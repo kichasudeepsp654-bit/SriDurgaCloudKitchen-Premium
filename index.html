@@ -627,6 +627,115 @@ style="position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padd
 style="position:fixed;bottom:90px;right:20px;background:#ff5722;color:white;padding:16px 18px;border-radius:50%;font-size:28px;text-decoration:none;z-index:9999;">
 📞
 </a>
+  <!-- ================= SEARCH ================= -->
+<section class="py-10 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-6">🔍 Search Meals</h2>
+
+    <input
+      type="text"
+      id="searchMeal"
+      placeholder="Search your favourite meal..."
+      class="w-full p-4 border rounded-xl shadow"
+      onkeyup="searchMeals()">
+
+  </div>
+</section>
+
+<!-- ================= BEST SELLERS ================= -->
+
+<section class="py-16 bg-white">
+
+<div class="max-w-7xl mx-auto px-4">
+
+<h2 class="text-4xl font-bold text-center text-orange-600 mb-10">
+🔥 Best Seller Meals
+</h2>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="meal bg-white shadow-xl rounded-2xl overflow-hidden">
+
+<img src="https://i.ibb.co/Z1FnrFMT/IMG-20260713-092725.jpg">
+
+<div class="p-5">
+
+<span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm">
+🔥 Best Seller
+</span>
+
+<h3 class="text-2xl font-bold mt-3">
+Mudde Meals
+</h3>
+
+<p>₹129</p>
+
+</div>
+
+</div>
+
+<div class="meal bg-white shadow-xl rounded-2xl overflow-hidden">
+
+<img src="https://i.ibb.co/wZYHVdvj/file-000000003cd481f68e900b9b81b70d98.png">
+
+<div class="p-5">
+
+<span class="bg-green-600 text-white px-3 py-1 rounded-full text-sm">
+🆕 New
+</span>
+
+<h3 class="text-2xl font-bold mt-3">
+Chapati Meals
+</h3>
+
+<p>₹129</p>
+
+</div>
+
+</div>
+
+<div class="meal bg-white shadow-xl rounded-2xl overflow-hidden">
+
+<img src="https://i.ibb.co/VcpdN5P3/file-00000000bddc81f7883c0755eb7eeffb.png">
+
+<div class="p-5">
+
+<span class="bg-gray-700 text-white px-3 py-1 rounded-full text-sm">
+🚫 Out Of Stock
+</span>
+
+<h3 class="text-2xl font-bold mt-3">
+Palav Meals
+</h3>
+
+<p>Available Tomorrow</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<script>
+function searchMeals() {
+  let input = document.getElementById("searchMeal").value.toLowerCase();
+  let meals = document.getElementsByClassName("meal");
+
+  for (let i = 0; i < meals.length; i++) {
+    let text = meals[i].innerText.toLowerCase();
+
+    if (text.includes(input)) {
+      meals[i].style.display = "block";
+    } else {
+      meals[i].style.display = "none";
+    }
+  }
+}
+</script>
   <!-- ================= COMBO MEALS ================= -->
 <section id="combo" class="py-16 bg-orange-50">
   <div class="max-w-7xl mx-auto px-4">

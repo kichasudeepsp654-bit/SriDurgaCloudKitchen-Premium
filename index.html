@@ -1019,5 +1019,186 @@ card.style.display="none";
 });
 
 }
+<!-- ================= WISHLIST + CART ================= -->
 
+<section class="py-16 bg-orange-50">
+  <div class="max-w-7xl mx-auto px-4">
+
+    <h2 class="text-4xl font-bold text-center text-orange-600 mb-10">
+      ❤️ Wishlist & 🛒 Cart
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+        <h3 class="text-2xl font-bold mb-3">❤️ Wishlist</h3>
+        <p class="text-gray-600">Save your favourite meals.</p>
+        <button onclick="addWishlist()" class="mt-4 bg-pink-600 text-white px-5 py-2 rounded-lg">
+          Add to Wishlist
+        </button>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+        <h3 class="text-2xl font-bold mb-3">🛒 Shopping Cart</h3>
+        <p class="text-gray-600">Items in Cart</p>
+
+        <div class="text-5xl font-bold my-4" id="cartCount">0</div>
+
+        <button onclick="addCart()" class="bg-green-600 text-white px-5 py-2 rounded-lg">
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-6">
+        <h3 class="text-2xl font-bold mb-3">🎟 Coupon Code</h3>
+
+        <input id="coupon"
+               class="w-full border rounded-lg p-3"
+               placeholder="Enter Coupon">
+
+        <button onclick="applyCoupon()"
+                class="mt-4 w-full bg-orange-600 text-white py-3 rounded-lg">
+          Apply Coupon
+        </button>
+
+        <p id="couponMsg" class="mt-4 font-bold text-green-600"></p>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+let cart = 0;
+
+function addCart(){
+    cart++;
+    document.getElementById("cartCount").innerHTML = cart;
+}
+
+function addWishlist(){
+    alert("❤️ Added to Wishlist");
+}
+
+function applyCoupon(){
+
+let code=document.getElementById("coupon").value;
+
+if(code==="DURGA10"){
+document.getElementById("couponMsg").innerHTML="✅ 10% Discount Applied";
+}else{
+document.getElementById("couponMsg").innerHTML="❌ Invalid Coupon";
+}
+
+}
+</script>
   </script>
+<!-- ================= PAYMENT & TRACKING ================= -->
+
+<section class="py-16 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-4">
+
+    <h2 class="text-4xl font-bold text-center text-orange-600 mb-10">
+      💳 Secure Checkout
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-8">
+
+      <!-- Payment -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <h3 class="text-2xl font-bold mb-5">Choose Payment</h3>
+
+        <label class="flex items-center gap-3 mb-3">
+          <input type="radio" name="pay">
+          PhonePe
+        </label>
+
+        <label class="flex items-center gap-3 mb-3">
+          <input type="radio" name="pay">
+          Google Pay
+        </label>
+
+        <label class="flex items-center gap-3 mb-3">
+          <input type="radio" name="pay">
+          UPI
+        </label>
+
+        <label class="flex items-center gap-3 mb-5">
+          <input type="radio" name="pay">
+          Debit / Credit Card
+        </label>
+
+        <button onclick="placeOrder()"
+          class="w-full bg-green-600 text-white py-3 rounded-xl">
+          ✅ Place Order
+        </button>
+
+        <p id="orderMsg" class="mt-4 text-green-700 font-bold"></p>
+      </div>
+
+      <!-- Tracking -->
+      <div class="bg-white p-6 rounded-2xl shadow-lg">
+
+        <h3 class="text-2xl font-bold mb-5">
+          📍 Live Order Tracking
+        </h3>
+
+        <div class="w-full bg-gray-300 rounded-full h-6 overflow-hidden">
+          <div id="trackBar"
+               class="bg-green-600 h-6"
+               style="width:0%">
+          </div>
+        </div>
+
+        <p id="trackText" class="mt-4 font-bold">
+          Waiting for Order...
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+function placeOrder(){
+
+document.getElementById("orderMsg").innerHTML =
+"🎉 Order Placed Successfully!";
+
+let bar=document.getElementById("trackBar");
+let txt=document.getElementById("trackText");
+
+let width=0;
+
+let x=setInterval(function(){
+
+if(width>=100){
+clearInterval(x);
+txt.innerHTML="🚴 Delivered Successfully";
+}
+else{
+width+=10;
+bar.style.width=width+"%";
+
+if(width<30)
+txt.innerHTML="🍳 Preparing Food";
+
+else if(width<60)
+txt.innerHTML="📦 Packed";
+
+else if(width<90)
+txt.innerHTML="🚴 Out For Delivery";
+
+else
+txt.innerHTML="🏠 Reaching Destination";
+
+}
+
+},500);
+
+}
+                                </script>

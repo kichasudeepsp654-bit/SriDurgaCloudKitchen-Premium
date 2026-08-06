@@ -8,6 +8,360 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
+  <!-- ================= PUSH NOTIFICATION ================= -->
+
+<div id="notifyBox"
+class="fixed left-5 bottom-5 bg-green-600 text-white px-6 py-4 rounded-xl shadow-xl hidden z-50">
+🎉 Welcome to Sri Durga Cloud Kitchen
+</div>
+
+<!-- ================= BIRTHDAY OFFER ================= -->
+
+<section class="py-16 bg-yellow-50">
+<div class="max-w-7xl mx-auto px-4">
+
+<h2 class="text-4xl font-bold text-center text-orange-600 mb-10">
+🎂 Birthday Special
+</h2>
+
+<div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+
+<h3 class="text-3xl font-bold">
+Get 20% OFF on Your Birthday
+</h3>
+
+<p class="mt-4 text-gray-600">
+Celebrate with delicious home-style meals.
+</p>
+
+<button class="mt-6 bg-pink-600 text-white px-8 py-3 rounded-xl">
+Claim Offer
+</button>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= FESTIVAL OFFER ================= -->
+
+<section class="py-16 bg-red-50">
+<div class="max-w-7xl mx-auto px-4">
+
+<h2 class="text-4xl font-bold text-center text-red-600 mb-10">
+🎉 Festival Offers
+</h2>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="bg-white rounded-xl p-6 shadow-lg">
+<h3 class="text-2xl font-bold">
+Ugadi Offer
+</h3>
+<p class="mt-3">
+Flat ₹100 OFF
+</p>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg">
+<h3 class="text-2xl font-bold">
+Dasara Offer
+</h3>
+<p class="mt-3">
+Free Sweet
+</p>
+</div>
+
+<div class="bg-white rounded-xl p-6 shadow-lg">
+<h3 class="text-2xl font-bold">
+Deepavali Offer
+</h3>
+<p class="mt-3">
+Buy 2 Get 1
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= REFERRAL ================= -->
+
+<section class="py-16">
+<div class="max-w-7xl mx-auto px-4">
+
+<div class="bg-orange-100 rounded-2xl p-8 text-center">
+
+<h2 class="text-4xl font-bold">
+🎁 Refer & Earn
+</h2>
+
+<p class="mt-4">
+Invite friends and earn reward points.
+</p>
+
+<button class="mt-5 bg-orange-600 text-white px-8 py-3 rounded-xl">
+Invite Friends
+</button>
+
+</div>
+
+</div>
+</section>
+
+<script>
+window.onload=function(){
+
+setTimeout(function(){
+
+document.getElementById("notifyBox").classList.remove("hidden");
+
+},2000);
+
+}
+  
+</script>
+<!-- ================= ORDER HISTORY ================= -->
+
+<section class="py-16 bg-gray-100">
+<div class="max-w-7xl mx-auto px-4">
+
+<h2 class="text-4xl font-bold text-center text-orange-600 mb-10">
+📦 Order History
+</h2>
+
+<div class="bg-white rounded-2xl shadow-lg p-6">
+
+<table class="w-full">
+
+<thead>
+
+<tr class="border-b">
+
+<th class="py-3 text-left">Order ID</th>
+<th class="py-3 text-left">Meal</th>
+<th class="py-3 text-left">Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr class="border-b">
+
+<td>#1001</td>
+<td>Mudde Meals</td>
+<td class="text-green-600">Delivered</td>
+
+</tr>
+
+<tr class="border-b">
+
+<td>#1002</td>
+<td>Chapati Meals</td>
+<td class="text-orange-600">Preparing</td>
+
+</tr>
+
+<tr>
+
+<td>#1003</td>
+<td>Palav Meals</td>
+<td class="text-blue-600">Out For Delivery</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= DAILY SALES ================= -->
+
+<section class="py-16">
+
+<div class="max-w-7xl mx-auto px-4">
+
+<h2 class="text-4xl font-bold text-center text-red-600 mb-10">
+📈 Today's Sales
+</h2>
+
+<div class="grid md:grid-cols-4 gap-6">
+
+<div class="bg-white rounded-xl shadow-lg p-6 text-center">
+<h3 class="text-3xl font-bold">₹12,580</h3>
+<p>Total Sales</p>
+</div>
+
+<div class="bg-white rounded-xl shadow-lg p-6 text-center">
+<h3 class="text-3xl font-bold">87</h3>
+<p>Orders</p>
+</div>
+
+<div class="bg-white rounded-xl shadow-lg p-6 text-center">
+<h3 class="text-3xl font-bold">12</h3>
+<p>Pending</p>
+</div>
+
+<div class="bg-white rounded-xl shadow-lg p-6 text-center">
+<h3 class="text-3xl font-bold">75</h3>
+<p>Delivered</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= EMAIL / SMS ================= -->
+
+<section class="py-16 bg-orange-50">
+
+<div class="max-w-5xl mx-auto px-4">
+
+<div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+
+<h2 class="text-3xl font-bold">
+📧 Order Confirmation
+</h2>
+
+<p class="mt-4">
+After placing your order, a confirmation will be sent by Email, SMS and WhatsApp.
+</p>
+
+<button class="mt-6 bg-green-600 text-white px-8 py-3 rounded-xl">
+Send Confirmation
+</button>
+
+</div>
+
+</div>
+
+</section>  
+  <!-- Floating Action Buttons -->
+<div class="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+
+  <a href="tel:+918431071610"
+     class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center shadow-xl hover:scale-110 transition">
+     📞
+  </a>
+
+  <a href="https://wa.me/919620483134"
+     target="_blank"
+     class="w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-xl hover:scale-110 transition">
+     💬
+  </a>
+
+</div>
+
+<!-- Back To Top -->
+<button id="topBtn"
+class="hidden fixed bottom-24 left-6 bg-orange-600 text-white w-12 h-12 rounded-full shadow-xl">
+↑
+</button>
+
+<script>
+
+const topBtn=document.getElementById("topBtn");
+
+window.onscroll=function(){
+
+if(document.documentElement.scrollTop>300){
+
+topBtn.style.display="block";
+
+}else{
+
+topBtn.style.display="none";
+
+}
+
+}
+
+topBtn.onclick=function(){
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+}
+
+</script>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white mt-20">
+
+<div class="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-4 gap-8">
+
+<div>
+
+<h2 class="text-2xl font-bold mb-3">Sri Durga Cloud Kitchen</h2>
+
+<p>Fresh Home Style Food Delivered in Hassan.</p>
+
+</div>
+
+<div>
+
+<h3 class="font-bold mb-3">Contact</h3>
+
+<p>📞 8431071610</p>
+
+<p>💬 9620483134</p>
+
+<p>B T Koppalu,<br>Near Karnataka Bank,<br>Arasikere Main Road,<br>Hassan</p>
+
+</div>
+
+<div>
+
+<h3 class="font-bold mb-3">Quick Links</h3>
+
+<ul class="space-y-2">
+
+<li><a href="#menu">Menu</a></li>
+
+<li><a href="#subscription">Subscription</a></li>
+
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h3 class="font-bold mb-3">Follow Us</h3>
+
+<div class="flex gap-4 text-3xl">
+
+<a href="#">📷</a>
+
+<a href="#">👍</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="text-center border-t border-gray-700 py-4">
+
+© 2026 Sri Durga Cloud Kitchen. All Rights Reserved.
+
+</div>
+
+</footer>
 body{
 font-family:Arial,sans-serif;
 background:#fafafa;
@@ -126,6 +480,58 @@ width:35px;
 </style>
 
 </head>
+  <!-- Wishlist + Coupon + Payment -->
+
+<div class="fixed left-5 bottom-32 flex flex-col gap-3 z-50">
+
+<button id="wishlistBtn"
+class="bg-pink-600 text-white px-4 py-3 rounded-full shadow-lg">
+❤️ Wishlist
+</button>
+
+<button id="couponBtn"
+class="bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg">
+🎟️ Coupon
+</button>
+
+<button id="paymentBtn"
+class="bg-green-700 text-white px-4 py-3 rounded-full shadow-lg">
+💳 Pay Now
+</button>
+
+</div>
+
+<script>
+
+document.getElementById("wishlistBtn").onclick=function(){
+
+alert("❤️ Wishlist feature coming soon!");
+
+}
+
+document.getElementById("couponBtn").onclick=function(){
+
+let code=prompt("Enter Coupon Code");
+
+if(code=="DURGA10"){
+
+alert("🎉 Coupon Applied! 10% Discount");
+
+}else if(code){
+
+alert("❌ Invalid Coupon");
+
+}
+
+}
+
+document.getElementById("paymentBtn").onclick=function(){
+
+window.location.href="upi://pay?pa=9620483134@upi&pn=Sri%20Durga%20Cloud%20Kitchen";
+
+}
+
+</script>
 
 <body>
 
@@ -160,6 +566,55 @@ width:35px;
 </div>
 
 </nav>
+  <!-- Top Action Bar -->
+<div class="bg-white shadow sticky top-20 z-40">
+
+<div class="max-w-7xl mx-auto p-4 flex flex-wrap gap-3 justify-between items-center">
+
+<input
+type="text"
+id="searchInput"
+placeholder="🔍 Search Meals..."
+class="border rounded-lg px-4 py-2 w-full md:w-80">
+
+<div class="flex gap-2">
+
+<button
+class="bg-orange-600 text-white px-4 py-2 rounded-lg">
+👤 Login
+</button>
+
+<button
+class="bg-green-600 text-white px-4 py-2 rounded-lg">
+🛒 Cart
+<span id="cartCount">0</span>
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const search=document.getElementById("searchInput");
+
+search.addEventListener("keyup",function(){
+
+let value=this.value.toLowerCase();
+
+document.querySelectorAll(".meal-card").forEach(card=>{
+
+let text=card.innerText.toLowerCase();
+
+card.style.display=text.includes(value)?"block":"none";
+
+});
+
+});
+
+</script>
 
 <section class="hero">
 
@@ -1026,7 +1481,98 @@ Open Instagram
 </div>
 
 </section>
+  
+<!-- GOOGLE REVIEWS -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-bold mb-4">⭐ Customer Reviews</h2>
+    <p class="text-gray-600 mb-8">
+      Loved our food? Leave us a Google Review.
+    </p>
 
+    <a href="https://g.page/r/" target="_blank"
+       class="bg-yellow-500 text-white px-8 py-3 rounded-xl font-bold hover:bg-yellow-600">
+       ⭐ Write a Google Review
+    </a>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="py-16 bg-orange-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-10">
+      📸 Instagram
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <img src="https://i.ibb.co/Z1FnrFMT/IMG-20260713-092725.jpg"
+      class="rounded-xl shadow-lg">
+
+      <img src="https://i.ibb.co/wZYHVdvj/file-000000003cd481f68e900b9b81b70d98.png"
+      class="rounded-xl shadow-lg">
+
+      <img src="https://i.ibb.co/VcpdN5P3/file-00000000bddc81f7883c0755eb7eeffb.png"
+      class="rounded-xl shadow-lg">
+
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="#"
+      class="bg-pink-600 text-white px-8 py-3 rounded-xl">
+      Follow Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="py-16">
+<div class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-3xl font-bold text-center mb-8">
+📍 Our Location
+</h2>
+
+<iframe
+src="https://maps.google.com/maps?q=BT%20Koppalu%20Hassan&t=&z=15&ie=UTF8&iwloc=&output=embed"
+width="100%"
+height="450"
+style="border:0;border-radius:20px;"
+loading="lazy">
+</iframe>
+
+</div>
+</section>
+
+<!-- DOWNLOAD MENU -->
+<section class="py-16 bg-gray-100 text-center">
+<h2 class="text-3xl font-bold mb-5">
+📥 Download Menu
+</h2>
+
+<a href="menu.pdf"
+download
+class="bg-red-600 text-white px-10 py-4 rounded-xl font-bold">
+Download PDF
+</a>
+
+</section>
+
+<!-- FLOATING BUTTONS -->
+<a href="https://wa.me/919620483134"
+class="fixed bottom-5 right-5 bg-green-500 w-16 h-16 rounded-full flex items-center justify-center text-white text-3xl shadow-2xl z-50">
+
+💬
+
+</a>
+
+<a href="tel:+918431071610"
+class="fixed bottom-24 right-5 bg-orange-600 w-16 h-16 rounded-full flex items-center justify-center text-white text-3xl shadow-2xl z-50">
+
+📞
+
+</a>
 <!-- ================= FOOTER ================= -->
 
 <footer class="bg-dark text-white mt-5">
@@ -1413,3 +1959,227 @@ txt.innerHTML="🏠 Reaching Destination";
 
 }
                                 </script>
+<div class="mt-4 flex gap-2">
+
+<a href="https://wa.me/919620483134?text=Hi%20I%20want%20to%20order%20Mudde%20Meal"
+class="flex-1 bg-green-600 text-white text-center py-2 rounded-lg font-semibold hover:bg-green-700 transition">
+Order Now
+</a>
+
+<button
+onclick="addToCart('Mudde Meal')"
+class="bg-orange-500 text-white px-4 rounded-lg hover:bg-orange-600 transition">
+🛒
+</button>
+
+</div>
+<script>
+
+let cart=[];
+
+function addToCart(item){
+
+cart.push(item);
+
+document.getElementById("cartCount").innerText=cart.length;
+
+alert(item + " added to cart");
+
+}
+
+</script>
+<!-- Meal Details Modal -->
+
+<div id="mealModal"
+class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
+
+<div class="bg-white rounded-xl p-6 max-w-md w-[90%] relative">
+
+<button
+onclick="closeMeal()"
+class="absolute top-3 right-4 text-2xl">
+✖
+</button>
+
+<h2 id="mealTitle"
+class="text-2xl font-bold mb-3">
+</h2>
+
+<p id="mealDesc"
+class="text-gray-600 mb-4">
+</p>
+
+<a id="mealOrder"
+href="#"
+target="_blank"
+class="block text-center bg-green-600 text-white py-3 rounded-lg font-bold">
+Order on WhatsApp
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+function openMeal(name,desc){
+
+document.getElementById("mealTitle").innerText=name;
+
+document.getElementById("mealDesc").innerText=desc;
+
+document.getElementById("mealOrder").href=
+"https://wa.me/919620483134?text=Hi%20I%20want%20to%20order%20"+encodeURIComponent(name);
+
+document.getElementById("mealModal").classList.remove("hidden");
+
+document.getElementById("mealModal").classList.add("flex");
+
+}
+
+function closeMeal(){
+
+document.getElementById("mealModal").classList.remove("flex");
+
+document.getElementById("mealModal").classList.add("hidden");
+
+}
+
+</script>
+<!-- Customer Reviews -->
+
+<section class="max-w-7xl mx-auto py-16 px-6">
+
+<h2 class="text-3xl font-bold text-center mb-10">
+⭐ Customer Reviews
+</h2>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="bg-white p-6 rounded-xl shadow-lg">
+<div class="text-yellow-500 text-xl">★★★★★</div>
+<p class="mt-3">
+"Home food taste. Very hygienic and affordable."
+</p>
+<h4 class="mt-4 font-bold">Ramesh</h4>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow-lg">
+<div class="text-yellow-500 text-xl">★★★★★</div>
+<p class="mt-3">
+"Best Mudde Meals in Hassan. Fast delivery."
+</p>
+<h4 class="mt-4 font-bold">Pooja</h4>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow-lg">
+<div class="text-yellow-500 text-xl">★★★★★</div>
+<p class="mt-3">
+"Fresh food every day. Highly recommended."
+</p>
+<h4 class="mt-4 font-bold">Arun</h4>
+</div>
+
+</div>
+
+</section>
+<!-- Location & Instagram -->
+
+<section class="max-w-7xl mx-auto py-16 px-6">
+
+<h2 class="text-3xl font-bold text-center mb-10">
+📍 Visit Us
+</h2>
+
+<div class="grid lg:grid-cols-2 gap-8">
+
+<!-- Google Map -->
+<div class="rounded-xl overflow-hidden shadow-lg">
+
+<iframe
+src="https://www.google.com/maps?q=B%20T%20Koppalu%20Near%20Karnataka%20Bank%20Arasikere%20Main%20Road%20Hassan&output=embed"
+width="100%"
+height="400"
+style="border:0;"
+allowfullscreen=""
+loading="lazy">
+</iframe>
+
+</div>
+
+<!-- Instagram Gallery -->
+<div>
+
+<h3 class="text-2xl font-bold mb-6">
+📸 Food Gallery
+</h3>
+
+<div class="grid grid-cols-2 gap-4">
+
+<img src="https://i.ibb.co/Z1FnrFMT/IMG-20260713-092725.jpg"
+class="rounded-xl shadow-lg hover:scale-105 transition">
+
+<img src="https://i.ibb.co/wZYHVdvj/file-000000003cd481f68e900b9b81b70d98.png"
+class="rounded-xl shadow-lg hover:scale-105 transition">
+
+<img src="https://i.ibb.co/VcpdN5P3/file-00000000bddc81f7883c0755eb7eeffb.png"
+class="rounded-xl shadow-lg hover:scale-105 transition">
+
+<img src="https://i.ibb.co/39v6yzFw/file-00000000d9e081f7abb2c35cf3054213.png"
+class="rounded-xl shadow-lg hover:scale-105 transition">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- FAQ Section -->
+<section class="max-w-7xl mx-auto py-16 px-6" id="faq">
+
+<h2 class="text-3xl font-bold text-center mb-10">
+❓ Frequently Asked Questions
+</h2>
+
+<div class="space-y-4">
+
+<details class="bg-white shadow rounded-xl p-5">
+<summary class="font-semibold cursor-pointer">
+What are your delivery timings?
+</summary>
+<p class="mt-3 text-gray-600">
+11:00 AM to 10:00 PM, every day.
+</p>
+</details>
+
+<details class="bg-white shadow rounded-xl p-5">
+<summary class="font-semibold cursor-pointer">
+Do you provide monthly meal subscriptions?
+</summary>
+<p class="mt-3 text-gray-600">
+Yes. Basic, Standard and Premium plans are available.
+</p>
+</details>
+
+<details class="bg-white shadow rounded-xl p-5">
+<summary class="font-semibold cursor-pointer">
+Which payment methods do you accept?
+</summary>
+<p class="mt-3 text-gray-600">
+UPI, PhonePe, Google Pay, Cash on Delivery and Bank Transfer.
+</p>
+</details>
+
+<details class="bg-white shadow rounded-xl p-5">
+<summary class="font-semibold cursor-pointer">
+How can I place an order?
+</summary>
+<p class="mt-3 text-gray-600">
+Click the WhatsApp Order button or call +91 8431071610.
+</p>
+</details>
+
+</div>
+
+</section>

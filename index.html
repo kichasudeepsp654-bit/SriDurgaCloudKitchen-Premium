@@ -3,25 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WORKZEN - Your Local Work Marketplace</title>
+    <title>WORKZEN - Work When You Need. Workers When You Need</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-blue: #0056b3;
+            --primary: #0056b3;
+            --primary-dark: #003d80;
             --accent-orange: #ff7300;
             --accent-yellow: #ffb703;
             --dark-navy: #0d1b2a;
-            --light-bg: #f8f9fa;
+            --light-bg: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #212529;
-            --text-muted: #6c757d;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --green: #22c55e;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             scroll-behavior: smooth;
         }
 
@@ -31,17 +34,17 @@
             line-height: 1.6;
         }
 
-        /* Top Bar & Nav */
+        /* Header */
         header {
-            background: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
         .navbar {
-            max-width: 1200px;
+            max-width: 1250px;
             margin: auto;
             padding: 0.8rem 1.5rem;
             display: flex;
@@ -59,8 +62,7 @@
         .logo-box h1 {
             font-size: 1.8rem;
             font-weight: 900;
-            color: var(--primary-blue);
-            letter-spacing: 1px;
+            color: var(--primary);
         }
 
         .logo-box h1 span {
@@ -78,7 +80,7 @@
             text-decoration: none;
             color: var(--dark-navy);
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: color 0.2s;
         }
 
@@ -99,9 +101,9 @@
             display: inline-block;
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
-            background: linear-gradient(135deg, var(--dark-navy) 0%, #1b263b 100%);
+            background: linear-gradient(135deg, var(--dark-navy) 0%, #1e3a5f 100%);
             color: white;
             padding: 4.5rem 1.5rem;
             text-align: center;
@@ -116,11 +118,11 @@
             background: rgba(255, 183, 3, 0.15);
             color: var(--accent-yellow);
             display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
+            padding: 6px 18px;
+            border-radius: 30px;
             font-weight: bold;
             font-size: 0.9rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             border: 1px solid rgba(255, 183, 3, 0.3);
         }
 
@@ -136,12 +138,11 @@
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: #e0e1dd;
+            font-size: 1.15rem;
+            color: #cbd5e1;
             margin-bottom: 2rem;
         }
 
-        /* Key Badges */
         .badges-bar {
             display: flex;
             flex-wrap: wrap;
@@ -151,8 +152,8 @@
         }
 
         .badge-item {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 0.6rem 1.2rem;
             border-radius: 8px;
             font-size: 0.9rem;
@@ -165,9 +166,9 @@
             color: var(--accent-yellow);
         }
 
-        /* Main Container */
+        /* Container & Titles */
         .container {
-            max-width: 1200px;
+            max-width: 1250px;
             margin: auto;
             padding: 4rem 1.5rem;
         }
@@ -180,7 +181,7 @@
         .section-title h3 {
             font-size: 2.2rem;
             color: var(--dark-navy);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .section-title p {
@@ -188,10 +189,10 @@
             font-size: 1rem;
         }
 
-        /* Categories Grid */
+        /* Section 1: Jobs Categories */
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 1.5rem;
         }
 
@@ -199,8 +200,8 @@
             background: var(--card-bg);
             padding: 1.8rem 1.2rem;
             border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
             border-bottom: 3px solid transparent;
             transition: all 0.3s ease;
         }
@@ -208,62 +209,64 @@
         .cat-card:hover {
             transform: translateY(-5px);
             border-bottom: 3px solid var(--accent-orange);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
 
         .cat-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1rem;
+            width: 55px;
+            height: 55px;
+            margin-bottom: 1rem;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            background: #e7f1ff;
-            color: var(--primary-blue);
+            font-size: 1.4rem;
+            background: #e0f2fe;
+            color: var(--primary);
         }
 
         .cat-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.4rem;
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
             color: var(--dark-navy);
         }
 
-        .cat-card p {
+        .cat-card ul {
+            list-style: none;
             font-size: 0.85rem;
             color: var(--text-muted);
         }
 
-        /* How it works */
-        .how-it-works {
-            background: #eef2f6;
+        .cat-card ul li {
+            margin-bottom: 0.3rem;
         }
 
+        /* Steps */
         .steps-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
             gap: 1.5rem;
             text-align: center;
         }
 
         .step-box {
             background: white;
-            padding: 1.5rem 1rem;
-            border-radius: 10px;
+            padding: 2rem 1rem 1.5rem;
+            border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             position: relative;
+            border: 1px solid var(--border);
         }
 
         .step-num {
             position: absolute;
-            top: -12px;
+            top: -14px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--primary-blue);
+            background: var(--primary);
             color: white;
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -275,7 +278,7 @@
         .step-box i {
             font-size: 2rem;
             color: var(--accent-orange);
-            margin: 1rem 0 0.8rem;
+            margin: 0.8rem 0;
         }
 
         .step-box h5 {
@@ -284,26 +287,31 @@
         }
 
         .step-box p {
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
         }
 
-        /* Pillars (Trust, Save, AI) */
-        .pillars-grid {
+        /* Multi Grid for Master Plan Features */
+        .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.8rem;
         }
 
-        .pillar-card {
+        .feature-card {
             background: var(--card-bg);
             border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            border-top: 4px solid var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            border-top: 4px solid var(--primary);
         }
 
-        .pillar-card h4 {
+        .feature-card.highlight {
+            border-top-color: var(--accent-orange);
+        }
+
+        .feature-card h4 {
             font-size: 1.25rem;
             color: var(--dark-navy);
             margin-bottom: 1rem;
@@ -312,32 +320,32 @@
             gap: 10px;
         }
 
-        .pillar-card ul {
+        .feature-card ul {
             list-style: none;
         }
 
-        .pillar-card ul li {
-            font-size: 0.95rem;
-            margin-bottom: 0.6rem;
-            color: #495057;
+        .feature-card ul li {
+            font-size: 0.9rem;
+            margin-bottom: 0.7rem;
+            color: #334155;
             display: flex;
             align-items: flex-start;
             gap: 8px;
         }
 
-        .pillar-card ul li i {
-            color: #28a745;
+        .feature-card ul li i {
+            color: var(--green);
             margin-top: 4px;
         }
 
-        /* Form / Waitlist */
+        /* Waitlist */
         .waitlist-section {
-            background: linear-gradient(135deg, #0d1b2a, #1e3a8a);
+            background: linear-gradient(135deg, #0d1b2a, #1b3a60);
             color: white;
             border-radius: 16px;
-            padding: 3.5rem 2rem;
+            padding: 3.5rem 1.5rem;
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
 
         .waitlist-form {
@@ -351,8 +359,8 @@
         .waitlist-form input, .waitlist-form select {
             padding: 0.9rem 1.2rem;
             border-radius: 8px;
-            border: none;
-            font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95rem;
             outline: none;
         }
 
@@ -360,16 +368,16 @@
         footer {
             background: #080f1a;
             color: #8d99ae;
-            padding: 3rem 1.5rem 1.5rem;
+            padding: 3.5rem 1.5rem 1.5rem;
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 1250px;
             margin: auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .footer-col h5 {
@@ -384,13 +392,12 @@
 
         .footer-col ul li {
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
         }
 
         .footer-col a {
             color: #8d99ae;
             text-decoration: none;
-            transition: color 0.2s;
         }
 
         .footer-col a:hover {
@@ -405,18 +412,14 @@
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .hero h2 {
-                font-size: 2rem;
-            }
+            .nav-links { display: none; }
+            .hero h2 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation Header -->
+    <!-- Header Navigation -->
     <header>
         <div class="navbar">
             <a href="#" class="logo-box">
@@ -424,10 +427,12 @@
                 <h1>WORK<span>ZEN</span></h1>
             </a>
             <ul class="nav-links">
-                <li><a href="#services">ಸೇವೆಗಳು</a></li>
-                <li><a href="#how-it-works">ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ?</a></li>
-                <li><a href="#features">ವೈಶಿಷ್ಟ್ಯಗಳು</a></li>
-                <li><a href="#waitlist" class="btn-cta">ನೋಂದಾಯಿಸಿ (Join)</a></li>
+                <li><a href="#services">ಕೆಲಸಗಳು (Jobs)</a></li>
+                <li><a href="#marketplace">ಸೇವೆಗಳು (Marketplace)</a></li>
+                <li><a href="#trust">ಸುರಕ್ಷತೆ (Trust)</a></li>
+                <li><a href="#finance">Save & Insurance</a></li>
+                <li><a href="#business">Business & AI</a></li>
+                <li><a href="#waitlist" class="btn-cta">ನೋಂದಾಯಿಸಿ</a></li>
             </ul>
         </div>
     </header>
@@ -435,215 +440,197 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
-            <div class="hero-tag">🌟 ಕೆಲಸ ಬೇಕಾ? ಕೆಲಸಗಾರ ಬೇಕಾ? WORKZEN!</div>
+            <div class="hero-tag">🌟 "Work. Earn. Save. Grow."</div>
             <h2>Work When You Need.<br><span>Workers When You Need.</span></h2>
-            <p>AI-ಆಧಾರಿತ ಸ್ಥಳೀಯ ಕೆಲಸ ಮತ್ತು ಉದ್ಯೋಗ ಮಾರುಕಟ್ಟೆ. ನಿಮ್ಮ ಹತ್ತಿರದ ಪರಿಣಿತ ಕೆಲಸಗಾರರು ಈಗ ಒಂದೇ ಕ್ಲಿಕ್‌ನಲ್ಲಿ ಲಭ್ಯ.</p>
+            <p>AI-ಆಧಾರಿತ ಉದ್ಯೋಗ, ಸೇವೆಗಳು ಮತ್ತು ಬಿಸಿನೆಸ್ ಅವಕಾಶಗಳ ಸಂಪೂರ್ಣ ಮಾರುಕಟ್ಟೆ ವೇದಿಕೆ.</p>
             
-            <a href="#waitlist" class="btn-cta" style="font-size: 1.1rem; padding: 0.8rem 2rem;">ಈಗಲೇ ಸೇರಿಕೊಳ್ಳಿ / Scan Waitlist</a>
+            <a href="#waitlist" class="btn-cta" style="font-size: 1.1rem; padding: 0.8rem 2.2rem;">ಈಗಲೇ ಸೇರಿಕೊಳ್ಳಿ / Scan Waitlist</a>
 
             <div class="badges-bar">
                 <div class="badge-item"><i class="fa-solid fa-location-dot"></i> Nearby Workers</div>
                 <div class="badge-item"><i class="fa-solid fa-bolt"></i> Available Now</div>
                 <div class="badge-item"><i class="fa-solid fa-shield-halved"></i> Verified & Trusted</div>
-                <div class="badge-item"><i class="fa-solid fa-comments"></i> In-App Chat & Call</div>
+                <div class="badge-item"><i class="fa-solid fa-comments"></i> In-App Chat</div>
                 <div class="badge-item"><i class="fa-solid fa-wallet"></i> Secure Payments</div>
             </div>
         </div>
     </section>
 
-    <!-- Categories / Services -->
+    <!-- Section 1: WORK & JOBS (All Categories) -->
     <section class="container" id="services">
         <div class="section-title">
-            <h3>ಎಲ್ಲಾ ರೀತಿಯ ಕೆಲಸಗಳು, ಒಂದೇ ಸ್ಥಳದಲ್ಲಿ</h3>
-            <p>All Types of Work. One Place.</p>
+            <h3>1. ಕೆಲಸಗಳು ಮತ್ತು ವಿಭಾಗಗಳು (Work & Jobs)</h3>
+            <p>ಎಲ್ಲಾ ಪ್ರಕಾರದ ದೈನಂದಿನ ಮತ್ತು ವೃತ್ತಿಪರ ಉದ್ಯೋಗಗಳು</p>
         </div>
 
         <div class="categories-grid">
             <div class="cat-card">
                 <div class="cat-icon"><i class="fa-solid fa-wrench"></i></div>
                 <h4>Home & Repair</h4>
-                <p>Electrician, Plumber, Carpenter, Painter, AC & Appliance Repair</p>
+                <ul>
+                    <li>• Electrician & Plumber</li>
+                    <li>• Carpenter & Painter</li>
+                    <li>• AC, Fridge & Washing Machine Repair</li>
+                    <li>• RO & Appliance Technician, Mason</li>
+                </ul>
             </div>
             <div class="cat-card">
                 <div class="cat-icon"><i class="fa-solid fa-broom"></i></div>
                 <h4>Home Services</h4>
-                <p>House Cleaning, Cook, Gardener, Pest Control, Packing & Moving</p>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-car"></i></div>
-                <h4>Driver & Transport</h4>
-                <p>Personal Driver, Delivery Driver, Truck, Auto & Vehicle Drop</p>
+                <ul>
+                    <li>• House Cleaning & Deep Cleaning</li>
+                    <li>• Cook & Chef, Gardener</li>
+                    <li>• Pest Control, Laundry</li>
+                    <li>• Packing & Moving, Home Helper</li>
+                </ul>
             </div>
             <div class="cat-card">
                 <div class="cat-icon"><i class="fa-solid fa-helmet-safety"></i></div>
                 <h4>Construction & Labour</h4>
-                <p>General Labour, Mason, Welder, Fabricator, Machine Operator</p>
+                <ul>
+                    <li>• General Labour & Helper</li>
+                    <li>• Mason, Welder & Fabricator</li>
+                    <li>• Site Worker & Supervisor</li>
+                    <li>• Heavy Machine Operator</li>
+                </ul>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon"><i class="fa-solid fa-car"></i></div>
+                <h4>Driver & Transport</h4>
+                <ul>
+                    <li>• Personal & Delivery Driver</li>
+                    <li>• Truck & Mini-Truck Driver</li>
+                    <li>• Auto Driver & Vehicle Pickup</li>
+                    <li>• Relocation / Moving Services</li>
+                </ul>
             </div>
             <div class="cat-card">
                 <div class="cat-icon"><i class="fa-solid fa-box"></i></div>
                 <h4>Delivery & Errands</h4>
-                <p>Grocery, Parcel, Document Delivery & Local Errands</p>
+                <ul>
+                    <li>• Grocery Delivery & Parcel</li>
+                    <li>• Document Delivery</li>
+                    <li>• Shopping Assistance</li>
+                    <li>• Local Errands & Tasks</li>
+                </ul>
             </div>
             <div class="cat-card">
                 <div class="cat-icon"><i class="fa-solid fa-tractor"></i></div>
                 <h4>Agriculture</h4>
-                <p>Farm Labour, Harvest Worker, Tractor Operator & Irrigation</p>
+                <ul>
+                    <li>• Farm Labour & Harvest Worker</li>
+                    <li>• Tractor Operator</li>
+                    <li>• Irrigation Worker</li>
+                    <li>• Farm Equipment Operator</li>
+                </ul>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon"><i class="fa-solid fa-building-user"></i></div>
+                <h4>Business & Office</h4>
+                <ul>
+                    <li>• Office Assistant & Receptionist</li>
+                    <li>• Data Entry Operator & Accountant</li>
+                    <li>• Sales Staff & Security</li>
+                    <li>• Housekeeping & Event Staff</li>
+                </ul>
             </div>
             <div class="cat-card">
                 <div class="cat-icon"><i class="fa-solid fa-laptop-code"></i></div>
                 <h4>Digital & Professional</h4>
-                <p>Graphic Design, Video Editor, Web/App Developer, Content Writer</p>
+                <ul>
+                    <li>• Graphic Designer & Video Editor</li>
+                    <li>• Web Developer & App Developer</li>
+                    <li>• Photographer & Content Writer</li>
+                    <li>• Digital Marketer & Translator</li>
+                </ul>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <h4>Education & Training</h4>
+                <ul>
+                    <li>• Home Tutor & Language Teacher</li>
+                    <li>• Music Teacher & Skill Trainer</li>
+                    <li>• Fitness Trainer & Career Mentor</li>
+                </ul>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon"><i class="fa-solid fa-music"></i></div>
+                <h4>Events & Entertainment</h4>
+                <ul>
+                    <li>• DJ, Singer, Dancer & Anchor</li>
+                    <li>• Makeup Artist & Videographer</li>
+                    <li>• Decoration Worker & Event Crew</li>
+                </ul>
             </div>
             <div class="cat-card">
                 <div class="cat-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
                 <h4>Quick / Urgent Jobs</h4>
-                <p>Need Now, Emergency Electrician, Emergency Plumber, Helper</p>
+                <ul>
+                    <li>• Need Now (ತುರ್ತು ಅಗತ್ಯ)</li>
+                    <li>• Emergency Electrician/Plumber</li>
+                    <li>• Immediate Driver & Help</li>
+                </ul>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon"><i class="fa-solid fa-business-time"></i></div>
+                <h4>Contract & Types</h4>
+                <ul>
+                    <li>• Full-time & Part-time</li>
+                    <li>• Temporary & Daily Wage</li>
+                    <li>• Contract & Apprenticeship</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- How WORKZEN Works -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <div class="section-title">
-                <h3>WORKZEN ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ?</h3>
-                <p>How WORKZEN Works</p>
-            </div>
-
-            <div class="steps-container">
-                <div class="step-box">
-                    <div class="step-num">1</div>
-                    <i class="fa-solid fa-file-pen"></i>
-                    <h5>Post Your Job</h5>
-                    <p>ನಿಮ್ಮ ಕೆಲಸದ ಅಗತ್ಯವನ್ನು ತಿಳಿಸಿ</p>
-                </div>
-                <div class="step-box">
-                    <div class="step-num">2</div>
-                    <i class="fa-solid fa-users-viewfinder"></i>
-                    <h5>Get Quotes</h5>
-                    <p>ಹತ್ತಿರದ ಕೆಲಸಗಾರರಿಂದ ಆಫರ್‌ಗಳನ್ನು ಪಡೆಯಿರಿ</p>
-                </div>
-                <div class="step-box">
-                    <div class="step-num">3</div>
-                    <i class="fa-solid fa-user-check"></i>
-                    <h5>Choose Worker</h5>
-                    <p>ರೇಟಿಂಗ್ ಮತ್ತು ವಿಮರ್ಶೆ ನೋಡಿ ಆಯ್ಕೆಮಾಡಿ</p>
-                </div>
-                <div class="step-box">
-                    <div class="step-num">4</div>
-                    <i class="fa-solid fa-lock"></i>
-                    <h5>Pay Securely</h5>
-                    <p>ಸುರಕ್ಷಿತ ಪಾವತಿ ವ್ಯವಸ್ಥೆ</p>
-                </div>
-                <div class="step-box">
-                    <div class="step-num">5</div>
-                    <i class="fa-solid fa-star"></i>
-                    <h5>Rate & Review</h5>
-                    <p>ಕೆಲಸ ಮುಗಿದ ನಂತರ ರೇಟಿಂಗ್ ನೀಡಿ</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features & Ecosystem -->
-    <section class="container" id="features">
+    <!-- Section: How WORKZEN Works -->
+    <section class="container" style="background: #eef4f9; border-radius: 16px; margin-bottom: 4rem;">
         <div class="section-title">
-            <h3>ನಮ್ಮ ಪ್ರಮುಖ ವೈಶಿಷ್ಟ್ಯಗಳು</h3>
-            <p>Work. Earn. Save. Grow.</p>
+            <h3>WORKZEN ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ?</h3>
+            <p>ಸರಳ 5 ಹಂತಗಳಲ್ಲಿ ನಿಮ್ಮ ಕೆಲಸ ಪೂರ್ಣಗೊಳಿಸಿ</p>
         </div>
 
-        <div class="pillars-grid">
-            <div class="pillar-card">
-                <h4><i class="fa-solid fa-shield-halved" style="color: var(--primary-blue);"></i> Worker Trust & Safety</h4>
-                <ul>
-                    <li><i class="fa-solid fa-circle-check"></i> ಡಿಜಿಟಲ್ ವೆರಿಫೈಡ್ WORKZEN ID</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Trust Score & Skill Badges</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Work Proof (ಫೋಟೋ/ವೀಡಿಯೊ ರೆಕಾರ್ಡ್)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Emergency SOS & Women Safety</li>
-                </ul>
+        <div class="steps-container">
+            <div class="step-box">
+                <div class="step-num">1</div>
+                <i class="fa-solid fa-file-pen"></i>
+                <h5>Post Your Job</h5>
+                <p>ನಿಮ್ಮ ಕೆಲಸದ ವಿವರ ನಮೂದಿಸಿ</p>
             </div>
-
-            <div class="pillar-card">
-                <h4><i class="fa-solid fa-piggy-bank" style="color: var(--accent-orange);"></i> WORKZEN Save & Wallet</h4>
-                <ul>
-                    <li><i class="fa-solid fa-circle-check"></i> ಕೆಲಸಗಾರರಿಗೆ ಸ್ವಯಂಚಾಲಿತ ಉಳಿತಾಯ (Save Scheme)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> ಸುರಕ್ಷಿತ Instant Payout ವ್ಯವಸ್ಥೆ</li>
-                    <li><i class="fa-solid fa-circle-check"></i> ಆಕ್ಸಿಡೆಂಟ್ & ಹೆಲ್ತ್ ಇನ್ಶುರೆನ್ಸ್ ಸೌಲಭ್ಯ</li>
-                    <li><i class="fa-solid fa-circle-check"></i> ಪಾರದರ್ಶಕ ವಾಲೆಟ್ & ರೀಫಂಡ್ ವ್ಯವಸ್ಥೆ</li>
-                </ul>
+            <div class="step-box">
+                <div class="step-num">2</div>
+                <i class="fa-solid fa-users-viewfinder"></i>
+                <h5>Get Quotes</h5>
+                <p>ಹತ್ತಿರದ ಕೆಲಸಗಾರರ ಕೊಟೇಶನ್ ಪಡೆಯಿರಿ</p>
             </div>
-
-            <div class="pillar-card">
-                <h4><i class="fa-solid fa-brain" style="color: #6f42c1;"></i> AI Engine & Support</h4>
-                <ul>
-                    <li><i class="fa-solid fa-circle-check"></i> AI ಸ್ಮಾರ್ಟ್ ಜಾಬ್ ಮ್ಯಾಚಿಂಗ್</li>
-                    <li><i class="fa-solid fa-circle-check"></i> ಕನ್ನಡ, ಇಂಗ್ಲಿಷ್ ಸೇರಿ ಬಹುಭಾಷಾ AI ಕಾಲ್ ಸೆಂಟರ್</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Business Bulk Hiring (ಕಂಪನಿಗಳಿಗೆ ವರ್ಕರ್ಸ್)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> ಸ್ಟಾರ್ಟ್‌ಅಪ್ & ಬಿಸಿನೆಸ್ ಇನ್ವೆಸ್ಟ್‌ಮೆಂಟ್ ಅವಕಾಶ</li>
-                </ul>
+            <div class="step-box">
+                <div class="step-num">3</div>
+                <i class="fa-solid fa-user-check"></i>
+                <h5>Choose Worker</h5>
+                <p>ವಿಮರ್ಶೆ ನೋಡಿ ಆಯ್ಕೆಮಾಡಿ</p>
             </div>
-        </div>
-
-        <!-- Waitlist / Registration Box -->
-        <div class="waitlist-section" id="waitlist">
-            <h3>COMING SOON!</h3>
-            <p>WORKZEN ವೇದಿಕೆಗೆ ಸೇರಲು ನಿಮ್ಮ ಹೆಸರನ್ನು ನೋಂದಾಯಿಸಿ.</p>
-
-            <form class="waitlist-form" id="waitlistForm">
-                <input type="text" id="name" placeholder="ನಿಮ್ಮ ಹೆಸರು (Full Name)" required>
-                <input type="tel" id="phone" placeholder="ಮೊಬೈಲ್ ಸಂಖ್ಯೆ (Phone Number)" required>
-                <select id="role" required>
-                    <option value="" disabled selected>ನೀವು ಯಾರಾಗಿ ನೋಂದಾಯಿಸಲು ಬಯಸುತ್ತೀರಿ?</option>
-                    <option value="worker">ಕೆಲಸಗಾರ / Worker (I want to earn)</option>
-                    <option value="customer">ಗ್ರಾಹಕ / Customer (I want to hire)</option>
-                    <option value="business">ಬಿಸಿನೆಸ್ / Business (Bulk hiring)</option>
-                </select>
-                <button type="submit" class="btn-cta" style="border-radius: 8px;">Register My Interest</button>
-            </form>
+            <div class="step-box">
+                <div class="step-num">4</div>
+                <i class="fa-solid fa-lock"></i>
+                <h5>Pay Securely</h5>
+                <p>ಸುರಕ್ಷಿತ ಪಾವತಿ ಹೋಲ್ಡ್ ವ್ಯವಸ್ಥೆ</p>
+            </div>
+            <div class="step-box">
+                <div class="step-num">5</div>
+                <i class="fa-solid fa-star"></i>
+                <h5>Rate Worker</h5>
+                <p>ಕೆಲಸ ಮುಗಿದ ಮೇಲೆ ರೇಟಿಂಗ್ ನೀಡಿ</p>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <h5 style="color: #ff7300;">WORKZEN</h5>
-                <p>Work When You Need. Workers When You Need. Local jobs & verified service platform.</p>
-            </div>
-            <div class="footer-col">
-                <h5>Quick Links</h5>
-                <ul>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#features">Worker Safety</a></li>
-                    <li><a href="#waitlist">Join Waitlist</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h5>Contact & Support</h5>
-                <ul>
-                    <li><i class="fa-solid fa-envelope"></i> support@workzen.in</li>
-                    <li><i class="fa-solid fa-phone"></i> +91 98765 43210</li>
-                    <li><i class="fa-solid fa-globe"></i> www.workzen.in</li>
-                    <li><i class="fa-solid fa-location-dot"></i> Hassan, Karnataka, India</li>
-                </ul>
-            </div>
+    <!-- Sections 3 to 12: Ecosystem & Features -->
+    <section class="container" id="trust">
+        <div class="section-title">
+            <h3>ಸುರಕ್ಷತೆ, ಆರ್ಥಿಕತೆ ಮತ್ತು ತಂತ್ರಜ್ಞಾನ ವ್ಯವಸ್ಥೆ</h3>
+            <p>Work. Earn. Save. Grow Ecosystem</p>
         </div>
-        <div class="footer-bottom">
-            <p>© 2026 WORKZEN. All rights reserved. Built with Vision for India & Global.</p>
-        </div>
-    </footer>
 
-    <!-- JavaScript Interactions -->
-    <script>
-        document.getElementById('waitlistForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const role = document.getElementById('role').value;
-            
-            alert(`ಧನ್ಯವಾದಗಳು ${name}! WORKZEN ವೇದಿಕೆಗೆ ನಿಮ್ಮ ಆಸಕ್ತಿ (${role}) ಯಶಸ್ವಿಯಾಗಿ ದಾಖಲಾಗಿದೆ. ನಾವು ಶೀಘ್ರದಲ್ಲೇ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತೇವೆ.`);
-            this.reset();
-        });
-    </script>
-</body>
-</html>
+        <div class="feature-grid">
+            <!-- 3. Worker Trust & Safety -->
+            <div cl

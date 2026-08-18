@@ -1330,4 +1330,391 @@
     </script>
 </body>
                     </html>
+ <!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORKZEN - Customer Service Booking & Live Tracking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056b3;
+            --accent-orange: #ff7300;
+            --accent-yellow: #ffb703;
+            --dark-navy: #0d1b2a;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --green: #10b981;
+            --red: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: var(--light-bg); color: var(--text-main); line-height: 1.6; }
+
+        /* Top Nav */
+        .top-nav {
+            background: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--primary); text-decoration: none; }
+        .logo span { color: var(--accent-orange); }
+
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; }
+
+        /* Status Header */
+        .status-banner {
+            background: linear-gradient(135deg, var(--dark-navy), #1e3a5f);
+            color: white;
+            padding: 1.8rem;
+            border-radius: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .status-badge {
+            background: var(--green);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Layout Grid */
+        .track-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 850px) {
+            .track-grid { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 1.8rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            color: var(--dark-navy);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Worker Profile Card */
+        .worker-card {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.2rem;
+        }
+
+        .worker-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #e0f2fe;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .verified-badge {
+            color: var(--green);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .btn-call { background: #e0f2fe; color: var(--primary); }
+        .btn-chat { background: #f3f4f6; color: var(--dark-navy); }
+
+        /* Timeline Step Tracker */
+        .timeline {
+            list-style: none;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 5px;
+            bottom: 5px;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-step {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -25px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 2px #cbd5e1;
+        }
+
+        .timeline-step.completed .timeline-dot {
+            background: var(--green);
+            box-shadow: 0 0 0 2px var(--green);
+        }
+
+        .timeline-step.active .timeline-dot {
+            background: var(--accent-orange);
+            box-shadow: 0 0 0 2px var(--accent-orange);
+        }
+
+        .timeline-title { font-weight: bold; font-size: 0.95rem; }
+        .timeline-desc { font-size: 0.82rem; color: var(--text-muted); }
+
+        /* Payment Hold Box */
+        .payment-box {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 10px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .pay-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-release {
+            width: 100%;
+            background: var(--green);
+            color: white;
+            padding: 0.85rem;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        /* Rating Stars */
+        .star-rating {
+            display: flex;
+            gap: 6px;
+            color: #d1d5db;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin: 0.8rem 0;
+        }
+        .star-rating .active { color: var(--accent-yellow); }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="top-nav">
+        <a href="index.html" class="logo">WORK<span>ZEN</span></a>
+        <div style="font-size: 0.9rem; font-weight: 600; color: var(--dark-navy);">
+            <i class="fa-solid fa-user-circle"></i> ಕಸ್ಟಮರ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Status Banner -->
+        <div class="status-banner">
+            <div>
+                <span class="status-badge" id="orderStatus"><i class="fa-solid fa-spinner fa-spin"></i> ವರ್ಕರ್ ದಾರಿಯಲ್ಲಿದ್ದಾರೆ (On the Way)</span>
+                <h2 style="margin-top: 0.6rem; font-size: 1.4rem;">Home Wiring & Appliance Repair</h2>
+                <p style="font-size: 0.85rem; color: #cbd5e1;">Booking ID: #WZ-BOOK-9921</p>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 0.85rem; color: #cbd5e1;">ಒಟ್ಟು ಶುಲ್ಕ (Secure Hold)</div>
+                <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-yellow);">₹450</div>
+            </div>
+        </div>
+
+        <div class="track-grid">
+            
+            <!-- Left: Tracking Progress & Work Proof -->
+            <div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-route" style="color: var(--primary);"></i> ಕೆಲಸದ ಪ್ರಗತಿ (Live Status)</h3>
                     
+                    <ul class="timeline">
+                        <li class="timeline-step completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-title">ಕೆಲಸ ಬುಕ್ ಆಗಿದೆ (Job Confirmed)</div>
+                            <div class="timeline-desc">ವರ್ಕರ್ ನಿಮ್ಮ ವಿನಂತಿಯನ್ನು ಒಪ್ಪಿಕೊಂಡಿದ್ದಾರೆ</div>
+                        </li>
+                        <li class="timeline-step active" id="step2">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-title">ವರ್ಕರ್ ದಾರಿಯಲ್ಲಿದ್ದಾರೆ (Worker Assigned)</div>
+                            <div class="timeline-desc">ಅಂದಾಜು ಆಗಮನ: 15 ನಿಮಿಷಗಳಲ್ಲಿ</div>
+                        </li>
+                        <li class="timeline-step" id="step3">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-title">ಕೆಲಸ ಆರಂಭ (Work in Progress)</div>
+                            <div class="timeline-desc">ಆರಂಭದ ಫೋಟೋ/ರೆಕಾರ್ಡ್ ದಾಖಲಾಗಿದೆ</div>
+                        </li>
+                        <li class="timeline-step" id="step4">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-title">ಪೂರ್ಣಗೊಂಡಿದೆ (Completed)</div>
+                            <div class="timeline-desc">ಕೆಲಸ ಮುಕ್ತಾಯಗೊಂಡಿದೆ & ಪಾವತಿ ಬಿಡುಗಡೆ</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Work Proof Preview Box -->
+                <div class="card">
+                    <h3><i class="fa-solid fa-camera" style="color: var(--accent-orange);"></i> Work Proof & Verification</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">ಕೆಲಸಗಾರರು ಅಪ್ಲೋಡ್ ಮಾಡಿದ Work Proof ಚಿತ್ರವನ್ನು ಪರಿಶೀಲಿಸಿ[span_1](start_span)[span_1](end_span).</p>
+                    <div style="background: #f1f5f9; border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+                        <i class="fa-solid fa-image" style="font-size: 2rem; margin-bottom: 0.5rem; color: #94a3b8;"></i>
+                        <div>Switch Board Repair Proof Image Attached</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Assigned Worker & Secure Payment Release -->
+            <div>
+                <!-- Worker Info -->
+                <div class="card">
+                    <h3><i class="fa-solid fa-user-check" style="color: var(--green);"></i> ನಿಗದಿಪಡಿಸಿದ ಕೆಲಸಗಾರ</h3>
+                    <div class="worker-card">
+                        <div class="worker-avatar">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h4 style="font-size: 1.05rem;">ಸುದೀಪ್ (Sudeep)</h4>
+                            <div class="verified-badge"><i class="fa-solid fa-shield-check"></i> Verified Worker ID: WZ-84920</div>
+                            <div style="font-size: 0.85rem; color: #d97706; margin-top: 2px;">★ 4.9 (124+ Jobs Completed)</div>
+                        </div>
+                    </div>
+
+                    <div class="action-btns">
+                        <button class="btn-action btn-call" onclick="callWorker()"><i class="fa-solid fa-phone"></i> ಕರೆ ಮಾಡಿ</button>
+                        <button class="btn-action btn-chat" onclick="chatWorker()"><i class="fa-solid fa-comment-dots"></i> ಚಾಟ್</button>
+                    </div>
+                </div>
+
+                <!-- Secure Payment Hold & Release -->
+                <div class="card">
+                    <h3><i class="fa-solid fa-lock" style="color: var(--primary);"></i> Secure Payment Hold</h3>
+                    
+                    <div class="payment-box">
+                        <div class="pay-row"><span>ಸೇವಾ ಮೊತ್ತ:</span> <strong>₹450</strong></div>
+                        <div class="pay-row"><span>ಪಾವತಿ ಸ್ಥಿತಿ:</span> <span style="color: var(--green); font-weight: bold;">ಸುರಕ್ಷಿತ ಹೋಲ್ಡ್‌ನಲ್ಲಿದೆ</span></div>
+                        <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem;">ಕೆಲಸ ತೃಪ್ತಿಕರವಾಗಿ ಮುಗಿದ ನಂತರವೇ ಕೆಲಸಗಾರರ ವಾಲೆಟ್‌ಗೆ ಜಮೆಯಾಗುತ್ತದೆ[span_2](start_span)[span_2](end_span).</div>
+                    </div>
+
+                    <button class="btn-release" onclick="completeJobAndPay()"><i class="fa-solid fa-circle-check"></i> ಕೆಲಸ ಪೂರ್ಣಗೊಂಡಿದೆ - ಹಣ ಬಿಡುಗಡೆ ಮಾಡಿ</button>
+
+                    <!-- Rating Section -->
+                    <div id="ratingSection" style="display: none; margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem; text-align: center;">
+                        <h4>ರೇಟಿಂಗ್ ನೀಡಿ (Rate Worker)</h4>
+                        <div class="star-rating">
+                            <span class="active" onclick="setRate(1)">★</span>
+                            <span class="active" onclick="setRate(2)">★</span>
+                            <span class="active" onclick="setRate(3)">★</span>
+                            <span class="active" onclick="setRate(4)">★</span>
+                            <span class="active" onclick="setRate(5)">★</span>
+                        </div>
+                        <button class="btn-action btn-call" style="width: 100%;" onclick="submitRating()">ರೇಟಿಂಗ್ ಸಲ್ಲಿಸಿ</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script for Customer Logic -->
+    <script>
+        function callWorker() {
+            alert("ವರ್ಕರ್ ಸುದೀಪ್ ಅವರಿಗೆ ಕರೆ ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ...");
+        }
+
+        function chatWorker() {
+            alert("ಇನ್-ಆ್ಯಪ್ ಚಾಟ್ ವಿಂಡೋ ತೆರೆಯಲಾಗಿದೆ!");
+        }
+
+        function completeJobAndPay() {
+            document.getElementById('step2').className = 'timeline-step completed';
+            document.getElementById('step3').className = 'timeline-step completed';
+            document.getElementById('step4').className = 'timeline-step completed';
+            
+            document.getElementById('orderStatus').innerHTML = '<i class="fa-solid fa-check"></i> ಕೆಲಸ ಪೂರ್ಣಗೊಂಡಿದೆ';
+            document.getElementById('orderStatus').style.background = '#10b981';
+
+            alert("₹450 ಪಾವತಿಯನ್ನು ಕೆಲಸಗಾರರ ಖಾತೆಗೆ ಯಶಸ್ವಿಯಾಗಿ ಬಿಡುಗಡೆ ಮಾಡಲಾಗಿದೆ[span_3](start_span)[span_3](end_span)!");
+            document.getElementById('ratingSection').style.display = 'block';
+        }
+
+        function setRate(stars) {
+            alert(stars + " ಸ್ಟಾರ್ ರೇಟಿಂಗ್ ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ!");
+        }
+
+        function submitRating() {
+            alert("ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ಅಮೂಲ್ಯ ರೇಟಿಂಗ್ ದಾಖಲಾಗಿದೆ[span_4](start_span)[span_4](end_span).");
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+            </html>
+    

@@ -1718,3 +1718,357 @@
 </body>
             </html>
     
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORKZEN - Business, Bulk Workforce & Investment Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056b3;
+            --accent-orange: #ff7300;
+            --accent-yellow: #ffb703;
+            --dark-navy: #0d1b2a;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --green: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--light-bg); color: var(--text-main); line-height: 1.6; }
+
+        /* Top Navigation */
+        .top-nav {
+            background: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--primary); text-decoration: none; }
+        .logo span { color: var(--accent-orange); }
+
+        .btn-cta {
+            background: linear-gradient(135deg, var(--accent-orange), #e65c00);
+            color: white !important;
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Hero */
+        .b2b-hero {
+            background: linear-gradient(135deg, var(--dark-navy) 0%, #1e3a5f 100%);
+            color: white;
+            padding: 4.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .b2b-hero h2 { font-size: 2.6rem; font-weight: 800; margin-bottom: 1rem; }
+        .b2b-hero h2 span { color: var(--accent-yellow); }
+        .b2b-hero p { font-size: 1.1rem; color: #cbd5e1; max-width: 800px; margin: auto; }
+
+        .container { max-width: 1200px; margin: auto; padding: 3.5rem 1.5rem; }
+
+        /* Two Major Sections Grid */
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .portal-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 2.2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .portal-card h3 {
+            font-size: 1.4rem;
+            color: var(--dark-navy);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .portal-card ul {
+            list-style: none;
+            margin: 1.2rem 0 2rem;
+            font-size: 0.95rem;
+            color: #334155;
+        }
+
+        .portal-card ul li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .portal-card ul li i { color: var(--green); margin-top: 4px; }
+
+        /* Forms Section */
+        .form-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-top: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .input-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark-navy);
+        }
+
+        .input-group input, .input-group select, .input-group textarea {
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        /* Sector Tags */
+        .sectors-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .sector-tag {
+            background: #e0f2fe;
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer { background: #080f1a; color: #8d99ae; padding: 2.5rem 1.5rem 1.5rem; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="top-nav">
+        <a href="index.html" class="logo">WORK<span>ZEN</span></a>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+            <a href="index.html" style="text-decoration: none; color: var(--dark-navy); font-weight: 600; font-size: 0.9rem;">ಮುಖಪುಟ</a>
+            <a href="#hiring" class="btn-cta" style="border-radius: 8px; font-size: 0.85rem;">Post Requirement</a>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="b2b-hero">
+        <h2>Business Workforce & <span>Investment Hub</span></h2>
+        <p>ಕಂಪನಿಗಳಿಗೆ ಪರಿಶೀಲಿತ ಬೃಹತ್ ಮಾನವಶಕ್ತಿ (Bulk Workforce) ಮತ್ತು ಸ್ಟಾರ್ಟ್‌ಅಪ್/ಸಣ್ಣ ಉದ್ಯಮಗಳಿಗೆ ಹೂಡಿಕೆ ಬೆಂಬಲ ಒದಗಿಸುವ AI ಪ್ಲಾಟ್‌ಫಾರ್ಮ್.</p>
+    </section>
+
+    <div class="container">
+
+        <!-- 2 Major Tracks -->
+        <div class="portal-grid">
+            
+            <!-- Track 1: Company Workforce -->
+            <div class="portal-card" style="border-top: 4px solid var(--primary);">
+                <div>
+                    <h3><i class="fa-solid fa-users-gear" style="color: var(--primary);"></i> 10. Business Workforce (Bulk Hiring)</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">ಕಾರ್ಖಾನೆಗಳು, ಕನ್‌ಸ್ಟ್ರಕ್ಷನ್ ಸೈಟ್‌ಗಳು ಅಥವಾ ಆಫೀಸ್‌ಗಳಿಗೆ ಏಕಕಾಲದಲ್ಲಿ 20 ರಿಂದ 100+ ಪರಿಶೀಲಿತ ಕೆಲಸಗಾರರನ್ನು ನೇಮಿಸಿಕೊಳ್ಳಿ.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> <strong>Verified Workforce:</strong> ಡಿಜಿಟಲ್ ಐಡಿ & ಸ್ಕಿಲ್ ಪರಿಶೀಲನೆ</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>AI Matching:</strong> ಅಗತ್ಯಕ್ಕೆ ತಕ್ಕಂತೆ ತ್ವರಿತ ಅಸೈನ್ಮೆಂಟ್</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>Recurring & Shift Management:</strong> ದಿನಗೂಲಿ ಅಥವಾ ಕಾಂಟ್ರಾಕ್ಟ್</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>Dedicated Account Manager:</strong> B2B ವಿಶೇಷ ಬೆಂಬಲ</li>
+                    </ul>
+                </div>
+                <a href="#hiring" class="btn-cta" style="text-align: center; border-radius: 8px;">ಕಾರ್ಮಿಕರ ಬೇಡಿಕೆ ಸಲ್ಲಿಸಿ (Hire Bulk)</a>
+            </div>
+
+            <!-- Track 2: Business & Investment -->
+            <div class="portal-card" style="border-top: 4px solid var(--accent-orange);">
+                <div>
+                    <h3><i class="fa-solid fa-chart-pie" style="color: var(--accent-orange);"></i> 9. Business & Investment</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">ಹೊಸ ಐಡಿಯಾ, ಉದ್ಯಮ ವಿಸ್ತರಣೆ (Expansion) ಅಥವಾ ಫ್ರಾಂಚೈಸಿಗಾಗಿ ಹೂಡಿಕೆದಾರರನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> <strong>Startup & Small Business:</strong> ಫಂಡಿಂಗ್ ಅವಶ್ಯಕತೆ ಪೋಸ್ಟ್ ಮಾಡಿ</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>Investor Matching:</strong> ಕ್ಷೇತ್ರ & ಬಜೆಟ್ ಆಧರಿಸಿ ಹೂಡಿಕೆದಾರರ ಕನೆಕ್ಟ್</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>Compliant Process:</strong> ನಿಯಮಬದ್ಧ ಹಣಕಾಸು ಪಾಲುದಾರರ ನೆರವು</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>Business Verification:</strong> ದೃಢೀಕೃತ ಬಿಸಿನೆಸ್ ಲಿಸ್ಟಿಂಗ್</li>
+                    </ul>
+                </div>
+                <a href="#investment" class="btn-cta" style="text-align: center; border-radius: 8px; background: linear-gradient(135deg, var(--dark-navy), #1e3a5f);">ಹೂಡಿಕೆಗೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ (Apply Funding)</a>
+            </div>
+
+        </div>
+
+        <!-- Investment Sectors Covered -->
+        <div style="text-align: center; margin-bottom: 3.5rem;">
+            <h4 style="font-size: 1.1rem; color: var(--dark-navy);">ಪ್ರಮುಖ ಹೂಡಿಕೆ ಮತ್ತು ಉದ್ಯಮ ವಿಭಾಗಗಳು (Sectors Covered)</h4>
+            <div class="sectors-cloud" style="justify-content: center;">
+                <span class="sector-tag">AI & Software</span>
+                <span class="sector-tag">Agriculture & AgriTech</span>
+                <span class="sector-tag">Manufacturing & Garments</span>
+                <span class="sector-tag">Retail & Restaurants</span>
+                <span class="sector-tag">Solar & EV (Green Business)</span>
+                <span class="sector-tag">Healthcare & Clinics</span>
+                <span class="sector-tag">Logistics & Transport</span>
+                <span class="sector-tag">Franchise Opportunities</span>
+            </div>
+        </div>
+
+        <!-- Form 1: Company Bulk Hiring Form -->
+        <div class="form-card" id="hiring">
+            <h3 style="color: var(--primary);"><i class="fa-solid fa-building"></i> ಕಂಪನಿ ಬಲ್ಕ್ ಹೈರಿಂಗ್ ವಿನಂತಿ (Bulk Workforce Request)</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">ನಿಮ್ಮ ಸಂಸ್ಥೆಗೆ ಅಗತ್ಯವಿರುವ ಮಾನವಶಕ್ತಿಯ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ.</p>
+
+            <form onsubmit="handleBulkHiring(event)">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>ಕಂಪನಿ ಹೆಸರು (Company Name)</label>
+                        <input type="text" id="companyName" placeholder="Ex: ABC Enterprises" required>
+                    </div>
+                    <div class="input-group">
+                        <label>ಸಂಪರ್ಕ ವ್ಯಕ್ತಿ / HR Name</label>
+                        <input type="text" id="hrName" placeholder="ನಿಮ್ಮ ಹೆಸರು" required>
+                    </div>
+                    <div class="input-group">
+                        <label>ಫೋನ್ / ಇಮೇಲ್</label>
+                        <input type="text" id="bContact" placeholder="+91 98765 43210" required>
+                    </div>
+                    <div class="input-group">
+                        <label>ಕೆಲಸಗಾರರ ಸಂಖ್ಯೆ (Count)</label>
+                        <select id="workerCount" required>
+                            <option value="10-20">10 ರಿಂದ 20 ಕೆಲಸಗಾರರು</option>
+                            <option value="20-50">20 ರಿಂದ 50 ಕೆಲಸಗಾರರು</option>
+                            <option value="50+">50+ ಕೆಲಸಗಾರರು</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>ಕೆಲಸದ ಪ್ರಕಾರ (Category)</label>
+                        <select id="workType" required>
+                            <option value="Construction Labour">Construction & Labour</option>
+                            <option value="Factory / Packaging">Factory & Packaging</option>
+                            <option value="Delivery Drivers">Delivery & Logistics</option>
+                            <option value="Office & Data Entry">Office Staff / Housekeeping</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>ಸ್ಥಳ (Work Location)</label>
+                        <input type="text" id="workLocation" placeholder="Ex: Hassan Industrial Area" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-cta" style="margin-top: 1.5rem; border-radius: 8px; width: 100%;">ಬಲ್ಕ್ ಹೈರಿಂಗ್ ವಿನಂತಿ ಸಲ್ಲಿಸಿ</button>
+            </form>
+        </div>
+
+        <!-- Form 2: Startup Funding / Investment Pitch -->
+        <div class="form-card" id="investment" style="border-top: 4px solid var(--accent-orange);">
+            <h3 style="color: var(--accent-orange);"><i class="fa-solid fa-hand-holding-dollar"></i> ಬಿಸಿನೆಸ್ ಫಂಡಿಂಗ್ & ಇನ್ವೆಸ್ಟ್‌ಮೆಂಟ್ ನೋಂದಣಿ</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">ನಿಮ್ಮ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಅಥವಾ ಉದ್ಯಮಕ್ಕೆ ಹೂಡಿಕೆ ಪಡೆಯಲು ವಿವರಗಳನ್ನು ನಮೂದಿಸಿ.</p>
+
+            <form onsubmit="handleInvestmentPitch(event)">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>ಉದ್ಯಮ / ಪ್ರಾಜೆಕ್ಟ್ ಹೆಸರು</label>
+                        <input type="text" id="bizName" placeholder="Ex: Smart Agri Tech" required>
+                    </div>
+                    <div class="input-group">
+                        <label>ಉದ್ಯಮದ ಹಂತ (Stage)</label>
+                        <select id="bizStage" required>
+                            <option value="Idea / Prototype">ಐಡಿಯಾ / ಪ್ರೋಟೋಟೈಪ್</option>
+                            <option value="Early Revenue">ಆರಂಭಿಕ ಆದಾಯ (Early Revenue)</option>
+                            <option value="Expansion / Scaling">ವಿಸ್ತರಣೆ (Expansion)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>ಅಗತ್ಯವಿರುವ ಹೂಡಿಕೆ ಮೊತ್ತ (Funding Needed)</label>
+                        <input type="text" id="fundAmount" placeholder="Ex: ₹5 Lakhs - ₹25 Lakhs" required>
+                    </div>
+                    <div class="input-group">
+                        <label>ಕ್ಷೇತ್ರ (Industry Sector)</label>
+                        <select id="bizSector" required>
+                            <option value="Technology & AI">Technology & AI</option>
+                            <option value="Agriculture / Food">Agriculture / Food Processing</option>
+                            <option value="Retail & Manufacturing">Retail & Manufacturing</option>
+                            <option value="Green Energy / EV">Green Energy & EV</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group" style="margin-top: 1.2rem;">
+                    <label>ಉದ್ಯಮದ ಸಂಕ್ಷಿಪ್ತ ವಿವರಣೆ (Brief Pitch)</label>
+                    <textarea id="bizDesc" rows="3" placeholder="ನಿಮ್ಮ ಬಿಸಿನೆಸ್ ಮಾಡೆಲ್ ಮತ್ತು ಹೂಡಿಕೆಯ ಉದ್ದೇಶವನ್ನು ವಿವರಿಸಿ..." required></textarea>
+                </div>
+                <button type="submit" class="btn-cta" style="margin-top: 1.5rem; border-radius: 8px; width: 100%; background: linear-gradient(135deg, var(--dark-navy), #1e3a5f);">ಇನ್ವೆಸ್ಟ್‌ಮೆಂಟ್ ಪ್ರಪೋಸಲ್ ಸಲ್ಲಿಸಿ</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 WORKZEN Business Solutions. All rights reserved. “Work. Earn. Save. Grow.”</p>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        function handleBulkHiring(e) {
+            e.preventDefault();
+            const company = document.getElementById('companyName').value;
+            const count = document.getElementById('workerCount').value;
+            const type = document.getElementById('workType').value;
+
+            alert(`ಧನ್ಯವಾದಗಳು ${company}!\nನಿಮ್ಮ ${count} (${type}) ಕೆಲಸಗಾರರ ಹೈರಿಂಗ್ ವಿನಂತಿಯನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ. ನಮ್ಮ B2B ಅಕೌಂಟ್ ಮ್ಯಾನೇಜರ್ ಶೀಘ್ರದಲ್ಲೇ ಸಂಪರ್ಕಿಸಲಿದ್ದಾರೆ.`);
+            e.target.reset();
+        }
+
+        function handleInvestmentPitch(e) {
+            e.preventDefault();
+            const biz = document.getElementById('bizName').value;
+            const amount = document.getElementById('fundAmount').value;
+
+            alert(`ಅಭಿನಂದನೆಗಳು! ${biz} ಪ್ರಾಜೆಕ್ಟ್‌ಗಾಗಿ ${amount} ಹೂಡಿಕೆ ಪ್ರಪೋಸಲ್ ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಕೆಯಾಗಿದೆ. ಪರಿಶೀಲನೆಯ ನಂತರ ಹೂಡಿಕೆದಾರರ ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ಲಿಸ್ಟ್ ಮಾಡಲಾಗುತ್ತದೆ.`);
+            e.target.reset();
+        }
+    </script>
+</body>
+                    </html>
+                    

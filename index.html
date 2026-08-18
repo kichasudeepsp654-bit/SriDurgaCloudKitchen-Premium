@@ -634,3 +634,284 @@
         <div class="feature-grid">
             <!-- 3. Worker Trust & Safety -->
             <div cl
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORKZEN - Work When You Need. Workers When You Need</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056b3;
+            --primary-dark: #003d80;
+            --accent-orange: #ff7300;
+            --accent-yellow: #ffb703;
+            --dark-navy: #0d1b2a;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --green: #22c55e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--light-bg); color: var(--text-main); line-height: 1.6; }
+
+        /* Navbar */
+        header { background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 1000; }
+        .navbar { max-width: 1250px; margin: auto; padding: 0.8rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo-box { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-box h1 { font-size: 1.8rem; font-weight: 900; color: var(--primary); }
+        .logo-box h1 span { color: var(--accent-orange); }
+        .nav-links { display: flex; list-style: none; gap: 1.5rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--dark-navy); font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--accent-orange); }
+        .btn-cta { background: linear-gradient(135deg, var(--accent-orange), #e65c00); color: white !important; padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: bold; border: none; cursor: pointer; text-decoration: none; display: inline-block; }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, var(--dark-navy) 0%, #1e3a5f 100%); color: white; padding: 4rem 1.5rem; text-align: center; }
+        .hero-container { max-width: 900px; margin: auto; }
+        .hero-tag { background: rgba(255, 183, 3, 0.15); color: var(--accent-yellow); display: inline-block; padding: 6px 18px; border-radius: 30px; font-weight: bold; font-size: 0.9rem; margin-bottom: 1.2rem; border: 1px solid rgba(255, 183, 3, 0.3); }
+        .hero h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; }
+        .hero h2 span { color: var(--accent-yellow); }
+        
+        .container { max-width: 1250px; margin: auto; padding: 4rem 1.5rem; }
+        .section-title { text-align: center; margin-bottom: 2.5rem; }
+        .section-title h3 { font-size: 2.2rem; color: var(--dark-navy); margin-bottom: 0.4rem; }
+        
+        /* Interactive Booking Widget */
+        .booking-widget { background: #fff; border-radius: 14px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid var(--border); max-width: 800px; margin: -2.5rem auto 3rem; position: relative; z-index: 10; }
+        .widget-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: end; }
+        .widget-group { display: flex; flex-direction: column; gap: 0.4rem; text-align: left; }
+        .widget-group label { font-size: 0.85rem; font-weight: bold; color: var(--dark-navy); }
+        .widget-group select, .widget-group input { padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; outline: none; }
+
+        /* Categories Grid */
+        .categories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+        .cat-card { background: var(--card-bg); padding: 1.8rem 1.2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border: 1px solid var(--border); border-bottom: 3px solid transparent; transition: all 0.3s ease; text-align: left; }
+        .cat-card:hover { transform: translateY(-5px); border-bottom: 3px solid var(--accent-orange); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        .cat-icon { width: 50px; height: 50px; margin-bottom: 1rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; background: #e0f2fe; color: var(--primary); }
+        .cat-card h4 { font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--dark-navy); }
+        .cat-card ul { list-style: none; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+        .btn-book-sm { background: #e0f2fe; color: var(--primary); border: none; padding: 0.4rem 1rem; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; }
+        .btn-book-sm:hover { background: var(--primary); color: #fff; }
+
+        /* Wallet & Save Interactive Simulator */
+        .simulator-box { background: #ffffff; border-radius: 14px; padding: 2.5rem; border: 1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; align-items: center; }
+        .calc-card { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 1.5rem; text-align: center; }
+        .calc-value { font-size: 1.8rem; font-weight: 800; color: #166534; margin: 0.5rem 0; }
+
+        /* Modal Popup (Auth / Booking) */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        .modal-card { background: white; width: 90%; max-width: 440px; border-radius: 12px; padding: 2rem; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; font-size: 1.2rem; cursor: pointer; color: var(--text-muted); }
+        .modal-card h3 { color: var(--dark-navy); margin-bottom: 1rem; }
+        .modal-form { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 1rem; }
+        .modal-form input, .modal-form select { padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; }
+
+        /* Footer */
+        footer { background: #080f1a; color: #8d99ae; padding: 3rem 1.5rem 1.5rem; }
+        .footer-content { max-width: 1250px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-bottom { text-align: center; padding-top: 1.5rem; border-top: 1px solid #1f293d; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <a href="#" class="logo-box">
+                <i class="fa-solid fa-briefcase" style="font-size: 1.8rem; color: var(--accent-orange);"></i>
+                <h1>WORK<span>ZEN</span></h1>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#services">ಸೇವೆಗಳು</a></li>
+                <li><a href="#simulator">ಉಳಿತಾಯ ಕ್ಯಾಲ್ಕುಲೇಟರ್</a></li>
+                <li><button onclick="openModal('worker')" class="btn-cta" style="background: transparent; color: var(--primary) !important; border: 1.5px solid var(--primary);">ವರ್ಕರ್ ಲಾಗಿನ್</button></li>
+                <li><button onclick="openModal('customer')" class="btn-cta">ಬುಕ್ ಮಾಡಿ</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-tag">🌟 ಕೆಲಸ ಬೇಕಾ? ಕೆಲಸಗಾರ ಬೇಕಾ? WORKZEN!</div>
+            <h2>Work When You Need.<br><span>Workers When You Need.</span></h2>
+            <p>AI-ಆಧಾರಿತ ಸ್ಥಳೀಯ ಉದ್ಯೋಗ ಮತ್ತು ಸೇವೆಗಳ ಮಾರುಕಟ್ಟೆ ವೇದಿಕೆ.</p>
+        </div>
+    </section>
+
+    <!-- Quick Booking Widget -->
+    <div style="max-width: 1250px; margin: auto; padding: 0 1.5rem;">
+        <div class="booking-widget">
+            <form class="widget-form" onsubmit="handleQuickSearch(event)">
+                <div class="widget-group">
+                    <label>ಸ್ಥಳ (Location)</label>
+                    <input type="text" id="quickLocation" value="Hassan, Karnataka" required>
+                </div>
+                <div class="widget-group">
+                    <label>ಸೇವೆ / ಕೆಲಸದ ಪ್ರಕಾರ</label>
+                    <select id="quickService" required>
+                        <option value="Electrician">Electrician (ಎಲೆಕ್ಟ್ರಿಷಿಯನ್)</option>
+                        <option value="Plumber">Plumber (ಪ್ಲಂಬರ್)</option>
+                        <option value="Driver">Driver (ಡ್ರೈವರ್)</option>
+                        <option value="House Cleaning">House Cleaning (ಕ್ಲೀನಿಂಗ್)</option>
+                        <option value="Agriculture Labour">Farm Labour (ಕೃಷಿ ಕಾರ್ಮಿಕ)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-cta" style="height: 44px; border-radius: 8px;">ಹುಡುಕಿ (Search)</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Section 1: Services Grid -->
+    <section class="container" id="services">
+        <div class="section-title">
+            <h3>ಲಭ್ಯವಿರುವ ಪ್ರಮುಖ ಸೇವೆಗಳು</h3>
+            <p>ನಿಮ್ಮ ಅಗತ್ಯಕ್ಕೆ ತಕ್ಕ ಪರಿಣಿತರನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ</p>
+        </div>
+
+        <div class="categories-grid">
+            <div class="cat-card">
+                <div class="cat-icon"><i class="fa-solid fa-wrench"></i></div>
+                <h4>Home & Repair</h4>
+                <ul>
+                    <li>• Electrician & Plumber</li>
+                    <li>• Appliance Repair & AC</li>
+                </ul>
+                <button class="btn-book-sm" onclick="selectService('Home & Repair')">Book Worker</button>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon"><i class="fa-solid fa-broom"></i></div>
+                <h4>Cleaning & Housework</h4>
+                <ul>
+                    <li>• House Deep Cleaning</li>
+                    <li>• Cook & Laundry Helper</li>
+                </ul>
+                <button class="btn-book-sm" onclick="selectService('House Cleaning')">Book Worker</button>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon"><i class="fa-solid fa-car"></i></div>
+                <h4>Driver & Transport</h4>
+                <ul>
+                    <li>• Personal Driver & Auto</li>
+                    <li>• Relocation Goods Transport</li>
+                </ul>
+                <button class="btn-book-sm" onclick="selectService('Driver & Transport')">Book Worker</button>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon"><i class="fa-solid fa-tractor"></i></div>
+                <h4>Agriculture</h4>
+                <ul>
+                    <li>• Farm Labour & Harvest</li>
+                    <li>• Tractor Operator</li>
+                </ul>
+                <button class="btn-book-sm" onclick="selectService('Agriculture Worker')">Book Worker</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- WORKZEN Save Live Simulator -->
+    <section class="container" id="simulator">
+        <div class="section-title">
+            <h3>WORKZEN Save & Wallet ಲೆಕ್ಕಾಚಾರ</h3>
+            <p>ಗಳಿಕೆಯಲ್ಲಿ ಸುಲಭ ಉಳಿತಾಯದ ಮಾದರಿ</p>
+        </div>
+
+        <div class="simulator-box">
+            <div class="calc-grid">
+                <div>
+                    <label style="font-weight: bold;">ದೈನಂದಿನ ಗಳಿಕೆ ನಮೂದಿಸಿ (Earning):</label>
+                    <input type="number" id="dailyEarn" value="1000" style="width: 100%; padding: 0.8rem; margin-top: 0.5rem; border: 1px solid var(--border); border-radius: 6px;" oninput="updateCalculator()">
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">WORKZEN Save ಮೂಲಕ 5% ಸ್ವಯಂ ಉಳಿತಾಯ ಮಾಡಲಾಗುತ್ತದೆ[span_1](start_span)[span_1](end_span).</p>
+                </div>
+                <div class="calc-card">
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">ನೇರ ಖಾತೆಗೆ ಜಮಾ (Payout):</p>
+                    <div class="calc-value" id="payoutVal">₹950</div>
+                    <p style="font-size: 0.9rem; color: #166534;">ಉಳಿತಾಯ ವಾಲೆಟ್ (Saved): <strong id="savedVal">₹50</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popup Modal -->
+    <div class="modal-overlay" id="actionModal">
+        <div class="modal-card">
+            <span class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></span>
+            <h3 id="modalTitle">ನೋಂದಣಿ / ಬುಕಿಂಗ್</h3>
+            <form class="modal-form" onsubmit="handleModalSubmit(event)">
+                <input type="text" id="mName" placeholder="ನಿಮ್ಮ ಹೆಸರು" required>
+                <input type="tel" id="mPhone" placeholder="ಮೊಬೈಲ್ ಸಂಖ್ಯೆ" required>
+                <input type="text" id="mDetail" placeholder="ಸೇವೆ ಅಥವಾ ಕೆಲಸದ ವಿವರ" required>
+                <button type="submit" class="btn-cta" style="border-radius: 6px; margin-top: 0.5rem;">ಸಲ್ಲಿಸಿ (Submit)</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h5 style="color: var(--accent-orange);">WORKZEN</h5>
+                <p style="font-size: 0.85rem;">“Work. Earn. Save. Grow.” Local Marketplace.</p>
+            </div>
+            <div>
+                <h5>ಸಂಪರ್ಕ</h5>
+                <p style="font-size: 0.85rem;">support@workzen.in | +91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 WORKZEN. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        function openModal(type) {
+            const modal = document.getElementById('actionModal');
+            const title = document.getElementById('modalTitle');
+            if(type === 'worker') {
+                title.innerText = "ವರ್ಕರ್ ಆಗಿ ನೋಂದಾಯಿಸಿ (Worker Registration)";
+            } else {
+                title.innerText = "ಸೇವೆ ಬುಕ್ ಮಾಡಿ (Book Service)";
+            }
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('actionModal').style.display = 'none';
+        }
+
+        function selectService(serviceName) {
+            document.getElementById('mDetail').value = serviceName;
+            openModal('customer');
+        }
+
+        function handleQuickSearch(e) {
+            e.preventDefault();
+            const loc = document.getElementById('quickLocation').value;
+            const srv = document.getElementById('quickService').value;
+            alert(`${loc} ಸ್ಥಳದಲ್ಲಿ ${srv} ಕೆಲಸಗಾರರ ಹುಡುಕಾಟ ಪ್ರಾರಂಭವಾಗಿದೆ!`);
+        }
+
+        function updateCalculator() {
+            const val = parseFloat(document.getElementById('dailyEarn').value) || 0;
+            const save = Math.round(val * 0.05);
+            const payout = val - save;
+            document.getElementById('payoutVal').innerText = '₹' + payout;
+            document.getElementById('savedVal').innerText = '₹' + save;
+        }
+
+        function handleModalSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('mName').value;
+            alert(`ಧನ್ಯವಾದಗಳು ${name}! ನಿಮ್ಮ ವಿನಂತಿಯನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ.`);
+            closeModal();
+        }
+    </script>
+</body>
+</html>

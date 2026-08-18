@@ -135,3 +135,28 @@ app.post('/api/business/pitch', (req, res) => {
 app.listen(PORT, () => {
     console.log(`WORKZEN Server is running on port ${PORT}`);
 });
+const Razorpay = require('razorpay');
+
+// Razorpay Test Keys (ನಿಮ್ಮ ಸ್ವಂತ Keys ಬಳಸಿ ಬದಲಾಯಿಸಬಹುದು)
+const razorpay = new Razorpay({
+    key_id: 'rzp_test_YOUR_KEY_HERE',
+    key_secret: 'YOUR_SECRET_KEY_HERE'
+});
+
+// Razorpay Order Creation Route (Secure Payment Hold)
+app.post('/api/payments/create-order', async (req, res) => {
+    const { amount, bookingId } = req.body;
+
+    const options = {
+        amount: (amount || 450) * 100, // Amount in Paise (₹450 = 45000)
+        currency: 'INR',
+        receipt: bookingId || 'order_rcptid_11'
+    };
+
+    try {
+        const order = await razorpay.orders.create(options);
+        res.json({ success: true, order });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});

@@ -913,5 +913,421 @@
             closeModal();
         }
     </script>
+    
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORKZEN - Worker Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056b3;
+            --accent-orange: #ff7300;
+            --accent-yellow: #ffb703;
+            --dark-navy: #0d1b2a;
+            --light-bg: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --green: #10b981;
+            --red: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: var(--light-bg); color: var(--text-main); line-height: 1.6; }
+
+        /* Dashboard Top Bar */
+        .dash-nav {
+            background: #ffffff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .dash-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .dash-logo span { color: var(--accent-orange); }
+
+        .worker-profile-pill {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8fafc;
+            padding: 6px 14px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .dash-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Top Grid - Wallet, Save & Status */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .stat-card h4 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark-navy);
+        }
+
+        .stat-badge {
+            display: inline-block;
+            margin-top: 0.4rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .badge-green { background: #dcfce7; color: #15803d; }
+        .badge-blue { background: #e0f2fe; color: #0369a1; }
+
+        /* SOS Button Header */
+        .sos-btn {
+            background: var(--red);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Main Content Layout */
+        .main-dash-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .main-dash-layout { grid-template-columns: 1fr; }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-header h3 {
+            font-size: 1.25rem;
+            color: var(--dark-navy);
+        }
+
+        /* Job Request Cards */
+        .job-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .job-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-navy);
+        }
+
+        .job-price {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--green);
+        }
+
+        .job-meta {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+
+        .job-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .job-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-accept {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .btn-reject {
+            background: #f1f5f9;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Side Info Card (Trust & Verification) */
+        .side-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .side-card h4 {
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+            color: var(--dark-navy);
+        }
+
+        .badge-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .badge-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge-list i {
+            color: var(--green);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dashboard Top Bar -->
+    <header class="dash-nav">
+        <a href="index.html" class="dash-logo">WORK<span>ZEN</span></a>
+        
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <button class="sos-btn" onclick="triggerSOS()"><i class="fa-solid fa-triangle-exclamation"></i> SOS</button>
+            <div class="worker-profile-pill">
+                <div class="avatar">S</div>
+                <div>
+                    <div style="font-size: 0.85rem; font-weight: bold;">ಸುದೀಪ್ (Verified Worker)</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">ID: WZ-84920</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dash-container">
+        
+        <!-- Live Stats & Wallet -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h4>ಇಂದಿನ ಗಳಿಕೆ (Today Earning)</h4>
+                <div class="value" id="todayEarn">₹1,450</div>
+                <span class="stat-badge badge-green">Payout Ready</span>
+            </div>
+
+            <div class="stat-card">
+                <h4>WORKZEN Save ವಾಲೆಟ್</h4>
+                <div class="value" id="saveEarn">₹380</div>
+                <span class="stat-badge badge-blue">Auto Saved (5%)</span>
+            </div>
+
+            <div class="stat-card">
+                <h4>Trust Score</h4>
+                <div class="value">4.9 ★</div>
+                <span class="stat-badge badge-green">Top Rated Pro</span>
+            </div>
+
+            <div class="stat-card">
+                <h4>Insurance Status</h4>
+                <div class="value" style="font-size: 1.2rem; color: #166534; padding-top: 5px;">Active Cover</div>
+                <span class="stat-badge badge-blue">Accident Cover Active</span>
+            </div>
+        </div>
+
+        <!-- Main Body: Job Feed & Profile Health -->
+        <div class="main-dash-layout">
+            
+            <!-- Left Side: Incoming Job Opportunities -->
+            <div>
+                <div class="section-header">
+                    <h3>ಹೊಸ ಕೆಲಸದ ವಿನಂತಿಗಳು (Nearby Jobs)</h3>
+                    <span style="font-size: 0.85rem; color: var(--green); font-weight: bold;"><i class="fa-solid fa-circle" style="font-size: 0.6rem;"></i> Live Matching Active</span>
+                </div>
+
+                <!-- Job 1 -->
+                <div class="job-card" id="job1">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Home Wiring & Switch Board Repair</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Customer: ರಮೇಶ್ ಕುಮಾರ್</div>
+                        </div>
+                        <div class="job-price">₹450</div>
+                    </div>
+                    <div class="job-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> Hassan Town (2.1 km)</span>
+                        <span><i class="fa-solid fa-clock"></i> Need Urgent (Today)</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn-accept" onclick="acceptJob('job1', 450)">ಸ್ವೀಕರಿಸಿ (Accept)</button>
+                        <button class="btn-reject" onclick="rejectJob('job1')">ತಿರಸ್ಕರಿಸಿ</button>
+                    </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="job-card" id="job2">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Ceiling Fan & Inverter Checkup</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Customer: ಪ್ರಿಯಾ ಶೆಟ್ಟಿ</div>
+                        </div>
+                        <div class="job-price">₹600</div>
+                    </div>
+                    <div class="job-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> BM Road (3.5 km)</span>
+                        <span><i class="fa-solid fa-clock"></i> Tomorrow Morning 10 AM</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn-accept" onclick="acceptJob('job2', 600)">ಸ್ವೀಕರಿಸಿ (Accept)</button>
+                        <button class="btn-reject" onclick="rejectJob('job2')">ತಿರಸ್ಕರಿಸಿ</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Trust, Badges & Proof Actions -->
+            <div>
+                <div class="side-card">
+                    <h4><i class="fa-solid fa-id-card" style="color: var(--primary);"></i> Worker Verification</h4>
+                    <ul class="badge-list">
+                        <li><i class="fa-solid fa-circle-check"></i> Digital ID Verified</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Skill Test: Electrician (Grade A)</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Police Background Verified</li>
+                        <li><i class="fa-solid fa-circle-check"></i> UPI Linked (Auto Payout)</li>
+                    </ul>
+                </div>
+
+                <div class="side-card" style="background: #fff8eb; border-color: #fde68a;">
+                    <h4 style="color: #b45309;"><i class="fa-solid fa-camera"></i> Work Proof Upload</h4>
+                    <p style="font-size: 0.85rem; color: #92400e; margin-bottom: 0.8rem;">ಕೆಲಸ ಮುಗಿದ ನಂತರ ಪಾವತಿ ಬಿಡುಗಡೆಗಾಗಿ ಫೋಟೋ ಅಪ್ಲೋಡ್ ಮಾಡಿ[span_1](start_span)[span_1](end_span).</p>
+                    <button style="width: 100%; background: #d97706; color: white; border: none; padding: 0.6rem; border-radius: 6px; font-weight: bold; cursor: pointer;" onclick="uploadProof()">Upload Completion Photo</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script for Dashboard Logic -->
+    <script>
+        let totalEarning = 1450;
+        let totalSave = 380;
+
+        function acceptJob(cardId, price) {
+            alert(`ಕೆಲಸವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಒಪ್ಪಿಕೊಳ್ಳಲಾಗಿದೆ (₹${price})! ಗ್ರಾಹಕರ ವಿವರಗಳನ್ನು ಚಾಟ್‌ನಲ್ಲಿ ತೆರೆಯಲಾಗಿದೆ.`);
+            
+            // Auto Update Wallet & Save Simulation
+            const saveAmount = Math.round(price * 0.05);
+            const payoutAmount = price - saveAmount;
+
+            totalEarning += payoutAmount;
+            totalSave += saveAmount;
+
+            document.getElementById('todayEarn').innerText = '₹' + totalEarning;
+            document.getElementById('saveEarn').innerText = '₹' + totalSave;
+
+            document.getElementById(cardId).style.display = 'none';
+        }
+
+        function rejectJob(cardId) {
+            document.getElementById(cardId).style.display = 'none';
+        }
+
+        function triggerSOS() {
+            alert("⚠️ ಎಮರ್ಜೆನ್ಸಿ SOS ಸಕ್ರಿಯವಾಗಿದೆ! ನಿಮ್ಮ ಲೈವ್ ಲೊಕೇಶನ್ ಅನ್ನು WORKZEN ಸಪೋರ್ಟ್ ಟೀಮ್ ಹಾಗೂ ಹತ್ತಿರದ ತುರ್ತು ಸಂಪರ್ಕಗಳಿಗೆ ಹಂಚಿಕೊಳ್ಳಲಾಗಿದೆ[span_2](start_span)[span_2](end_span).");
+        }
+
+        function uploadProof() {
+            alert("ಫೋಟೋ/ವೀಡಿಯೊ ಅಪ್ಲೋಡ್ ಮಾಡಲಾಗಿದೆ. ಗ್ರಾಹಕರ ದೃಢೀಕರಣದ ನಂತರ ಮೊತ್ತ ತಕ್ಷಣ ವಾಲೆಟ್‌ಗೆ ಜಮೆಯಾಗುತ್ತದೆ[span_3](start_span)[span_3](end_span)!");
+        }
+    </script>
+</body>
+                    </html>
+                    

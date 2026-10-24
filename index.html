@@ -2,724 +2,543 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Let's Go - Bike Parcel, Auto & Cabs</title>
-    <!-- FontAwesome for Icons -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Let's Go - Rapido Style App</title>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Leaflet Map CSS (For Real Map Look) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
     <style>
         :root {
-            --primary: #FFC700; /* Rapido Style Yellow */
-            --dark: #1A1A1A;
-            --light: #F8F9FA;
-            --gray: #6C757D;
-            --success: #28A745;
+            --rapido-yellow: #FFC700;
+            --rapido-dark: #121212;
+            --green-pin: #1DB954;
+            --red-pin: #E50914;
+            --bg-gray: #F3F4F6;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--light);
-            color: var(--dark);
-            overflow-x: hidden;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
-        /* Navbar */
-        nav {
+        /* Mobile App Container */
+        .app-frame {
+            width: 100%;
+            max-width: 430px;
+            height: 100vh;
+            max-height: 920px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+        }
+
+        @media (min-width: 500px) {
+            .app-frame {
+                height: 92vh;
+                border-radius: 32px;
+                border: 8px solid #111;
+            }
+        }
+
+        /* Top Floating Header over Map */
+        .top-bar {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
-            background: #fff;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            pointer-events: none;
         }
 
-        .logo {
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--dark);
-            text-decoration: none;
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            background: #fff;
+            border-radius: 50%;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            pointer-events: auto;
+            font-size: 18px;
+            color: var(--rapido-dark);
+        }
+
+        .brand-pill {
+            background: var(--rapido-dark);
+            color: var(--rapido-yellow);
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Live Map Area */
+        #map {
+            width: 100%;
+            height: 52%;
+            z-index: 1;
+        }
+
+        /* Center Map Pin Overlay */
+        .center-pin {
+            position: absolute;
+            top: 24%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 500;
+            pointer-events: none;
+            text-align: center;
+        }
+
+        .pin-bubble {
+            background: var(--rapido-dark);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+        }
+
+        .pin-bubble span {
+            color: var(--rapido-yellow);
+        }
+
+        .center-pin i {
+            font-size: 32px;
+            color: var(--rapido-dark);
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        /* Rapido Style Bottom Sheet */
+        .bottom-sheet {
+            height: 52%;
+            background: #fff;
+            border-radius: 26px 26px 0 0;
+            margin-top: -24px;
+            z-index: 1000;
+            padding: 12px 18px 20px;
+            box-shadow: 0 -8px 25px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+        }
+
+        .drag-handle {
+            width: 42px;
+            height: 5px;
+            background: #E0E0E0;
+            border-radius: 10px;
+            margin: 0 auto 10px;
+        }
+
+        /* Location Box (Rapido Connected Dots Style) */
+        .location-box {
+            background: var(--bg-gray);
+            border-radius: 16px;
+            padding: 12px 14px;
+            position: relative;
+            border: 1px solid #E5E7EB;
+        }
+
+        .loc-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .loc-row.first {
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #D1D5DB;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot.green {
+            background: var(--green-pin);
+            box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.2);
+        }
+
+        .dot.red {
+            background: var(--red-pin);
+            box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2);
+        }
+
+        .loc-row input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--rapido-dark);
+            outline: none;
+        }
+
+        .loc-row input::placeholder {
+            color: #888;
+            font-weight: 500;
+        }
+
+        /* Parcel Item Pill Selector */
+        .parcel-types {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 8px 0 4px;
+            scrollbar-width: none;
+        }
+
+        .parcel-types::-webkit-scrollbar {
+            display: none;
+        }
+
+        .parcel-chip {
+            background: #FFF9DB;
+            border: 1px solid #FFE066;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            color: #444;
+        }
+
+        .parcel-chip.active {
+            background: var(--rapido-dark);
+            color: var(--rapido-yellow);
+            border-color: var(--rapido-dark);
+        }
+
+        /* Rapido Style Vertical Vehicle List */
+        .ride-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .ride-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            border-radius: 14px;
+            border: 2px solid #F3F4F6;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #fff;
+        }
+
+        .ride-card.selected {
+            border-color: var(--rapido-yellow);
+            background: #FFFEF5;
+            box-shadow: 0 4px 12px rgba(255, 199, 0, 0.18);
+        }
+
+        .ride-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .vehicle-icon {
+            width: 48px;
+            height: 42px;
+            background: var(--bg-gray);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--rapido-dark);
+            position: relative;
+        }
+
+        .ride-card.selected .vehicle-icon {
+            background: var(--rapido-yellow);
+        }
+
+        .ride-info h4 {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--rapido-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tag-fast {
+            font-size: 9px;
+            background: var(--rapido-dark);
+            color: var(--rapido-yellow);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .ride-info p {
+            font-size: 11px;
+            color: #666;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .ride-price {
+            text-align: right;
+        }
+
+        .ride-price h3 {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--rapido-dark);
+        }
+
+        .ride-price del {
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* Payment & Offers Bar */
+        .payment-strip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 4px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        /* Rapido Main Action Button */
+        .btn-rapido {
+            width: 100%;
+            background: var(--rapido-yellow);
+            color: var(--rapido-dark);
+            border: none;
+            padding: 15px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
             align-items: center;
             gap: 10px;
+            box-shadow: 0 6px 16px rgba(255, 199, 0, 0.45);
+            transition: 0.2s;
         }
 
-        .logo span {
-            background: var(--primary);
-            padding: 4px 10px;
-            border-radius: 8px;
-            color: var(--dark);
+        .btn-rapido:active {
+            transform: scale(0.98);
         }
 
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 600;
-            font-size: 15px;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #d4a500;
-        }
-
-        .btn-download {
-            background: var(--dark);
-            color: #fff;
-            padding: 10px 22px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-download:hover {
-            background: var(--primary);
-            color: var(--dark);
-        }
-
-        /* Hero Section */
-        .hero {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            padding: 40px 5%;
-            min-height: 85vh;
-            background: linear-gradient(135deg, #fff 55%, var(--primary) 45%);
-            gap: 30px;
-        }
-
-        /* Booking Widget */
-        .booking-card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
-            width: 100%;
-            max-width: 460px;
-            z-index: 2;
-        }
-
-        .booking-card h2 {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .booking-card p.sub {
-            font-size: 13px;
-            color: var(--gray);
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        .input-group i {
+        /* Searching Captain Drawer */
+        .captain-drawer {
             position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .input-group input, .input-group select {
-            width: 100%;
-            padding: 14px 15px 14px 42px;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 14px;
-            outline: none;
-            transition: 0.3s;
-            background: #fafafa;
-        }
-
-        .input-group input:focus, .input-group select:focus {
-            border-color: var(--primary);
-            background: #fff;
-        }
-
-        /* Ride Type Selection */
-        .ride-options {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        .ride-option {
-            border: 2px solid #eee;
-            border-radius: 12px;
-            padding: 12px 5px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-            background: #fff;
-            position: relative;
-        }
-
-        .ride-option.active {
-            border-color: var(--primary);
-            background: rgba(255, 199, 0, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .ride-option i {
-            font-size: 22px;
-            margin-bottom: 6px;
-            color: var(--dark);
-        }
-
-        .ride-option span {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .ride-option small {
-            font-size: 10px;
-            color: var(--gray);
-        }
-
-        .parcel-badge {
-            position: absolute;
-            top: -8px;
-            right: 8px;
-            background: var(--dark);
-            color: var(--primary);
-            font-size: 9px;
-            padding: 2px 6px;
-            border-radius: 6px;
-            font-weight: 700;
-        }
-
-        /* Fare Estimate Box */
-        .fare-estimate {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 18px;
-            display: none;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 5px solid var(--primary);
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fare-details h4 {
-            font-size: 15px;
-            color: var(--dark);
-        }
-
-        .fare-details p {
-            font-size: 12px;
-            color: var(--gray);
-        }
-
-        .fare-price {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--dark);
-        }
-
-        .btn-book {
-            width: 100%;
-            background: var(--primary);
-            color: var(--dark);
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 12px rgba(255, 199, 0, 0.4);
-        }
-
-        .btn-book:hover {
-            background: #e6b400;
-            transform: translateY(-2px);
-        }
-
-        /* Hero Text Content */
-        .hero-content {
-            flex: 1;
-            min-width: 300px;
-            max-width: 550px;
-            z-index: 2;
-        }
-
-        .badge-tag {
-            display: inline-block;
-            background: var(--dark);
-            color: var(--primary);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .hero-content h1 {
-            font-size: 46px;
-            line-height: 1.15;
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-
-        .hero-content p {
-            font-size: 17px;
-            color: #333;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .stats-row {
-            display: flex;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .stat-item h3 {
-            font-size: 26px;
-            font-weight: 800;
-        }
-
-        .stat-item p {
-            font-size: 13px;
-            color: #444;
-            margin: 0;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 70px 5%;
-            text-align: center;
-            background: #fff;
-        }
-
-        .features h2 {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .features p.section-sub {
-            color: var(--gray);
-            margin-bottom: 45px;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px;
-        }
-
-        .feature-card {
-            background: var(--light);
-            padding: 30px 20px;
-            border-radius: 16px;
-            transition: 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-
-        .feature-icon {
-            width: 65px;
-            height: 65px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 26px;
-            color: var(--dark);
-        }
-
-        .feature-card h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            color: var(--gray);
-        }
-
-        /* Booking Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
+            bottom: -100%;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.65);
+            background: #fff;
+            border-radius: 26px 26px 0 0;
+            padding: 25px 20px;
             z-index: 2000;
+            box-shadow: 0 -10px 35px rgba(0,0,0,0.25);
+            transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-align: center;
+        }
+
+        .captain-drawer.open {
+            bottom: 0;
+        }
+
+        .pulse-loader {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: var(--rapido-yellow);
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            font-size: 26px;
+            margin: 0 auto 15px;
+            animation: pulse 1.2s infinite;
         }
 
-        .modal-content {
-            background: #fff;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 380px;
-            width: 100%;
-            position: relative;
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 199, 0, 0.7); }
+            70% { box-shadow: 0 0 0 22px rgba(255, 199, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 199, 0, 0); }
         }
 
-        .radar-spinner {
-            width: 70px;
-            height: 70px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .captain-card {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 12px;
+        .captain-box {
+            background: var(--bg-gray);
+            padding: 14px;
+            border-radius: 16px;
             margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             text-align: left;
-            border: 1px solid #eee;
         }
 
-        .otp-badge {
-            background: var(--dark);
-            color: var(--primary);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-weight: 700;
-            letter-spacing: 2px;
+        .cap-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: #fff;
-            padding: 40px 5% 20px;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-size: 24px;
+        .cap-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--rapido-dark);
+            color: var(--rapido-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
             font-weight: 800;
-            margin-bottom: 15px;
         }
 
-        .footer-logo span {
-            color: var(--primary);
-        }
-
-        footer p {
-            color: #aaa;
+        .otp-pin {
+            background: var(--rapido-dark);
+            color: var(--rapido-yellow);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 800;
             font-size: 14px;
-        }
-
-        /* Responsive */
-        @media (max-width: 850px) {
-            .hero {
-                background: var(--primary);
-                justify-content: center;
-                text-align: center;
-            }
-            .nav-links {
-                display: none;
-            }
-            .hero-content h1 {
-                font-size: 34px;
-            }
-            .stats-row {
-                justify-content: center;
-            }
+            letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
-    <nav>
-        <a href="#" class="logo">
-            <i class="fa-solid fa-bolt"></i> Let's <span>Go</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#features">Bike Parcel</a></li>
-            <li><a href="#features">Auto & Cab</a></li>
-            <li><a href="#">Become a Captain</a></li>
-        </ul>
-        <button class="btn-download" onclick="alert('Let\'s Go App coming soon on Play Store & App Store!')">Download App</button>
-    </nav>
-
-    <!-- Main Hero & Booking Section -->
-    <section class="hero">
-        <!-- Booking Widget -->
-        <div class="booking-card">
-            <h2 id="formHeading">Send Bike Parcel Instantly</h2>
-            <p class="sub" id="formSub">Fastest doorstep parcel delivery & city rides</p>
-            
-            <div class="input-group">
-                <i class="fa-solid fa-circle-dot" style="color: #28a745;"></i>
-                <input type="text" id="pickup" placeholder="Enter Pickup Location (e.g., Bus Stand)" oninput="calculateFare()">
+    <div class="app-frame">
+        
+        <!-- Top Floating App Controls -->
+        <div class="top-bar">
+            <div class="icon-btn" onclick="alert('Menu: Profile, My Rides, Parcel History, Wallet')">
+                <i class="fa-solid fa-bars"></i>
             </div>
-            
-            <div class="input-group">
-                <i class="fa-solid fa-location-dot" style="color: #dc3545;"></i>
-                <input type="text" id="drop" placeholder="Enter Drop Location (e.g., Railway Station)" oninput="calculateFare()">
+            <div class="brand-pill">
+                <i class="fa-solid fa-bolt"></i> Let's Go
             </div>
-
-            <!-- Extra Parcel Type Input (Shown only when Bike Parcel is selected) -->
-            <div class="input-group" id="parcelItemGroup">
-                <i class="fa-solid fa-box" style="color: #ff9800;"></i>
-                <select id="parcelItem">
-                    <option value="Food / Lunch Box">📦 Food / Lunch Box</option>
-                    <option value="Documents / Files">📄 Documents / Files</option>
-                    <option value="Keys / Personal Item">🔑 Keys / Personal Item</option>
-                    <option value="Groceries / Medicines">💊 Groceries / Medicines</option>
-                    <option value="Other Small Package">🛍️ Other Small Package (Max 10kg)</option>
-                </select>
-            </div>
-
-            <!-- Vehicle Categories -->
-            <div class="ride-options">
-                <div class="ride-option active" onclick="selectRide('Bike Parcel', 30, '2 mins away', true, this)">
-                    <span class="parcel-badge">DELIVERY</span>
-                    <i class="fa-solid fa-motorcycle"></i>
-                    <span>Bike Parcel</span>
-                    <small>Instant Delivery</small>
-                </div>
-                <div class="ride-option" onclick="selectRide('Auto', 45, '4 mins away', false, this)">
-                    <i class="fa-solid fa-car-side"></i>
-                    <span>Auto Ride</span>
-                    <small>Comfort</small>
-                </div>
-                <div class="ride-option" onclick="selectRide('Cab', 90, '6 mins away', false, this)">
-                    <i class="fa-solid fa-taxi"></i>
-                    <span>Cab Ride</span>
-                    <small>Family</small>
-                </div>
-            </div>
-
-            <!-- Dynamic Fare Box -->
-            <div class="fare-estimate" id="fareBox">
-                <div class="fare-details">
-                    <h4 id="selectedRideText">Let's Go Bike Parcel</h4>
-                    <p id="etaText"><i class="fa-regular fa-clock"></i> Captain is 2 mins away</p>
-                </div>
-                <div class="fare-price" id="priceDisplay">₹45</div>
-            </div>
-
-            <button class="btn-book" id="bookBtn" onclick="bookRide()">Send Bike Parcel Now</button>
-        </div>
-
-        <!-- Right Side Text -->
-        <div class="hero-content">
-            <span class="badge-tag">#1 Instant Parcel & Ride App</span>
-            <h1>Send Parcels on Bike or Book Auto & Cab with Let's Go!</h1>
-            <p>From hot lunch boxes and urgent documents on 2-wheelers to comfortable Auto and Cab rides across town — Let's Go delivers in minutes.</p>
-            
-            <div class="stats-row">
-                <div class="stat-item">
-                    <h3>2 Min</h3>
-                    <p>Bike Parcel Pickup</p>
-                </div>
-                <div class="stat-item">
-                    <h3>100%</h3>
-                    <p>Safe Delivery</p>
-                </div>
-                <div class="stat-item">
-                    <h3>24/7</h3>
-                    <p>Live Tracking</p>
-                </div>
+            <div class="icon-btn" onclick="locateUser()">
+                <i class="fa-solid fa-location-crosshairs"></i>
             </div>
         </div>
-    </section>
 
-    <!-- Why Choose Us Section -->
-    <section class="features" id="features">
-        <h2>Why Choose Let's Go?</h2>
-        <p class="section-sub">Super-fast Bike Parcel delivery and pocket-friendly Auto & Cab rides</p>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-motorcycle"></i></div>
-                <h3>Express Bike Parcel</h3>
-                <p>Send lunch boxes, keys, medicines, or business parcels anywhere in the city within minutes.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-wallet"></i></div>
-                <h3>Pocket Friendly</h3>
-                <p>Starts at just ₹30! Transparent pricing with zero hidden charges. Pay via UPI or Cash.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <h3>100% Safe & Verified</h3>
-                <p>Background-verified Delivery Captains and OTP-secured parcel handover at drop location.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-taxi"></i></div>
-                <h3>Quick Auto & Cabs</h3>
-                <p>Need to travel? Book doorstep Auto and Cab rides anytime without haggling over fares.</p>
-            </div>
+        <!-- Real Interactive Map (Hassan Default) -->
+        <div id="map"></div>
+
+        <!-- Center Pickup Pin on Map -->
+        <div class="center-pin">
+            <div class="pin-bubble">Pickup in <span>2 mins</span></div>
+            <i class="fa-solid fa-location-pin"></i>
         </div>
-    </section>
 
-    <!-- Live Booking Popup Modal -->
-    <div class="modal" id="bookingModal">
-        <div class="modal-content" id="modalContent">
-            <div class="radar-spinner" id="spinner"></div>
-            <h3 id="modalTitle">Searching for Captains...</h3>
-            <p id="modalDesc" style="color: #666; font-size: 14px; margin-top: 8px;">Connecting you with the nearest Let's Go partner.</p>
-            <button class="btn-book" style="margin-top: 20px; background: #eee; box-shadow: none;" onclick="closeModal()">Cancel Request</button>
-        </div>
-    </div>
+        <!-- Rapido Bottom Sheet -->
+        <div class="bottom-sheet">
+            <div>
+                <div class="drag-handle"></div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-logo"><i class="fa-solid fa-bolt"></i> Let's <span>Go</span></div>
-        <p>&copy; 2026 Let's Go Mobility & Logistics. All rights reserved.</p>
-    </footer>
-
-    <!-- JavaScript Logic -->
-    <script>
-        let currentRide = 'Bike Parcel';
-        let baseRate = 30;
-        let currentEta = '2 mins away';
-        let isParcelMode = true;
-        let searchTimer;
-
-        function selectRide(rideName, rate, eta, isParcel, element) {
-            currentRide = rideName;
-            baseRate = rate;
-            currentEta = eta;
-            isParcelMode = isParcel;
-
-            // Highlight selected option
-            let options = document.querySelectorAll('.ride-option');
-            options.forEach(opt => opt.classList.remove('active'));
-            element.classList.add('active');
-
-            // Show/Hide Parcel Item Dropdown & Update Button Text
-            const parcelGroup = document.getElementById('parcelItemGroup');
-            const bookBtn = document.getElementById('bookBtn');
-            const formHeading = document.getElementById('formHeading');
-
-            if (isParcelMode) {
-                parcelGroup.style.display = 'block';
-                bookBtn.innerText = 'Send Bike Parcel Now';
-                formHeading.innerText = 'Send Bike Parcel Instantly';
-            } else {
-                parcelGroup.style.display = 'none';
-                bookBtn.innerText = `Book ${rideName} Ride Now`;
-                formHeading.innerText = `Book Your ${rideName} Instantly`;
-            }
-
-            calculateFare();
-        }
-
-        function calculateFare() {
-            const pickup = document.getElementById('pickup').value.trim();
-            const drop = document.getElementById('drop').value.trim();
-            const fareBox = document.getElementById('fareBox');
-
-            if (pickup.length > 2 && drop.length > 2) {
-                const simulatedKm = Math.max(2, (pickup.length + drop.length) % 9 + 2);
-                const totalFare = baseRate + (simulatedKm * 7);
-
-                document.getElementById('selectedRideText').innerText = `Let's Go ${currentRide} (${simulatedKm} km)`;
-                document.getElementById('etaText').innerHTML = `<i class="fa-regular fa-clock"></i> Captain is ${currentEta}`;
-                document.getElementById('priceDisplay').innerText = `₹${totalFare}`;
-                fareBox.style.display = 'flex';
-            } else {
-                fareBox.style.display = 'none';
-            }
-        }
-
-        function bookRide() {
-            const pickup = document.getElementById('pickup').value.trim();
-            const drop = document.getElementById('drop').value.trim();
-            const parcelItem = document.getElementById('parcelItem').value;
-
-            if (pickup.length <= 2 || drop.length <= 2) {
-                alert('ದಯವಿಟ್ಟು ಪಿಕಪ್ ಮತ್ತು ಡ್ರಾಪ್ ಲೊಕೇಶನ್ ಹಾಕಿ! (Please enter valid Pickup and Drop locations)');
-                return;
-            }
-
-            const modal = document.getElementById('bookingModal');
-            const spinner = document.getElementById('spinner');
-            const title = document.getElementById('modalTitle');
-            const desc = document.getElementById('modalDesc');
-
-            modal.style.display = 'flex';
-            spinner.style.display = 'block';
-            title.innerText = `Assigning ${currentRide} Captain...`;
-            
-            if (isParcelMode) {
-                desc.innerHTML = `<b>Parcel:</b> ${parcelItem}<br><b>Pickup:</b> ${pickup} <br> <b>Drop:</b> ${drop}`;
-            } else {
-                desc.innerHTML = `<b>Pickup:</b> ${pickup} <br> <b>Drop:</b> ${drop}`;
-            }
-
-            // Simulate Captain Assignment after 2.5 seconds
-            searchTimer = setTimeout(() => {
-                spinner.style.display = 'none';
-                title.innerHTML = `<span style="color: #28a745;"><i class="fa-solid fa-circle-check"></i> ${currentRide} Confirmed!</span>`;
-                const randomOtp = Math.floor(1000 + Math.random() * 9000);
-                
-                desc.innerHTML = `
-                    <div class="captain-card">
-                        <p style="font-size: 14px; margin-bottom: 5px;"><strong>Captain:</strong> Darshan Kumar ⭐ 4.9</p>
-                        <p style="font-size: 14px; margin-bottom: 8px;"><strong>Vehicle:</strong> KA-13-EL-4589 (${currentRide})</p>
-                        ${isParcelMode ? `<p style="font-size: 13px; margin-bottom: 8px; color:#555;"><strong>Item:</strong> ${parcelItem}</p>` : ''}
-                        <p style="font-size: 14px;"><strong>${isParcelMode ? 'Delivery OTP:' : 'Ride PIN:'}</strong> <span class="otp-badge">${randomOtp}</span></p>
+                <!-- Pickup & Drop Connected Box -->
+                <div class="location-box">
+                    <div class="loc-row first">
+                        <span class="dot green"></span>
+                        <input type="text" id="pickup" value="BM Road, Hassan" placeholder="Pickup Location" oninput="updateFares()">
                     </div>
-                    <small style="color: #28a745; font-weight: 600;">Captain is on the way to ${pickup}!</small>
-                `;
-            }, 2500);
-        }
+                    <div class="loc-row">
+                        <span class="dot red"></span>
+                        <input type="text" id="drop" placeholder="Where to drop? (e.g., Vidyanagar)" oninput="updateFares()">
+                    </div>
+                </div>
 
-        function closeModal() {
-            clearTimeout(searchTimer);
-            document.getElementById('bookingModal').style.display = 'none';
-        }
-    </script>
-</body>
-</html>
+                <!-- Parcel Category Chips (Shown when Bike Parcel is active) -->
+                <div class="parcel-types" id="parcelChips">
+                    <div class="parcel-chip active" onclick="selectChip(this, 'Food / Lunch Box')">🍱 Lunch Box</div>
+                    <div class="parcel-chip" onclick="selectChip(this, 'Documents')">📄 Documents</div>
+                    <div class="parcel-chip" onclick="selectChip(this, 'Keys / Charger')">🔑 Keys</div>
+                    <div class="parcel-chip" onclick="selectChip(this, 'Medicines')">💊 Medicines</div>
+                    <div class="parcel-chip" onclick="selectChip(this, 'Groceries')">🛍️ Groceries</div>
+                </div>
+
+                <!-- Rapido Style Vehicle Cards -->
+                <div class="ride-list">
+                    <!-- Option 1: Bike Parcel -->
+                    <div class="ride-card selected" onclick="chooseService('Bike Parcel', 35, true, this)">
+                        <div class="ride-left">
+                            <div class="vehicle-icon">
+                                <i class="fa-solid fa-motorcycle"></i>
+                            </div>
+                            <div class="ride-info">
+                                <h4>Bike Parcel <span class="tag-fast">DELIVERY</span></h4>
+                                <p>2 mins away • Instant doorstep</p>
+                            </div>
+                        </div>
+                        <div class="ride-price">
+                            <h3 id="price-bike">₹35</h3>
+                            <del>₹50</del>
+                        </div>
+                    </div>
+
+                    <!-- Option 2: Auto -->
+                    <div class="ride-card" onclick="chooseService('Auto', 55, false, this)">
+                        <div class="ride-left">
+                            <div class="vehicle-icon">
+                                <i class="fa-solid fa-truck-pickup"></i>
+                            </div>
+                            <div class="ride-info">
+                                <h4>Auto <span style="font-size:11px; color:#555;"><i class="fa-solid fa-user"></i> 3</span></h4>
+                                <p>3 mins away • Zero haggling</p>
+                            </div>
+                        </div>
+                        <div class="ride-price">
+                            <h3 id="price-auto">
+    

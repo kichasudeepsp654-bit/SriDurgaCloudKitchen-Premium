@@ -2,22 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Let's Go - Rapido Style App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Go - 10 Mins Bike Parcel, Auto & Cab</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Leaflet Map CSS (For Real Map Look) -->
+    <!-- Leaflet Map CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <style>
         :root {
-            --rapido-yellow: #FFC700;
-            --rapido-dark: #121212;
-            --green-pin: #1DB954;
-            --red-pin: #E50914;
-            --bg-gray: #F3F4F6;
+            --yellow: #FFC700;
+            --dark: #121212;
+            --gray: #F4F5F7;
+            --text-muted: #6B7280;
+            --green: #16A34A;
+            --red: #DC2626;
         }
 
         * {
@@ -25,93 +26,280 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #222;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
+            background: #FAFAFA;
+            color: var(--dark);
+            overflow-x: hidden;
         }
 
-        /* Mobile App Container */
-        .app-frame {
-            width: 100%;
-            max-width: 430px;
-            height: 100vh;
-            max-height: 920px;
+        /* ================= NAVBAR ================= */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 6%;
             background: #fff;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            background: var(--yellow);
+            padding: 3px 10px;
+            border-radius: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #d4a500;
+        }
+
+        .nav-btn {
+            background: var(--dark);
+            color: var(--yellow);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* ================= HERO (WEBSITE + APP SIMULATOR) ================= */
+        .hero-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px 6%;
+            background: linear-gradient(135deg, #FFFDF5 55%, var(--yellow) 45%);
+            min-height: 90vh;
+            gap: 40px;
+        }
+
+        .hero-left {
+            flex: 1;
+            min-width: 300px;
+            max-width: 540px;
+        }
+
+        .eta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--dark);
+            color: var(--yellow);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .hero-left h1 {
+            font-size: 46px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .hero-left p {
+            font-size: 16px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .h-badge {
+            background: #fff;
+            padding: 14px 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            border-left: 5px solid var(--yellow);
+        }
+
+        .h-badge h3 {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .h-badge span {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* ================= STEP-BY-STEP MOBILE APP PHONE ================= */
+        .phone-wrapper {
+            width: 100%;
+            max-width: 400px;
+            height: 700px;
+            background: #fff;
+            border-radius: 36px;
+            border: 10px solid var(--dark);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.25);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            margin: 0 auto;
         }
 
-        @media (min-width: 500px) {
-            .app-frame {
-                height: 92vh;
-                border-radius: 32px;
-                border: 8px solid #111;
-            }
+        /* App Screens */
+        .app-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            position: relative;
         }
 
-        /* Top Floating Header over Map */
-        .top-bar {
+        .app-screen.active {
+            display: flex;
+        }
+
+        /* --- SCREEN 1: LOGIN / OTP --- */
+        .login-screen {
+            padding: 35px 24px;
+            justify-content: space-between;
+            background: linear-gradient(180deg, var(--yellow) 38%, #fff 38%);
+        }
+
+        .login-top {
+            margin-top: 20px;
+        }
+
+        .login-top .app-tag {
+            background: var(--dark);
+            color: var(--yellow);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .login-top h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-top: 10px;
+        }
+
+        .login-card {
+            background: #fff;
+            padding: 24px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .login-card label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .phone-input {
+            display: flex;
+            align-items: center;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .phone-input span {
+            font-weight: 800;
+            padding-right: 10px;
+            border-right: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        .phone-input input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        /* --- SCREEN 2 & 3: MAP + BOTTOM SHEET --- */
+        .map-header {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
+            top: 12px;
+            left: 12px;
+            right: 12px;
             z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            pointer-events: none;
         }
 
-        .icon-btn {
-            width: 44px;
-            height: 44px;
+        .round-btn {
+            width: 38px;
+            height: 38px;
             background: #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             cursor: pointer;
-            pointer-events: auto;
-            font-size: 18px;
-            color: var(--rapido-dark);
+            font-size: 15px;
         }
 
-        .brand-pill {
-            background: var(--rapido-dark);
-            color: var(--rapido-yellow);
-            padding: 8px 18px;
-            border-radius: 25px;
+        .eta-header-badge {
+            background: var(--dark);
+            color: var(--yellow);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 800;
-            font-size: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            pointer-events: auto;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        /* Live Map Area */
-        #map {
+        #appMap {
             width: 100%;
-            height: 52%;
+            height: 45%;
             z-index: 1;
         }
 
-        /* Center Map Pin Overlay */
-        .center-pin {
+        .map-center-pin {
             position: absolute;
-            top: 24%;
+            top: 20%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 500;
@@ -119,426 +307,419 @@
             text-align: center;
         }
 
-        .pin-bubble {
-            background: var(--rapido-dark);
+        .pin-tag {
+            background: var(--dark);
             color: #fff;
-            font-size: 11px;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 12px;
-            margin-bottom: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 9px;
+            border-radius: 10px;
+            margin-bottom: 3px;
             white-space: nowrap;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
         }
 
-        .pin-bubble span {
-            color: var(--rapido-yellow);
+        .pin-tag span {
+            color: var(--yellow);
         }
 
-        .center-pin i {
-            font-size: 32px;
-            color: var(--rapido-dark);
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
-        }
-
-        /* Rapido Style Bottom Sheet */
-        .bottom-sheet {
-            height: 52%;
+        .sheet-container {
+            height: 58%;
             background: #fff;
-            border-radius: 26px 26px 0 0;
-            margin-top: -24px;
+            border-radius: 24px 24px 0 0;
+            margin-top: -18px;
             z-index: 1000;
-            padding: 12px 18px 20px;
-            box-shadow: 0 -8px 25px rgba(0,0,0,0.1);
+            padding: 14px 16px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             overflow-y: auto;
+            box-shadow: 0 -6px 20px rgba(0,0,0,0.08);
         }
 
-        .drag-handle {
-            width: 42px;
-            height: 5px;
-            background: #E0E0E0;
-            border-radius: 10px;
-            margin: 0 auto 10px;
-        }
-
-        /* Location Box (Rapido Connected Dots Style) */
-        .location-box {
-            background: var(--bg-gray);
-            border-radius: 16px;
-            padding: 12px 14px;
-            position: relative;
+        .loc-card {
+            background: var(--gray);
+            border-radius: 14px;
+            padding: 10px 12px;
             border: 1px solid #E5E7EB;
         }
 
-        .loc-row {
+        .loc-line {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .loc-row.first {
-            padding-bottom: 10px;
-            margin-bottom: 10px;
+        .loc-line.border-b {
+            padding-bottom: 8px;
+            margin-bottom: 8px;
             border-bottom: 1px dashed #D1D5DB;
         }
 
-        .dot {
-            width: 12px;
-            height: 12px;
+        .dot-pin {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             flex-shrink: 0;
         }
 
-        .dot.green {
-            background: var(--green-pin);
-            box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.2);
-        }
+        .dot-pin.green { background: var(--green); }
+        .dot-pin.red { background: var(--red); }
 
-        .dot.red {
-            background: var(--red-pin);
-            box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2);
-        }
-
-        .loc-row input {
-            width: 100%;
+        .loc-line input {
             border: none;
             background: transparent;
-            font-size: 14px;
+            width: 100%;
+            font-size: 13px;
             font-weight: 600;
-            color: var(--rapido-dark);
             outline: none;
         }
 
-        .loc-row input::placeholder {
-            color: #888;
-            font-weight: 500;
+        /* Parcel Details Bar */
+        .parcel-box {
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+            border-radius: 12px;
+            padding: 8px 10px;
+            margin-top: 8px;
         }
 
-        /* Parcel Item Pill Selector */
-        .parcel-types {
+        .parcel-chips {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             overflow-x: auto;
-            padding: 8px 0 4px;
+            padding-bottom: 6px;
             scrollbar-width: none;
         }
 
-        .parcel-types::-webkit-scrollbar {
-            display: none;
-        }
+        .parcel-chips::-webkit-scrollbar { display: none; }
 
-        .parcel-chip {
-            background: #FFF9DB;
-            border: 1px solid #FFE066;
-            padding: 6px 12px;
-            border-radius: 20px;
+        .p-chip {
+            background: #fff;
+            border: 1px solid #fcd34d;
+            padding: 4px 10px;
+            border-radius: 15px;
             font-size: 11px;
             font-weight: 700;
             white-space: nowrap;
             cursor: pointer;
-            color: #444;
         }
 
-        .parcel-chip.active {
-            background: var(--rapido-dark);
-            color: var(--rapido-yellow);
-            border-color: var(--rapido-dark);
+        .p-chip.active {
+            background: var(--dark);
+            color: var(--yellow);
+            border-color: var(--dark);
         }
 
-        /* Rapido Style Vertical Vehicle List */
-        .ride-list {
+        .receiver-input {
+            width: 100%;
+            border: 1px solid #E5E7EB;
+            background: #fff;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            outline: none;
+        }
+
+        /* Vehicle List */
+        .v-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 7px;
             margin: 8px 0;
         }
 
-        .ride-card {
+        .v-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 14px;
-            border-radius: 14px;
+            padding: 8px 12px;
+            border-radius: 12px;
             border: 2px solid #F3F4F6;
             cursor: pointer;
             transition: 0.2s;
-            background: #fff;
         }
 
-        .ride-card.selected {
-            border-color: var(--rapido-yellow);
+        .v-item.active {
+            border-color: var(--yellow);
             background: #FFFEF5;
-            box-shadow: 0 4px 12px rgba(255, 199, 0, 0.18);
         }
 
-        .ride-left {
+        .v-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
         }
 
-        .vehicle-icon {
-            width: 48px;
-            height: 42px;
-            background: var(--bg-gray);
-            border-radius: 10px;
+        .v-icon {
+            width: 40px;
+            height: 36px;
+            background: var(--gray);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            color: var(--rapido-dark);
-            position: relative;
+            font-size: 18px;
         }
 
-        .ride-card.selected .vehicle-icon {
-            background: var(--rapido-yellow);
+        .v-item.active .v-icon {
+            background: var(--yellow);
         }
 
-        .ride-info h4 {
-            font-size: 15px;
+        .v-title h4 {
+            font-size: 13px;
             font-weight: 800;
-            color: var(--rapido-dark);
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
-        .tag-fast {
-            font-size: 9px;
-            background: var(--rapido-dark);
-            color: var(--rapido-yellow);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 700;
-        }
-
-        .ride-info p {
+        .v-title p {
             font-size: 11px;
-            color: #666;
-            font-weight: 500;
-            margin-top: 2px;
+            color: var(--text-muted);
+            font-weight: 600;
         }
 
-        .ride-price {
+        .v-price {
             text-align: right;
         }
 
-        .ride-price h3 {
-            font-size: 17px;
+        .v-price h4 {
+            font-size: 15px;
             font-weight: 800;
-            color: var(--rapido-dark);
         }
 
-        .ride-price del {
-            font-size: 11px;
-            color: #999;
-        }
-
-        /* Payment & Offers Bar */
-        .payment-strip {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 4px;
-            font-size: 13px;
-            font-weight: 700;
-            color: #333;
-        }
-
-        .payment-method {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-        }
-
-        /* Rapido Main Action Button */
-        .btn-rapido {
+        .btn-main {
             width: 100%;
-            background: var(--rapido-yellow);
-            color: var(--rapido-dark);
+            background: var(--yellow);
+            color: var(--dark);
             border: none;
-            padding: 15px;
-            border-radius: 14px;
-            font-size: 16px;
+            padding: 13px;
+            border-radius: 12px;
+            font-size: 15px;
             font-weight: 800;
             cursor: pointer;
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 6px 16px rgba(255, 199, 0, 0.45);
-            transition: 0.2s;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .btn-rapido:active {
-            transform: scale(0.98);
-        }
-
-        /* Searching Captain Drawer */
-        .captain-drawer {
+        /* --- SCREEN 4: BOOKING CONFIRMED MODAL --- */
+        .booking-overlay {
             position: absolute;
             bottom: -100%;
             left: 0;
             width: 100%;
             background: #fff;
-            border-radius: 26px 26px 0 0;
-            padding: 25px 20px;
-            z-index: 2000;
-            box-shadow: 0 -10px 35px rgba(0,0,0,0.25);
-            transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 24px 24px 0 0;
+            padding: 20px;
+            z-index: 1500;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
+            transition: 0.35s ease;
             text-align: center;
         }
 
-        .captain-drawer.open {
+        .booking-overlay.show {
             bottom: 0;
         }
 
-        .pulse-loader {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            background: var(--rapido-yellow);
+        .captain-card {
+            background: var(--gray);
+            padding: 12px;
+            border-radius: 14px;
+            margin: 12px 0;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            margin: 0 auto 15px;
-            animation: pulse 1.2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 199, 0, 0.7); }
-            70% { box-shadow: 0 0 0 22px rgba(255, 199, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 199, 0, 0); }
-        }
-
-        .captain-box {
-            background: var(--bg-gray);
-            padding: 14px;
-            border-radius: 16px;
-            margin: 15px 0;
-            display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             text-align: left;
         }
 
-        .cap-profile {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        /* ================= WEBSITE SECTIONS BELOW ================= */
+        .services-sec {
+            padding: 70px 6%;
+            text-align: center;
+            background: #fff;
         }
 
-        .cap-avatar {
-            width: 48px;
-            height: 48px;
-            background: var(--rapido-dark);
-            color: var(--rapido-yellow);
-            border-radius: 50%;
+        .services-sec h2 {
+            font-size: 34px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .s-card {
+            background: var(--gray);
+            padding: 30px 22px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .s-card:hover {
+            transform: translateY(-6px);
+            background: #FFFBEB;
+            border: 1px solid var(--yellow);
+        }
+
+        .s-icon {
+            width: 65px;
+            height: 65px;
+            background: var(--yellow);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            font-weight: 800;
+            font-size: 28px;
+            margin: 0 auto 18px;
         }
 
-        .otp-pin {
-            background: var(--rapido-dark);
-            color: var(--rapido-yellow);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-weight: 800;
+        /* Captain Registration Section */
+        .captain-sec {
+            padding: 70px 6%;
+            background: var(--dark);
+            color: #fff;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .cap-left {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .cap-left h2 {
+            font-size: 36px;
+            color: var(--yellow);
+            margin-bottom: 15px;
+        }
+
+        .cap-form {
+            background: #1F2937;
+            padding: 30px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .cap-form input, .cap-form select {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 14px;
+            border-radius: 10px;
+            border: 1px solid #374151;
+            background: #111827;
+            color: #fff;
+            outline: none;
+        }
+
+        footer {
+            background: #0B0F19;
+            color: #9CA3AF;
+            text-align: center;
+            padding: 30px 6%;
             font-size: 14px;
-            letter-spacing: 2px;
+        }
+
+        @media (max-width: 850px) {
+            .nav-links { display: none; }
+            .hero-left h1 { font-size: 34px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="app-frame">
+    <!-- ================= TOP WEBSITE NAVBAR ================= -->
+    <nav>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-bolt"></i> Let's <span>Go</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">10-Min Bike Parcel</a></li>
+            <li><a href="#services">Auto & Cab</a></li>
+            <li><a href="#captain">Become a Captain</a></li>
+        </ul>
+        <button class="nav-btn" onclick="document.getElementById('captain').scrollIntoView({behavior:'smooth'})">
+            Join as Captain
+        </button>
+    </nav>
+
+    <!-- ================= HERO: WEBSITE + INTERACTIVE APP ================= -->
+    <section class="hero-section" id="home">
         
-        <!-- Top Floating App Controls -->
-        <div class="top-bar">
-            <div class="icon-btn" onclick="alert('Menu: Profile, My Rides, Parcel History, Wallet')">
-                <i class="fa-solid fa-bars"></i>
+        <!-- Left Website Content -->
+        <div class="hero-left">
+            <div class="eta-pill">
+                <i class="fa-solid fa-stopwatch"></i> Guaranteed 10 Mins Doorstep Pickup
             </div>
-            <div class="brand-pill">
-                <i class="fa-solid fa-bolt"></i> Let's Go
-            </div>
-            <div class="icon-btn" onclick="locateUser()">
-                <i class="fa-solid fa-location-crosshairs"></i>
+            <h1>Send Bike Parcels & Book Auto or Cabs in 10 Mins!</h1>
+            <p>Whether it's sending hot lunch boxes, urgent documents, keys, or booking a quick Auto & Cab ride across town — <strong>Let's Go</strong> reaches your doorstep within 10 minutes.</p>
+
+            <div class="hero-badges">
+                <div class="h-badge">
+                    <h3>10 Mins</h3>
+                    <span>Quick Pickup Time</span>
+                </div>
+                <div class="h-badge">
+                    <h3>₹30</h3>
+                    <span>Bike Parcel Starts At</span>
+                </div>
+                <div class="h-badge">
+                    <h3>100%</h3>
+                    <span>OTP Secured Delivery</span>
+                </div>
             </div>
         </div>
 
-        <!-- Real Interactive Map (Hassan Default) -->
-        <div id="map"></div>
-
-        <!-- Center Pickup Pin on Map -->
-        <div class="center-pin">
-            <div class="pin-bubble">Pickup in <span>2 mins</span></div>
-            <i class="fa-solid fa-location-pin"></i>
-        </div>
-
-        <!-- Rapido Bottom Sheet -->
-        <div class="bottom-sheet">
-            <div>
-                <div class="drag-handle"></div>
-
-                <!-- Pickup & Drop Connected Box -->
-                <div class="location-box">
-                    <div class="loc-row first">
-                        <span class="dot green"></span>
-                        <input type="text" id="pickup" value="BM Road, Hassan" placeholder="Pickup Location" oninput="updateFares()">
-                    </div>
-                    <div class="loc-row">
-                        <span class="dot red"></span>
-                        <input type="text" id="drop" placeholder="Where to drop? (e.g., Vidyanagar)" oninput="updateFares()">
-                    </div>
+        <!-- Right Interactive Step-by-Step Mobile App -->
+        <div class="phone-wrapper">
+            
+            <!-- STEP 1: LOGIN SCREEN -->
+            <div class="app-screen login-screen active" id="screenLogin">
+                <div class="login-top">
+                    <span class="app-tag"><i class="fa-solid fa-bolt"></i> LET'S GO APP</span>
+                    <h2>Doorstep Pickup in 10 Minutes!</h2>
+                    <p style="font-size: 13px; margin-top: 5px; font-weight: 600;">Bike Parcel • Auto Ride • Cab</p>
                 </div>
 
-                <!-- Parcel Category Chips (Shown when Bike Parcel is active) -->
-                <div class="parcel-types" id="parcelChips">
-                    <div class="parcel-chip active" onclick="selectChip(this, 'Food / Lunch Box')">🍱 Lunch Box</div>
-                    <div class="parcel-chip" onclick="selectChip(this, 'Documents')">📄 Documents</div>
-                    <div class="parcel-chip" onclick="selectChip(this, 'Keys / Charger')">🔑 Keys</div>
-                    <div class="parcel-chip" onclick="selectChip(this, 'Medicines')">💊 Medicines</div>
-                    <div class="parcel-chip" onclick="selectChip(this, 'Groceries')">🛍️ Groceries</div>
+                <div class="login-card">
+                    <label>ENTER MOBILE NUMBER</label>
+                    <div class="phone-input">
+                        <span>+91</span>
+                        <input type="tel" id="loginPhone" maxlength="10" placeholder="98765 43210" value="9876543210">
+                    </div>
+                    <button class="btn-main" onclick="goToAppMap()">
+                        Continue with OTP <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <p style="text-align: center; font-size: 11px; color: #888; margin-top: 12px; cursor: pointer;" onclick="goToAppMap()">
+                        Skip Login & Try Live Booking ➔
+                    </p>
                 </div>
 
-                <!-- Rapido Style Vehicle Cards -->
-                <div class="ride-list">
-                    <!-- Option 1: Bike Parcel -->
-                    <div class="ride-card selected" onclick="chooseService('Bike Parcel', 35, true, this)">
-                        <div class="ride-left">
-                            <div class="vehicle-icon">
-                                <i class="fa-solid fa-motorcycle"></i>
-                            </div>
-                            <div class="ride-info">
-                                <h4>Bike Parcel <span class="tag-fast">DELIVERY</span></h4>
-                                <p>2 mins away • Instant doorstep</p>
-                            </div>
-                        </div>
-                        <div class="ride-price">
-                            <h3 id="price-bike">₹35</h3>
-                            <del>₹50</del>
-                        </div>
-                    </div>
+                <div style="text-align: center; font-size: 11px; color: #777;">
+                    <i class="fa-solid fa-shield-halved"></i> 100% Safe & Verified KA-13 Captains
+                </div>
+            </div>
 
-                    <!-- Option 2: Auto -->
-                    <div class="ride-card" onclick="chooseService('Auto', 55, false, this)">
-                        <div class="ride-left">
-                            <div class="vehicle-icon">
-                                <i class="fa-solid fa-truck-pickup"></i>
-                            </div>
-                            <div class="ride-info">
-                                <h4>Auto <span style="font-size:11px; color:#555;"><i class="fa-solid fa-user"></i> 3</span></h4>
-                                <p>3 mins away • Zero haggling</p>
-                            </div>
-                        </div>
-                        <div class="ride-price">
-                            <h3 id="price-auto">
-    
+            <!-- STEP 2 & 3: LIVE MAP + BOOKING SCREEN -->
+            <div class="app-screen" id="screenBooking">
+                
+                <!-- Floating Map Header -->
+                <div class="map-header">
+                    <div class="round-btn" onclick="backToLogin()" title="Back to Login">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </div>
+                    <div class="eta-header-badge">
+                        <i class="fa-regular fa-clock"></i> Pickup in 10 Mins
+                    </div>
+                    <div class="round-btn" onclick="resetMapCenter()">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </div>
+       

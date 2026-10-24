@@ -1,2074 +1,725 @@
 <!DOCTYPE html>
-<html lang="kn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WORKZEN - Work When You Need. Workers When You Need</title>
+    <title>Let's Go - Bike Parcel, Auto & Cabs</title>
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #0056b3;
-            --primary-dark: #003d80;
-            --accent-orange: #ff7300;
-            --accent-yellow: #ffb703;
-            --dark-navy: #0d1b2a;
-            --light-bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --green: #22c55e;
+            --primary: #FFC700; /* Rapido Style Yellow */
+            --dark: #1A1A1A;
+            --light: #F8F9FA;
+            --gray: #6C757D;
+            --success: #28A745;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            scroll-behavior: smooth;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background-color: var(--light-bg);
-            color: var(--text-main);
-            line-height: 1.6;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
         }
 
-        /* Header */
-        header {
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
             background: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .navbar {
-            max-width: 1250px;
-            margin: auto;
-            padding: 0.8rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-box {
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--dark);
+            text-decoration: none;
             display: flex;
             align-items: center;
             gap: 10px;
-            text-decoration: none;
         }
 
-        .logo-box h1 {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary);
-        }
-
-        .logo-box h1 span {
-            color: var(--accent-orange);
+        .logo span {
+            background: var(--primary);
+            padding: 4px 10px;
+            border-radius: 8px;
+            color: var(--dark);
         }
 
         .nav-links {
             display: flex;
+            gap: 25px;
             list-style: none;
-            gap: 1.5rem;
-            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--dark-navy);
+            color: var(--dark);
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: color 0.2s;
+            font-size: 15px;
+            transition: 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--accent-orange);
+            color: #d4a500;
         }
 
-        .btn-cta {
-            background: linear-gradient(135deg, var(--accent-orange), #e65c00);
-            color: white !important;
-            padding: 0.6rem 1.4rem;
-            border-radius: 50px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(255, 115, 0, 0.3);
+        .btn-download {
+            background: var(--dark);
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
             border: none;
             cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
         }
 
-        /* Hero */
+        .btn-download:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--dark-navy) 0%, #1e3a5f 100%);
-            color: white;
-            padding: 4.5rem 1.5rem;
-            text-align: center;
-        }
-
-        .hero-container {
-            max-width: 900px;
-            margin: auto;
-        }
-
-        .hero-tag {
-            background: rgba(255, 183, 3, 0.15);
-            color: var(--accent-yellow);
-            display: inline-block;
-            padding: 6px 18px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 1.2rem;
-            border: 1px solid rgba(255, 183, 3, 0.3);
-        }
-
-        .hero h2 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero h2 span {
-            color: var(--accent-yellow);
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            color: #cbd5e1;
-            margin-bottom: 2rem;
-        }
-
-        .badges-bar {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .badge-item {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
+            padding: 40px 5%;
+            min-height: 85vh;
+            background: linear-gradient(135deg, #fff 55%, var(--primary) 45%);
+            gap: 30px;
         }
 
-        .badge-item i {
-            color: var(--accent-yellow);
+        /* Booking Widget */
+        .booking-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+            width: 100%;
+            max-width: 460px;
+            z-index: 2;
         }
 
-        /* Container & Titles */
-        .container {
-            max-width: 1250px;
-            margin: auto;
-            padding: 4rem 1.5rem;
+        .booking-card h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
         }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
+        .booking-card p.sub {
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 20px;
         }
 
-        .section-title h3 {
-            font-size: 2.2rem;
-            color: var(--dark-navy);
-            margin-bottom: 0.4rem;
-        }
-
-        .section-title p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        /* Section 1: Jobs Categories */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .cat-card {
-            background: var(--card-bg);
-            padding: 1.8rem 1.2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-            border: 1px solid var(--border);
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .cat-card:hover {
-            transform: translateY(-5px);
-            border-bottom: 3px solid var(--accent-orange);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        }
-
-        .cat-icon {
-            width: 55px;
-            height: 55px;
-            margin-bottom: 1rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            background: #e0f2fe;
-            color: var(--primary);
-        }
-
-        .cat-card h4 {
-            font-size: 1.15rem;
-            margin-bottom: 0.5rem;
-            color: var(--dark-navy);
-        }
-
-        .cat-card ul {
-            list-style: none;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .cat-card ul li {
-            margin-bottom: 0.3rem;
-        }
-
-        /* Steps */
-        .steps-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 1.5rem;
-            text-align: center;
-        }
-
-        .step-box {
-            background: white;
-            padding: 2rem 1rem 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        .input-group {
             position: relative;
-            border: 1px solid var(--border);
+            margin-bottom: 15px;
         }
 
-        .step-num {
+        .input-group i {
             position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 14px 15px 14px 42px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+            background: #fafafa;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--primary);
+            background: #fff;
+        }
+
+        /* Ride Type Selection */
+        .ride-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .ride-option {
+            border: 2px solid #eee;
+            border-radius: 12px;
+            padding: 12px 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #fff;
+            position: relative;
+        }
+
+        .ride-option.active {
+            border-color: var(--primary);
+            background: rgba(255, 199, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .ride-option i {
+            font-size: 22px;
+            margin-bottom: 6px;
+            color: var(--dark);
+        }
+
+        .ride-option span {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .ride-option small {
+            font-size: 10px;
+            color: var(--gray);
+        }
+
+        .parcel-badge {
+            position: absolute;
+            top: -8px;
+            right: 8px;
+            background: var(--dark);
+            color: var(--primary);
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        /* Fare Estimate Box */
+        .fare-estimate {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            display: none;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.85rem;
+            border-left: 5px solid var(--primary);
+            animation: fadeIn 0.3s ease;
         }
 
-        .step-box i {
-            font-size: 2rem;
-            color: var(--accent-orange);
-            margin: 0.8rem 0;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .step-box h5 {
-            font-size: 1rem;
-            margin-bottom: 0.3rem;
+        .fare-details h4 {
+            font-size: 15px;
+            color: var(--dark);
         }
 
-        .step-box p {
-            font-size: 0.82rem;
-            color: var(--text-muted);
+        .fare-details p {
+            font-size: 12px;
+            color: var(--gray);
         }
 
-        /* Multi Grid for Master Plan Features */
+        .fare-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .btn-book {
+            width: 100%;
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(255, 199, 0, 0.4);
+        }
+
+        .btn-book:hover {
+            background: #e6b400;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Text Content */
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 550px;
+            z-index: 2;
+        }
+
+        .badge-tag {
+            display: inline-block;
+            background: var(--dark);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero-content h1 {
+            font-size: 46px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero-content p {
+            font-size: 17px;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .stat-item h3 {
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .stat-item p {
+            font-size: 13px;
+            color: #444;
+            margin: 0;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 70px 5%;
+            text-align: center;
+            background: #fff;
+        }
+
+        .features h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .features p.section-sub {
+            color: var(--gray);
+            margin-bottom: 45px;
+        }
+
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.8rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
         }
 
         .feature-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border: 1px solid var(--border);
-            border-top: 4px solid var(--primary);
+            background: var(--light);
+            padding: 30px 20px;
+            border-radius: 16px;
+            transition: 0.3s;
         }
 
-        .feature-card.highlight {
-            border-top-color: var(--accent-orange);
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
         }
 
-        .feature-card h4 {
-            font-size: 1.25rem;
-            color: var(--dark-navy);
-            margin-bottom: 1rem;
+        .feature-icon {
+            width: 65px;
+            height: 65px;
+            background: var(--primary);
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 26px;
+            color: var(--dark);
         }
 
-        .feature-card ul {
-            list-style: none;
+        .feature-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
         }
 
-        .feature-card ul li {
-            font-size: 0.9rem;
-            margin-bottom: 0.7rem;
-            color: #334155;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
+        .feature-card p {
+            font-size: 14px;
+            color: var(--gray);
         }
 
-        .feature-card ul li i {
-            color: var(--green);
-            margin-top: 4px;
+        /* Booking Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.65);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
-        /* Waitlist */
-        .waitlist-section {
-            background: linear-gradient(135deg, #0d1b2a, #1b3a60);
-            color: white;
-            border-radius: 16px;
-            padding: 3.5rem 1.5rem;
+        .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
             text-align: center;
-            margin-top: 3rem;
+            max-width: 380px;
+            width: 100%;
+            position: relative;
         }
 
-        .waitlist-form {
-            max-width: 500px;
-            margin: 2rem auto 0;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .radar-spinner {
+            width: 70px;
+            height: 70px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
         }
 
-        .waitlist-form input, .waitlist-form select {
-            padding: 0.9rem 1.2rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.95rem;
-            outline: none;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .captain-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            text-align: left;
+            border: 1px solid #eee;
+        }
+
+        .otp-badge {
+            background: var(--dark);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
         /* Footer */
         footer {
-            background: #080f1a;
-            color: #8d99ae;
-            padding: 3.5rem 1.5rem 1.5rem;
-        }
-
-        .footer-content {
-            max-width: 1250px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .footer-col h5 {
-            color: white;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 0.5rem;
-            font-size: 0.88rem;
-        }
-
-        .footer-col a {
-            color: #8d99ae;
-            text-decoration: none;
-        }
-
-        .footer-col a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
+            background: var(--dark);
+            color: #fff;
+            padding: 40px 5% 20px;
             text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid #1f293d;
-            font-size: 0.85rem;
         }
 
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h2 { font-size: 2rem; }
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        footer p {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 850px) {
+            .hero {
+                background: var(--primary);
+                justify-content: center;
+                text-align: center;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero-content h1 {
+                font-size: 34px;
+            }
+            .stats-row {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- Header Navigation -->
-    <header>
-        <div class="navbar">
-            <a href="#" class="logo-box">
-                <i class="fa-solid fa-briefcase" style="font-size: 1.8rem; color: var(--accent-orange);"></i>
-                <h1>WORK<span>ZEN</span></h1>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#services">ಕೆಲಸಗಳು (Jobs)</a></li>
-                <li><a href="#marketplace">ಸೇವೆಗಳು (Marketplace)</a></li>
-                <li><a href="#trust">ಸುರಕ್ಷತೆ (Trust)</a></li>
-                <li><a href="#finance">Save & Insurance</a></li>
-                <li><a href="#business">Business & AI</a></li>
-                <li><a href="#waitlist" class="btn-cta">ನೋಂದಾಯಿಸಿ</a></li>
-            </ul>
-        </div>
-    </header>
+    <nav>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-bolt"></i> Let's <span>Go</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#features">Bike Parcel</a></li>
+            <li><a href="#features">Auto & Cab</a></li>
+            <li><a href="#">Become a Captain</a></li>
+        </ul>
+        <button class="btn-download" onclick="alert('Let\'s Go App coming soon on Play Store & App Store!')">Download App</button>
+    </nav>
 
-    <!-- Hero Section -->
+    <!-- Main Hero & Booking Section -->
     <section class="hero">
-        <div class="hero-container">
-            <div class="hero-tag">🌟 "Work. Earn. Save. Grow."</div>
-            <h2>Work When You Need.<br><span>Workers When You Need.</span></h2>
-            <p>AI-ಆಧಾರಿತ ಉದ್ಯೋಗ, ಸೇವೆಗಳು ಮತ್ತು ಬಿಸಿನೆಸ್ ಅವಕಾಶಗಳ ಸಂಪೂರ್ಣ ಮಾರುಕಟ್ಟೆ ವೇದಿಕೆ.</p>
+        <!-- Booking Widget -->
+        <div class="booking-card">
+            <h2 id="formHeading">Send Bike Parcel Instantly</h2>
+            <p class="sub" id="formSub">Fastest doorstep parcel delivery & city rides</p>
             
-            <a href="#waitlist" class="btn-cta" style="font-size: 1.1rem; padding: 0.8rem 2.2rem;">ಈಗಲೇ ಸೇರಿಕೊಳ್ಳಿ / Scan Waitlist</a>
+            <div class="input-group">
+                <i class="fa-solid fa-circle-dot" style="color: #28a745;"></i>
+                <input type="text" id="pickup" placeholder="Enter Pickup Location (e.g., Bus Stand)" oninput="calculateFare()">
+            </div>
+            
+            <div class="input-group">
+                <i class="fa-solid fa-location-dot" style="color: #dc3545;"></i>
+                <input type="text" id="drop" placeholder="Enter Drop Location (e.g., Railway Station)" oninput="calculateFare()">
+            </div>
 
-            <div class="badges-bar">
-                <div class="badge-item"><i class="fa-solid fa-location-dot"></i> Nearby Workers</div>
-                <div class="badge-item"><i class="fa-solid fa-bolt"></i> Available Now</div>
-                <div class="badge-item"><i class="fa-solid fa-shield-halved"></i> Verified & Trusted</div>
-                <div class="badge-item"><i class="fa-solid fa-comments"></i> In-App Chat</div>
-                <div class="badge-item"><i class="fa-solid fa-wallet"></i> Secure Payments</div>
+            <!-- Extra Parcel Type Input (Shown only when Bike Parcel is selected) -->
+            <div class="input-group" id="parcelItemGroup">
+                <i class="fa-solid fa-box" style="color: #ff9800;"></i>
+                <select id="parcelItem">
+                    <option value="Food / Lunch Box">📦 Food / Lunch Box</option>
+                    <option value="Documents / Files">📄 Documents / Files</option>
+                    <option value="Keys / Personal Item">🔑 Keys / Personal Item</option>
+                    <option value="Groceries / Medicines">💊 Groceries / Medicines</option>
+                    <option value="Other Small Package">🛍️ Other Small Package (Max 10kg)</option>
+                </select>
+            </div>
+
+            <!-- Vehicle Categories -->
+            <div class="ride-options">
+                <div class="ride-option active" onclick="selectRide('Bike Parcel', 30, '2 mins away', true, this)">
+                    <span class="parcel-badge">DELIVERY</span>
+                    <i class="fa-solid fa-motorcycle"></i>
+                    <span>Bike Parcel</span>
+                    <small>Instant Delivery</small>
+                </div>
+                <div class="ride-option" onclick="selectRide('Auto', 45, '4 mins away', false, this)">
+                    <i class="fa-solid fa-car-side"></i>
+                    <span>Auto Ride</span>
+                    <small>Comfort</small>
+                </div>
+                <div class="ride-option" onclick="selectRide('Cab', 90, '6 mins away', false, this)">
+                    <i class="fa-solid fa-taxi"></i>
+                    <span>Cab Ride</span>
+                    <small>Family</small>
+                </div>
+            </div>
+
+            <!-- Dynamic Fare Box -->
+            <div class="fare-estimate" id="fareBox">
+                <div class="fare-details">
+                    <h4 id="selectedRideText">Let's Go Bike Parcel</h4>
+                    <p id="etaText"><i class="fa-regular fa-clock"></i> Captain is 2 mins away</p>
+                </div>
+                <div class="fare-price" id="priceDisplay">₹45</div>
+            </div>
+
+            <button class="btn-book" id="bookBtn" onclick="bookRide()">Send Bike Parcel Now</button>
+        </div>
+
+        <!-- Right Side Text -->
+        <div class="hero-content">
+            <span class="badge-tag">#1 Instant Parcel & Ride App</span>
+            <h1>Send Parcels on Bike or Book Auto & Cab with Let's Go!</h1>
+            <p>From hot lunch boxes and urgent documents on 2-wheelers to comfortable Auto and Cab rides across town — Let's Go delivers in minutes.</p>
+            
+            <div class="stats-row">
+                <div class="stat-item">
+                    <h3>2 Min</h3>
+                    <p>Bike Parcel Pickup</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>Safe Delivery</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Live Tracking</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Section 1: WORK & JOBS (All Categories) -->
-    <section class="container" id="services">
-        <div class="section-title">
-            <h3>1. ಕೆಲಸಗಳು ಮತ್ತು ವಿಭಾಗಗಳು (Work & Jobs)</h3>
-            <p>ಎಲ್ಲಾ ಪ್ರಕಾರದ ದೈನಂದಿನ ಮತ್ತು ವೃತ್ತಿಪರ ಉದ್ಯೋಗಗಳು</p>
-        </div>
-
-        <div class="categories-grid">
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-wrench"></i></div>
-                <h4>Home & Repair</h4>
-                <ul>
-                    <li>• Electrician & Plumber</li>
-                    <li>• Carpenter & Painter</li>
-                    <li>• AC, Fridge & Washing Machine Repair</li>
-                    <li>• RO & Appliance Technician, Mason</li>
-                </ul>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-broom"></i></div>
-                <h4>Home Services</h4>
-                <ul>
-                    <li>• House Cleaning & Deep Cleaning</li>
-                    <li>• Cook & Chef, Gardener</li>
-                    <li>• Pest Control, Laundry</li>
-                    <li>• Packing & Moving, Home Helper</li>
-                </ul>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-helmet-safety"></i></div>
-                <h4>Construction & Labour</h4>
-                <ul>
-                    <li>• General Labour & Helper</li>
-                    <li>• Mason, Welder & Fabricator</li>
-                    <li>• Site Worker & Supervisor</li>
-                    <li>• Heavy Machine Operator</li>
-                </ul>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-car"></i></div>
-                <h4>Driver & Transport</h4>
-                <ul>
-                    <li>• Personal & Delivery Driver</li>
-                    <li>• Truck & Mini-Truck Driver</li>
-                    <li>• Auto Driver & Vehicle Pickup</li>
-                    <li>• Relocation / Moving Services</li>
-                </ul>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-box"></i></div>
-                <h4>Delivery & Errands</h4>
-                <ul>
-                    <li>• Grocery Delivery & Parcel</li>
-                    <li>• Document Delivery</li>
-                    <li>• Shopping Assistance</li>
-                    <li>• Local Errands & Tasks</li>
-                </ul>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-tractor"></i></div>
-                <h4>Agriculture</h4>
-                <ul>
-                    <li>• Farm Labour & Harvest Worker</li>
-                    <li>• Tractor Operator</li>
-                    <li>• Irrigation Worker</li>
-                    <li>• Farm Equipment Operator</li>
-                </ul>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-building-user"></i></div>
-                <h4>Business & Office</h4>
-                <ul>
-                    <li>• Office Assistant & Receptionist</li>
-                    <li>• Data Entry Operator & Accountant</li>
-                    <li>• Sales Staff & Security</li>
-                    <li>• Housekeeping & Event Staff</li>
-                </ul>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-laptop-code"></i></div>
-                <h4>Digital & Professional</h4>
-                <ul>
-                    <li>• Graphic Designer & Video Editor</li>
-                    <li>• Web Developer & App Developer</li>
-                    <li>• Photographer & Content Writer</li>
-                    <li>• Digital Marketer & Translator</li>
-                </ul>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                <h4>Education & Training</h4>
-                <ul>
-                    <li>• Home Tutor & Language Teacher</li>
-                    <li>• Music Teacher & Skill Trainer</li>
-                    <li>• Fitness Trainer & Career Mentor</li>
-                </ul>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-music"></i></div>
-                <h4>Events & Entertainment</h4>
-                <ul>
-                    <li>• DJ, Singer, Dancer & Anchor</li>
-                    <li>• Makeup Artist & Videographer</li>
-                    <li>• Decoration Worker & Event Crew</li>
-                </ul>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
-                <h4>Quick / Urgent Jobs</h4>
-                <ul>
-                    <li>• Need Now (ತುರ್ತು ಅಗತ್ಯ)</li>
-                    <li>• Emergency Electrician/Plumber</li>
-                    <li>• Immediate Driver & Help</li>
-                </ul>
-            </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-business-time"></i></div>
-                <h4>Contract & Types</h4>
-                <ul>
-                    <li>• Full-time & Part-time</li>
-                    <li>• Temporary & Daily Wage</li>
-                    <li>• Contract & Apprenticeship</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section: How WORKZEN Works -->
-    <section class="container" style="background: #eef4f9; border-radius: 16px; margin-bottom: 4rem;">
-        <div class="section-title">
-            <h3>WORKZEN ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ?</h3>
-            <p>ಸರಳ 5 ಹಂತಗಳಲ್ಲಿ ನಿಮ್ಮ ಕೆಲಸ ಪೂರ್ಣಗೊಳಿಸಿ</p>
-        </div>
-
-        <div class="steps-container">
-            <div class="step-box">
-                <div class="step-num">1</div>
-                <i class="fa-solid fa-file-pen"></i>
-                <h5>Post Your Job</h5>
-                <p>ನಿಮ್ಮ ಕೆಲಸದ ವಿವರ ನಮೂದಿಸಿ</p>
-            </div>
-            <div class="step-box">
-                <div class="step-num">2</div>
-                <i class="fa-solid fa-users-viewfinder"></i>
-                <h5>Get Quotes</h5>
-                <p>ಹತ್ತಿರದ ಕೆಲಸಗಾರರ ಕೊಟೇಶನ್ ಪಡೆಯಿರಿ</p>
-            </div>
-            <div class="step-box">
-                <div class="step-num">3</div>
-                <i class="fa-solid fa-user-check"></i>
-                <h5>Choose Worker</h5>
-                <p>ವಿಮರ್ಶೆ ನೋಡಿ ಆಯ್ಕೆಮಾಡಿ</p>
-            </div>
-            <div class="step-box">
-                <div class="step-num">4</div>
-                <i class="fa-solid fa-lock"></i>
-                <h5>Pay Securely</h5>
-                <p>ಸುರಕ್ಷಿತ ಪಾವತಿ ಹೋಲ್ಡ್ ವ್ಯವಸ್ಥೆ</p>
-            </div>
-            <div class="step-box">
-                <div class="step-num">5</div>
-                <i class="fa-solid fa-star"></i>
-                <h5>Rate Worker</h5>
-                <p>ಕೆಲಸ ಮುಗಿದ ಮೇಲೆ ರೇಟಿಂಗ್ ನೀಡಿ</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sections 3 to 12: Ecosystem & Features -->
-    <section class="container" id="trust">
-        <div class="section-title">
-            <h3>ಸುರಕ್ಷತೆ, ಆರ್ಥಿಕತೆ ಮತ್ತು ತಂತ್ರಜ್ಞಾನ ವ್ಯವಸ್ಥೆ</h3>
-            <p>Work. Earn. Save. Grow Ecosystem</p>
-        </div>
-
+    <!-- Why Choose Us Section -->
+    <section class="features" id="features">
+        <h2>Why Choose Let's Go?</h2>
+        <p class="section-sub">Super-fast Bike Parcel delivery and pocket-friendly Auto & Cab rides</p>
         <div class="feature-grid">
-            <!-- 3. Worker Trust & Safety -->
-            <div cl
-<!DOCTYPE html>
-<html lang="kn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WORKZEN - Work When You Need. Workers When You Need</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #0056b3;
-            --primary-dark: #003d80;
-            --accent-orange: #ff7300;
-            --accent-yellow: #ffb703;
-            --dark-navy: #0d1b2a;
-            --light-bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --green: #22c55e;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--light-bg); color: var(--text-main); line-height: 1.6; }
-
-        /* Navbar */
-        header { background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 1000; }
-        .navbar { max-width: 1250px; margin: auto; padding: 0.8rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo-box { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo-box h1 { font-size: 1.8rem; font-weight: 900; color: var(--primary); }
-        .logo-box h1 span { color: var(--accent-orange); }
-        .nav-links { display: flex; list-style: none; gap: 1.5rem; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--dark-navy); font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--accent-orange); }
-        .btn-cta { background: linear-gradient(135deg, var(--accent-orange), #e65c00); color: white !important; padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: bold; border: none; cursor: pointer; text-decoration: none; display: inline-block; }
-
-        /* Hero */
-        .hero { background: linear-gradient(135deg, var(--dark-navy) 0%, #1e3a5f 100%); color: white; padding: 4rem 1.5rem; text-align: center; }
-        .hero-container { max-width: 900px; margin: auto; }
-        .hero-tag { background: rgba(255, 183, 3, 0.15); color: var(--accent-yellow); display: inline-block; padding: 6px 18px; border-radius: 30px; font-weight: bold; font-size: 0.9rem; margin-bottom: 1.2rem; border: 1px solid rgba(255, 183, 3, 0.3); }
-        .hero h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; }
-        .hero h2 span { color: var(--accent-yellow); }
-        
-        .container { max-width: 1250px; margin: auto; padding: 4rem 1.5rem; }
-        .section-title { text-align: center; margin-bottom: 2.5rem; }
-        .section-title h3 { font-size: 2.2rem; color: var(--dark-navy); margin-bottom: 0.4rem; }
-        
-        /* Interactive Booking Widget */
-        .booking-widget { background: #fff; border-radius: 14px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid var(--border); max-width: 800px; margin: -2.5rem auto 3rem; position: relative; z-index: 10; }
-        .widget-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: end; }
-        .widget-group { display: flex; flex-direction: column; gap: 0.4rem; text-align: left; }
-        .widget-group label { font-size: 0.85rem; font-weight: bold; color: var(--dark-navy); }
-        .widget-group select, .widget-group input { padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; outline: none; }
-
-        /* Categories Grid */
-        .categories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
-        .cat-card { background: var(--card-bg); padding: 1.8rem 1.2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border: 1px solid var(--border); border-bottom: 3px solid transparent; transition: all 0.3s ease; text-align: left; }
-        .cat-card:hover { transform: translateY(-5px); border-bottom: 3px solid var(--accent-orange); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
-        .cat-icon { width: 50px; height: 50px; margin-bottom: 1rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; background: #e0f2fe; color: var(--primary); }
-        .cat-card h4 { font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--dark-navy); }
-        .cat-card ul { list-style: none; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
-        .btn-book-sm { background: #e0f2fe; color: var(--primary); border: none; padding: 0.4rem 1rem; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; }
-        .btn-book-sm:hover { background: var(--primary); color: #fff; }
-
-        /* Wallet & Save Interactive Simulator */
-        .simulator-box { background: #ffffff; border-radius: 14px; padding: 2.5rem; border: 1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; align-items: center; }
-        .calc-card { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 1.5rem; text-align: center; }
-        .calc-value { font-size: 1.8rem; font-weight: 800; color: #166534; margin: 0.5rem 0; }
-
-        /* Modal Popup (Auth / Booking) */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 2000; }
-        .modal-card { background: white; width: 90%; max-width: 440px; border-radius: 12px; padding: 2rem; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-        .modal-close { position: absolute; top: 1rem; right: 1rem; font-size: 1.2rem; cursor: pointer; color: var(--text-muted); }
-        .modal-card h3 { color: var(--dark-navy); margin-bottom: 1rem; }
-        .modal-form { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 1rem; }
-        .modal-form input, .modal-form select { padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; }
-
-        /* Footer */
-        footer { background: #080f1a; color: #8d99ae; padding: 3rem 1.5rem 1.5rem; }
-        .footer-content { max-width: 1250px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
-        .footer-bottom { text-align: center; padding-top: 1.5rem; border-top: 1px solid #1f293d; font-size: 0.85rem; }
-    </style>
-</head>
-<body>
-
-    <!-- Header -->
-    <header>
-        <div class="navbar">
-            <a href="#" class="logo-box">
-                <i class="fa-solid fa-briefcase" style="font-size: 1.8rem; color: var(--accent-orange);"></i>
-                <h1>WORK<span>ZEN</span></h1>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#services">ಸೇವೆಗಳು</a></li>
-                <li><a href="#simulator">ಉಳಿತಾಯ ಕ್ಯಾಲ್ಕುಲೇಟರ್</a></li>
-                <li><button onclick="openModal('worker')" class="btn-cta" style="background: transparent; color: var(--primary) !important; border: 1.5px solid var(--primary);">ವರ್ಕರ್ ಲಾಗಿನ್</button></li>
-                <li><button onclick="openModal('customer')" class="btn-cta">ಬುಕ್ ಮಾಡಿ</button></li>
-            </ul>
-        </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-tag">🌟 ಕೆಲಸ ಬೇಕಾ? ಕೆಲಸಗಾರ ಬೇಕಾ? WORKZEN!</div>
-            <h2>Work When You Need.<br><span>Workers When You Need.</span></h2>
-            <p>AI-ಆಧಾರಿತ ಸ್ಥಳೀಯ ಉದ್ಯೋಗ ಮತ್ತು ಸೇವೆಗಳ ಮಾರುಕಟ್ಟೆ ವೇದಿಕೆ.</p>
-        </div>
-    </section>
-
-    <!-- Quick Booking Widget -->
-    <div style="max-width: 1250px; margin: auto; padding: 0 1.5rem;">
-        <div class="booking-widget">
-            <form class="widget-form" onsubmit="handleQuickSearch(event)">
-                <div class="widget-group">
-                    <label>ಸ್ಥಳ (Location)</label>
-                    <input type="text" id="quickLocation" value="Hassan, Karnataka" required>
-                </div>
-                <div class="widget-group">
-                    <label>ಸೇವೆ / ಕೆಲಸದ ಪ್ರಕಾರ</label>
-                    <select id="quickService" required>
-                        <option value="Electrician">Electrician (ಎಲೆಕ್ಟ್ರಿಷಿಯನ್)</option>
-                        <option value="Plumber">Plumber (ಪ್ಲಂಬರ್)</option>
-                        <option value="Driver">Driver (ಡ್ರೈವರ್)</option>
-                        <option value="House Cleaning">House Cleaning (ಕ್ಲೀನಿಂಗ್)</option>
-                        <option value="Agriculture Labour">Farm Labour (ಕೃಷಿ ಕಾರ್ಮಿಕ)</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn-cta" style="height: 44px; border-radius: 8px;">ಹುಡುಕಿ (Search)</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Section 1: Services Grid -->
-    <section class="container" id="services">
-        <div class="section-title">
-            <h3>ಲಭ್ಯವಿರುವ ಪ್ರಮುಖ ಸೇವೆಗಳು</h3>
-            <p>ನಿಮ್ಮ ಅಗತ್ಯಕ್ಕೆ ತಕ್ಕ ಪರಿಣಿತರನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ</p>
-        </div>
-
-        <div class="categories-grid">
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-wrench"></i></div>
-                <h4>Home & Repair</h4>
-                <ul>
-                    <li>• Electrician & Plumber</li>
-                    <li>• Appliance Repair & AC</li>
-                </ul>
-                <button class="btn-book-sm" onclick="selectService('Home & Repair')">Book Worker</button>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-motorcycle"></i></div>
+                <h3>Express Bike Parcel</h3>
+                <p>Send lunch boxes, keys, medicines, or business parcels anywhere in the city within minutes.</p>
             </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-broom"></i></div>
-                <h4>Cleaning & Housework</h4>
-                <ul>
-                    <li>• House Deep Cleaning</li>
-                    <li>• Cook & Laundry Helper</li>
-                </ul>
-                <button class="btn-book-sm" onclick="selectService('House Cleaning')">Book Worker</button>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-wallet"></i></div>
+                <h3>Pocket Friendly</h3>
+                <p>Starts at just ₹30! Transparent pricing with zero hidden charges. Pay via UPI or Cash.</p>
             </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-car"></i></div>
-                <h4>Driver & Transport</h4>
-                <ul>
-                    <li>• Personal Driver & Auto</li>
-                    <li>• Relocation Goods Transport</li>
-                </ul>
-                <button class="btn-book-sm" onclick="selectService('Driver & Transport')">Book Worker</button>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>100% Safe & Verified</h3>
+                <p>Background-verified Delivery Captains and OTP-secured parcel handover at drop location.</p>
             </div>
-            <div class="cat-card">
-                <div class="cat-icon"><i class="fa-solid fa-tractor"></i></div>
-                <h4>Agriculture</h4>
-                <ul>
-                    <li>• Farm Labour & Harvest</li>
-                    <li>• Tractor Operator</li>
-                </ul>
-                <button class="btn-book-sm" onclick="selectService('Agriculture Worker')">Book Worker</button>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-taxi"></i></div>
+                <h3>Quick Auto & Cabs</h3>
+                <p>Need to travel? Book doorstep Auto and Cab rides anytime without haggling over fares.</p>
             </div>
         </div>
     </section>
 
-    <!-- WORKZEN Save Live Simulator -->
-    <section class="container" id="simulator">
-        <div class="section-title">
-            <h3>WORKZEN Save & Wallet ಲೆಕ್ಕಾಚಾರ</h3>
-            <p>ಗಳಿಕೆಯಲ್ಲಿ ಸುಲಭ ಉಳಿತಾಯದ ಮಾದರಿ</p>
-        </div>
-
-        <div class="simulator-box">
-            <div class="calc-grid">
-                <div>
-                    <label style="font-weight: bold;">ದೈನಂದಿನ ಗಳಿಕೆ ನಮೂದಿಸಿ (Earning):</label>
-                    <input type="number" id="dailyEarn" value="1000" style="width: 100%; padding: 0.8rem; margin-top: 0.5rem; border: 1px solid var(--border); border-radius: 6px;" oninput="updateCalculator()">
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">WORKZEN Save ಮೂಲಕ 5% ಸ್ವಯಂ ಉಳಿತಾಯ ಮಾಡಲಾಗುತ್ತದೆ[span_1](start_span)[span_1](end_span).</p>
-                </div>
-                <div class="calc-card">
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">ನೇರ ಖಾತೆಗೆ ಜಮಾ (Payout):</p>
-                    <div class="calc-value" id="payoutVal">₹950</div>
-                    <p style="font-size: 0.9rem; color: #166534;">ಉಳಿತಾಯ ವಾಲೆಟ್ (Saved): <strong id="savedVal">₹50</strong></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Popup Modal -->
-    <div class="modal-overlay" id="actionModal">
-        <div class="modal-card">
-            <span class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></span>
-            <h3 id="modalTitle">ನೋಂದಣಿ / ಬುಕಿಂಗ್</h3>
-            <form class="modal-form" onsubmit="handleModalSubmit(event)">
-                <input type="text" id="mName" placeholder="ನಿಮ್ಮ ಹೆಸರು" required>
-                <input type="tel" id="mPhone" placeholder="ಮೊಬೈಲ್ ಸಂಖ್ಯೆ" required>
-                <input type="text" id="mDetail" placeholder="ಸೇವೆ ಅಥವಾ ಕೆಲಸದ ವಿವರ" required>
-                <button type="submit" class="btn-cta" style="border-radius: 6px; margin-top: 0.5rem;">ಸಲ್ಲಿಸಿ (Submit)</button>
-            </form>
+    <!-- Live Booking Popup Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content" id="modalContent">
+            <div class="radar-spinner" id="spinner"></div>
+            <h3 id="modalTitle">Searching for Captains...</h3>
+            <p id="modalDesc" style="color: #666; font-size: 14px; margin-top: 8px;">Connecting you with the nearest Let's Go partner.</p>
+            <button class="btn-book" style="margin-top: 20px; background: #eee; box-shadow: none;" onclick="closeModal()">Cancel Request</button>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div>
-                <h5 style="color: var(--accent-orange);">WORKZEN</h5>
-                <p style="font-size: 0.85rem;">“Work. Earn. Save. Grow.” Local Marketplace.</p>
-            </div>
-            <div>
-                <h5>ಸಂಪರ್ಕ</h5>
-                <p style="font-size: 0.85rem;">support@workzen.in | +91 98765 43210</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 WORKZEN. All rights reserved.</p>
-        </div>
+        <div class="footer-logo"><i class="fa-solid fa-bolt"></i> Let's <span>Go</span></div>
+        <p>&copy; 2026 Let's Go Mobility & Logistics. All rights reserved.</p>
     </footer>
 
-    <!-- Interactive Script -->
+    <!-- JavaScript Logic -->
     <script>
-        function openModal(type) {
-            const modal = document.getElementById('actionModal');
-            const title = document.getElementById('modalTitle');
-            if(type === 'worker') {
-                title.innerText = "ವರ್ಕರ್ ಆಗಿ ನೋಂದಾಯಿಸಿ (Worker Registration)";
+        let currentRide = 'Bike Parcel';
+        let baseRate = 30;
+        let currentEta = '2 mins away';
+        let isParcelMode = true;
+        let searchTimer;
+
+        function selectRide(rideName, rate, eta, isParcel, element) {
+            currentRide = rideName;
+            baseRate = rate;
+            currentEta = eta;
+            isParcelMode = isParcel;
+
+            // Highlight selected option
+            let options = document.querySelectorAll('.ride-option');
+            options.forEach(opt => opt.classList.remove('active'));
+            element.classList.add('active');
+
+            // Show/Hide Parcel Item Dropdown & Update Button Text
+            const parcelGroup = document.getElementById('parcelItemGroup');
+            const bookBtn = document.getElementById('bookBtn');
+            const formHeading = document.getElementById('formHeading');
+
+            if (isParcelMode) {
+                parcelGroup.style.display = 'block';
+                bookBtn.innerText = 'Send Bike Parcel Now';
+                formHeading.innerText = 'Send Bike Parcel Instantly';
             } else {
-                title.innerText = "ಸೇವೆ ಬುಕ್ ಮಾಡಿ (Book Service)";
+                parcelGroup.style.display = 'none';
+                bookBtn.innerText = `Book ${rideName} Ride Now`;
+                formHeading.innerText = `Book Your ${rideName} Instantly`;
             }
+
+            calculateFare();
+        }
+
+        function calculateFare() {
+            const pickup = document.getElementById('pickup').value.trim();
+            const drop = document.getElementById('drop').value.trim();
+            const fareBox = document.getElementById('fareBox');
+
+            if (pickup.length > 2 && drop.length > 2) {
+                const simulatedKm = Math.max(2, (pickup.length + drop.length) % 9 + 2);
+                const totalFare = baseRate + (simulatedKm * 7);
+
+                document.getElementById('selectedRideText').innerText = `Let's Go ${currentRide} (${simulatedKm} km)`;
+                document.getElementById('etaText').innerHTML = `<i class="fa-regular fa-clock"></i> Captain is ${currentEta}`;
+                document.getElementById('priceDisplay').innerText = `₹${totalFare}`;
+                fareBox.style.display = 'flex';
+            } else {
+                fareBox.style.display = 'none';
+            }
+        }
+
+        function bookRide() {
+            const pickup = document.getElementById('pickup').value.trim();
+            const drop = document.getElementById('drop').value.trim();
+            const parcelItem = document.getElementById('parcelItem').value;
+
+            if (pickup.length <= 2 || drop.length <= 2) {
+                alert('ದಯವಿಟ್ಟು ಪಿಕಪ್ ಮತ್ತು ಡ್ರಾಪ್ ಲೊಕೇಶನ್ ಹಾಕಿ! (Please enter valid Pickup and Drop locations)');
+                return;
+            }
+
+            const modal = document.getElementById('bookingModal');
+            const spinner = document.getElementById('spinner');
+            const title = document.getElementById('modalTitle');
+            const desc = document.getElementById('modalDesc');
+
             modal.style.display = 'flex';
+            spinner.style.display = 'block';
+            title.innerText = `Assigning ${currentRide} Captain...`;
+            
+            if (isParcelMode) {
+                desc.innerHTML = `<b>Parcel:</b> ${parcelItem}<br><b>Pickup:</b> ${pickup} <br> <b>Drop:</b> ${drop}`;
+            } else {
+                desc.innerHTML = `<b>Pickup:</b> ${pickup} <br> <b>Drop:</b> ${drop}`;
+            }
+
+            // Simulate Captain Assignment after 2.5 seconds
+            searchTimer = setTimeout(() => {
+                spinner.style.display = 'none';
+                title.innerHTML = `<span style="color: #28a745;"><i class="fa-solid fa-circle-check"></i> ${currentRide} Confirmed!</span>`;
+                const randomOtp = Math.floor(1000 + Math.random() * 9000);
+                
+                desc.innerHTML = `
+                    <div class="captain-card">
+                        <p style="font-size: 14px; margin-bottom: 5px;"><strong>Captain:</strong> Darshan Kumar ⭐ 4.9</p>
+                        <p style="font-size: 14px; margin-bottom: 8px;"><strong>Vehicle:</strong> KA-13-EL-4589 (${currentRide})</p>
+                        ${isParcelMode ? `<p style="font-size: 13px; margin-bottom: 8px; color:#555;"><strong>Item:</strong> ${parcelItem}</p>` : ''}
+                        <p style="font-size: 14px;"><strong>${isParcelMode ? 'Delivery OTP:' : 'Ride PIN:'}</strong> <span class="otp-badge">${randomOtp}</span></p>
+                    </div>
+                    <small style="color: #28a745; font-weight: 600;">Captain is on the way to ${pickup}!</small>
+                `;
+            }, 2500);
         }
 
         function closeModal() {
-            document.getElementById('actionModal').style.display = 'none';
-        }
-
-        function selectService(serviceName) {
-            document.getElementById('mDetail').value = serviceName;
-            openModal('customer');
-        }
-
-        function handleQuickSearch(e) {
-            e.preventDefault();
-            const loc = document.getElementById('quickLocation').value;
-            const srv = document.getElementById('quickService').value;
-            alert(`${loc} ಸ್ಥಳದಲ್ಲಿ ${srv} ಕೆಲಸಗಾರರ ಹುಡುಕಾಟ ಪ್ರಾರಂಭವಾಗಿದೆ!`);
-        }
-
-        function updateCalculator() {
-            const val = parseFloat(document.getElementById('dailyEarn').value) || 0;
-            const save = Math.round(val * 0.05);
-            const payout = val - save;
-            document.getElementById('payoutVal').innerText = '₹' + payout;
-            document.getElementById('savedVal').innerText = '₹' + save;
-        }
-
-        function handleModalSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('mName').value;
-            alert(`ಧನ್ಯವಾದಗಳು ${name}! ನಿಮ್ಮ ವಿನಂತಿಯನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ.`);
-            closeModal();
+            clearTimeout(searchTimer);
+            document.getElementById('bookingModal').style.display = 'none';
         }
     </script>
-    
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="kn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WORKZEN - Worker Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #0056b3;
-            --accent-orange: #ff7300;
-            --accent-yellow: #ffb703;
-            --dark-navy: #0d1b2a;
-            --light-bg: #f1f5f9;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --green: #10b981;
-            --red: #ef4444;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background-color: var(--light-bg); color: var(--text-main); line-height: 1.6; }
-
-        /* Dashboard Top Bar */
-        .dash-nav {
-            background: #ffffff;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .dash-logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .dash-logo span { color: var(--accent-orange); }
-
-        .worker-profile-pill {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: #f8fafc;
-            padding: 6px 14px;
-            border-radius: 30px;
-            border: 1px solid var(--border);
-        }
-
-        .avatar {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .dash-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Top Grid - Wallet, Save & Status */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-            position: relative;
-        }
-
-        .stat-card h4 {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-card .value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--dark-navy);
-        }
-
-        .stat-badge {
-            display: inline-block;
-            margin-top: 0.4rem;
-            font-size: 0.75rem;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 4px;
-        }
-
-        .badge-green { background: #dcfce7; color: #15803d; }
-        .badge-blue { background: #e0f2fe; color: #0369a1; }
-
-        /* SOS Button Header */
-        .sos-btn {
-            background: var(--red);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Main Content Layout */
-        .main-dash-layout {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-        }
-
-        @media (max-width: 900px) {
-            .main-dash-layout { grid-template-columns: 1fr; }
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.2rem;
-        }
-
-        .section-header h3 {
-            font-size: 1.25rem;
-            color: var(--dark-navy);
-        }
-
-        /* Job Request Cards */
-        .job-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            margin-bottom: 1.2rem;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .job-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--dark-navy);
-        }
-
-        .job-price {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--green);
-        }
-
-        .job-meta {
-            display: flex;
-            gap: 1.2rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            flex-wrap: wrap;
-        }
-
-        .job-meta span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .job-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .btn-accept {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.6rem 1.4rem;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            flex: 1;
-        }
-
-        .btn-reject {
-            background: #f1f5f9;
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Side Info Card (Trust & Verification) */
-        .side-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .side-card h4 {
-            font-size: 1.05rem;
-            margin-bottom: 1rem;
-            color: var(--dark-navy);
-        }
-
-        .badge-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            font-size: 0.9rem;
-        }
-
-        .badge-list li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .badge-list i {
-            color: var(--green);
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Dashboard Top Bar -->
-    <header class="dash-nav">
-        <a href="index.html" class="dash-logo">WORK<span>ZEN</span></a>
-        
-        <div style="display: flex; align-items: center; gap: 1.5rem;">
-            <button class="sos-btn" onclick="triggerSOS()"><i class="fa-solid fa-triangle-exclamation"></i> SOS</button>
-            <div class="worker-profile-pill">
-                <div class="avatar">S</div>
-                <div>
-                    <div style="font-size: 0.85rem; font-weight: bold;">ಸುದೀಪ್ (Verified Worker)</div>
-                    <div style="font-size: 0.75rem; color: var(--text-muted);">ID: WZ-84920</div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="dash-container">
-        
-        <!-- Live Stats & Wallet -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h4>ಇಂದಿನ ಗಳಿಕೆ (Today Earning)</h4>
-                <div class="value" id="todayEarn">₹1,450</div>
-                <span class="stat-badge badge-green">Payout Ready</span>
-            </div>
-
-            <div class="stat-card">
-                <h4>WORKZEN Save ವಾಲೆಟ್</h4>
-                <div class="value" id="saveEarn">₹380</div>
-                <span class="stat-badge badge-blue">Auto Saved (5%)</span>
-            </div>
-
-            <div class="stat-card">
-                <h4>Trust Score</h4>
-                <div class="value">4.9 ★</div>
-                <span class="stat-badge badge-green">Top Rated Pro</span>
-            </div>
-
-            <div class="stat-card">
-                <h4>Insurance Status</h4>
-                <div class="value" style="font-size: 1.2rem; color: #166534; padding-top: 5px;">Active Cover</div>
-                <span class="stat-badge badge-blue">Accident Cover Active</span>
-            </div>
-        </div>
-
-        <!-- Main Body: Job Feed & Profile Health -->
-        <div class="main-dash-layout">
-            
-            <!-- Left Side: Incoming Job Opportunities -->
-            <div>
-                <div class="section-header">
-                    <h3>ಹೊಸ ಕೆಲಸದ ವಿನಂತಿಗಳು (Nearby Jobs)</h3>
-                    <span style="font-size: 0.85rem; color: var(--green); font-weight: bold;"><i class="fa-solid fa-circle" style="font-size: 0.6rem;"></i> Live Matching Active</span>
-                </div>
-
-                <!-- Job 1 -->
-                <div class="job-card" id="job1">
-                    <div class="job-header">
-                        <div>
-                            <div class="job-title">Home Wiring & Switch Board Repair</div>
-                            <div style="font-size: 0.85rem; color: var(--text-muted);">Customer: ರಮೇಶ್ ಕುಮಾರ್</div>
-                        </div>
-                        <div class="job-price">₹450</div>
-                    </div>
-                    <div class="job-meta">
-                        <span><i class="fa-solid fa-location-dot"></i> Hassan Town (2.1 km)</span>
-                        <span><i class="fa-solid fa-clock"></i> Need Urgent (Today)</span>
-                    </div>
-                    <div class="job-actions">
-                        <button class="btn-accept" onclick="acceptJob('job1', 450)">ಸ್ವೀಕರಿಸಿ (Accept)</button>
-                        <button class="btn-reject" onclick="rejectJob('job1')">ತಿರಸ್ಕರಿಸಿ</button>
-                    </div>
-                </div>
-
-                <!-- Job 2 -->
-                <div class="job-card" id="job2">
-                    <div class="job-header">
-                        <div>
-                            <div class="job-title">Ceiling Fan & Inverter Checkup</div>
-                            <div style="font-size: 0.85rem; color: var(--text-muted);">Customer: ಪ್ರಿಯಾ ಶೆಟ್ಟಿ</div>
-                        </div>
-                        <div class="job-price">₹600</div>
-                    </div>
-                    <div class="job-meta">
-                        <span><i class="fa-solid fa-location-dot"></i> BM Road (3.5 km)</span>
-                        <span><i class="fa-solid fa-clock"></i> Tomorrow Morning 10 AM</span>
-                    </div>
-                    <div class="job-actions">
-                        <button class="btn-accept" onclick="acceptJob('job2', 600)">ಸ್ವೀಕರಿಸಿ (Accept)</button>
-                        <button class="btn-reject" onclick="rejectJob('job2')">ತಿರಸ್ಕರಿಸಿ</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Side: Trust, Badges & Proof Actions -->
-            <div>
-                <div class="side-card">
-                    <h4><i class="fa-solid fa-id-card" style="color: var(--primary);"></i> Worker Verification</h4>
-                    <ul class="badge-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Digital ID Verified</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Skill Test: Electrician (Grade A)</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Police Background Verified</li>
-                        <li><i class="fa-solid fa-circle-check"></i> UPI Linked (Auto Payout)</li>
-                    </ul>
-                </div>
-
-                <div class="side-card" style="background: #fff8eb; border-color: #fde68a;">
-                    <h4 style="color: #b45309;"><i class="fa-solid fa-camera"></i> Work Proof Upload</h4>
-                    <p style="font-size: 0.85rem; color: #92400e; margin-bottom: 0.8rem;">ಕೆಲಸ ಮುಗಿದ ನಂತರ ಪಾವತಿ ಬಿಡುಗಡೆಗಾಗಿ ಫೋಟೋ ಅಪ್ಲೋಡ್ ಮಾಡಿ[span_1](start_span)[span_1](end_span).</p>
-                    <button style="width: 100%; background: #d97706; color: white; border: none; padding: 0.6rem; border-radius: 6px; font-weight: bold; cursor: pointer;" onclick="uploadProof()">Upload Completion Photo</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Script for Dashboard Logic -->
-    <script>
-        let totalEarning = 1450;
-        let totalSave = 380;
-
-        function acceptJob(cardId, price) {
-            alert(`ಕೆಲಸವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಒಪ್ಪಿಕೊಳ್ಳಲಾಗಿದೆ (₹${price})! ಗ್ರಾಹಕರ ವಿವರಗಳನ್ನು ಚಾಟ್‌ನಲ್ಲಿ ತೆರೆಯಲಾಗಿದೆ.`);
-            
-            // Auto Update Wallet & Save Simulation
-            const saveAmount = Math.round(price * 0.05);
-            const payoutAmount = price - saveAmount;
-
-            totalEarning += payoutAmount;
-            totalSave += saveAmount;
-
-            document.getElementById('todayEarn').innerText = '₹' + totalEarning;
-            document.getElementById('saveEarn').innerText = '₹' + totalSave;
-
-            document.getElementById(cardId).style.display = 'none';
-        }
-
-        function rejectJob(cardId) {
-            document.getElementById(cardId).style.display = 'none';
-        }
-
-        function triggerSOS() {
-            alert("⚠️ ಎಮರ್ಜೆನ್ಸಿ SOS ಸಕ್ರಿಯವಾಗಿದೆ! ನಿಮ್ಮ ಲೈವ್ ಲೊಕೇಶನ್ ಅನ್ನು WORKZEN ಸಪೋರ್ಟ್ ಟೀಮ್ ಹಾಗೂ ಹತ್ತಿರದ ತುರ್ತು ಸಂಪರ್ಕಗಳಿಗೆ ಹಂಚಿಕೊಳ್ಳಲಾಗಿದೆ[span_2](start_span)[span_2](end_span).");
-        }
-
-        function uploadProof() {
-            alert("ಫೋಟೋ/ವೀಡಿಯೊ ಅಪ್ಲೋಡ್ ಮಾಡಲಾಗಿದೆ. ಗ್ರಾಹಕರ ದೃಢೀಕರಣದ ನಂತರ ಮೊತ್ತ ತಕ್ಷಣ ವಾಲೆಟ್‌ಗೆ ಜಮೆಯಾಗುತ್ತದೆ[span_3](start_span)[span_3](end_span)!");
-        }
-    </script>
-</body>
-                    </html>
- <!DOCTYPE html>
-<html lang="kn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WORKZEN - Customer Service Booking & Live Tracking</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #0056b3;
-            --accent-orange: #ff7300;
-            --accent-yellow: #ffb703;
-            --dark-navy: #0d1b2a;
-            --light-bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --green: #10b981;
-            --red: #ef4444;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background-color: var(--light-bg); color: var(--text-main); line-height: 1.6; }
-
-        /* Top Nav */
-        .top-nav {
-            background: #fff;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo { font-size: 1.5rem; font-weight: 900; color: var(--primary); text-decoration: none; }
-        .logo span { color: var(--accent-orange); }
-
-        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; }
-
-        /* Status Header */
-        .status-banner {
-            background: linear-gradient(135deg, var(--dark-navy), #1e3a5f);
-            color: white;
-            padding: 1.8rem;
-            border-radius: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .status-badge {
-            background: var(--green);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Layout Grid */
-        .track-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 2rem;
-        }
-
-        @media (max-width: 850px) {
-            .track-grid { grid-template-columns: 1fr; }
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            padding: 1.8rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            margin-bottom: 1.5rem;
-        }
-
-        .card h3 {
-            font-size: 1.2rem;
-            color: var(--dark-navy);
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Worker Profile Card */
-        .worker-card {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            padding-bottom: 1.2rem;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 1.2rem;
-        }
-
-        .worker-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #e0f2fe;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-        }
-
-        .verified-badge {
-            color: var(--green);
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .action-btns {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-action {
-            flex: 1;
-            padding: 0.75rem;
-            border-radius: 8px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-
-        .btn-call { background: #e0f2fe; color: var(--primary); }
-        .btn-chat { background: #f3f4f6; color: var(--dark-navy); }
-
-        /* Timeline Step Tracker */
-        .timeline {
-            list-style: none;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 7px;
-            top: 5px;
-            bottom: 5px;
-            width: 2px;
-            background: var(--border);
-        }
-
-        .timeline-step {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -25px;
-            top: 4px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #cbd5e1;
-            border: 3px solid #fff;
-            box-shadow: 0 0 0 2px #cbd5e1;
-        }
-
-        .timeline-step.completed .timeline-dot {
-            background: var(--green);
-            box-shadow: 0 0 0 2px var(--green);
-        }
-
-        .timeline-step.active .timeline-dot {
-            background: var(--accent-orange);
-            box-shadow: 0 0 0 2px var(--accent-orange);
-        }
-
-        .timeline-title { font-weight: bold; font-size: 0.95rem; }
-        .timeline-desc { font-size: 0.82rem; color: var(--text-muted); }
-
-        /* Payment Hold Box */
-        .payment-box {
-            background: #f8fafc;
-            border: 1px dashed #cbd5e1;
-            border-radius: 10px;
-            padding: 1.2rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .pay-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .btn-release {
-            width: 100%;
-            background: var(--green);
-            color: white;
-            padding: 0.85rem;
-            border-radius: 8px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            font-size: 0.95rem;
-        }
-
-        /* Rating Stars */
-        .star-rating {
-            display: flex;
-            gap: 6px;
-            color: #d1d5db;
-            font-size: 1.5rem;
-            cursor: pointer;
-            margin: 0.8rem 0;
-        }
-        .star-rating .active { color: var(--accent-yellow); }
-    </style>
-</head>
-<body>
-
-    <!-- Header Navigation -->
-    <header class="top-nav">
-        <a href="index.html" class="logo">WORK<span>ZEN</span></a>
-        <div style="font-size: 0.9rem; font-weight: 600; color: var(--dark-navy);">
-            <i class="fa-solid fa-user-circle"></i> ಕಸ್ಟಮರ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್
-        </div>
-    </header>
-
-    <div class="container">
-        
-        <!-- Status Banner -->
-        <div class="status-banner">
-            <div>
-                <span class="status-badge" id="orderStatus"><i class="fa-solid fa-spinner fa-spin"></i> ವರ್ಕರ್ ದಾರಿಯಲ್ಲಿದ್ದಾರೆ (On the Way)</span>
-                <h2 style="margin-top: 0.6rem; font-size: 1.4rem;">Home Wiring & Appliance Repair</h2>
-                <p style="font-size: 0.85rem; color: #cbd5e1;">Booking ID: #WZ-BOOK-9921</p>
-            </div>
-            <div style="text-align: right;">
-                <div style="font-size: 0.85rem; color: #cbd5e1;">ಒಟ್ಟು ಶುಲ್ಕ (Secure Hold)</div>
-                <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-yellow);">₹450</div>
-            </div>
-        </div>
-
-        <div class="track-grid">
-            
-            <!-- Left: Tracking Progress & Work Proof -->
-            <div>
-                <div class="card">
-                    <h3><i class="fa-solid fa-route" style="color: var(--primary);"></i> ಕೆಲಸದ ಪ್ರಗತಿ (Live Status)</h3>
-                    
-                    <ul class="timeline">
-                        <li class="timeline-step completed">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-title">ಕೆಲಸ ಬುಕ್ ಆಗಿದೆ (Job Confirmed)</div>
-                            <div class="timeline-desc">ವರ್ಕರ್ ನಿಮ್ಮ ವಿನಂತಿಯನ್ನು ಒಪ್ಪಿಕೊಂಡಿದ್ದಾರೆ</div>
-                        </li>
-                        <li class="timeline-step active" id="step2">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-title">ವರ್ಕರ್ ದಾರಿಯಲ್ಲಿದ್ದಾರೆ (Worker Assigned)</div>
-                            <div class="timeline-desc">ಅಂದಾಜು ಆಗಮನ: 15 ನಿಮಿಷಗಳಲ್ಲಿ</div>
-                        </li>
-                        <li class="timeline-step" id="step3">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-title">ಕೆಲಸ ಆರಂಭ (Work in Progress)</div>
-                            <div class="timeline-desc">ಆರಂಭದ ಫೋಟೋ/ರೆಕಾರ್ಡ್ ದಾಖಲಾಗಿದೆ</div>
-                        </li>
-                        <li class="timeline-step" id="step4">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-title">ಪೂರ್ಣಗೊಂಡಿದೆ (Completed)</div>
-                            <div class="timeline-desc">ಕೆಲಸ ಮುಕ್ತಾಯಗೊಂಡಿದೆ & ಪಾವತಿ ಬಿಡುಗಡೆ</div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Work Proof Preview Box -->
-                <div class="card">
-                    <h3><i class="fa-solid fa-camera" style="color: var(--accent-orange);"></i> Work Proof & Verification</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">ಕೆಲಸಗಾರರು ಅಪ್ಲೋಡ್ ಮಾಡಿದ Work Proof ಚಿತ್ರವನ್ನು ಪರಿಶೀಲಿಸಿ[span_1](start_span)[span_1](end_span).</p>
-                    <div style="background: #f1f5f9; border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
-                        <i class="fa-solid fa-image" style="font-size: 2rem; margin-bottom: 0.5rem; color: #94a3b8;"></i>
-                        <div>Switch Board Repair Proof Image Attached</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right: Assigned Worker & Secure Payment Release -->
-            <div>
-                <!-- Worker Info -->
-                <div class="card">
-                    <h3><i class="fa-solid fa-user-check" style="color: var(--green);"></i> ನಿಗದಿಪಡಿಸಿದ ಕೆಲಸಗಾರ</h3>
-                    <div class="worker-card">
-                        <div class="worker-avatar">
-                            <i class="fa-solid fa-user-tie"></i>
-                        </div>
-                        <div>
-                            <h4 style="font-size: 1.05rem;">ಸುದೀಪ್ (Sudeep)</h4>
-                            <div class="verified-badge"><i class="fa-solid fa-shield-check"></i> Verified Worker ID: WZ-84920</div>
-                            <div style="font-size: 0.85rem; color: #d97706; margin-top: 2px;">★ 4.9 (124+ Jobs Completed)</div>
-                        </div>
-                    </div>
-
-                    <div class="action-btns">
-                        <button class="btn-action btn-call" onclick="callWorker()"><i class="fa-solid fa-phone"></i> ಕರೆ ಮಾಡಿ</button>
-                        <button class="btn-action btn-chat" onclick="chatWorker()"><i class="fa-solid fa-comment-dots"></i> ಚಾಟ್</button>
-                    </div>
-                </div>
-
-                <!-- Secure Payment Hold & Release -->
-                <div class="card">
-                    <h3><i class="fa-solid fa-lock" style="color: var(--primary);"></i> Secure Payment Hold</h3>
-                    
-                    <div class="payment-box">
-                        <div class="pay-row"><span>ಸೇವಾ ಮೊತ್ತ:</span> <strong>₹450</strong></div>
-                        <div class="pay-row"><span>ಪಾವತಿ ಸ್ಥಿತಿ:</span> <span style="color: var(--green); font-weight: bold;">ಸುರಕ್ಷಿತ ಹೋಲ್ಡ್‌ನಲ್ಲಿದೆ</span></div>
-                        <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem;">ಕೆಲಸ ತೃಪ್ತಿಕರವಾಗಿ ಮುಗಿದ ನಂತರವೇ ಕೆಲಸಗಾರರ ವಾಲೆಟ್‌ಗೆ ಜಮೆಯಾಗುತ್ತದೆ[span_2](start_span)[span_2](end_span).</div>
-                    </div>
-
-                    <button class="btn-release" onclick="completeJobAndPay()"><i class="fa-solid fa-circle-check"></i> ಕೆಲಸ ಪೂರ್ಣಗೊಂಡಿದೆ - ಹಣ ಬಿಡುಗಡೆ ಮಾಡಿ</button>
-
-                    <!-- Rating Section -->
-                    <div id="ratingSection" style="display: none; margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem; text-align: center;">
-                        <h4>ರೇಟಿಂಗ್ ನೀಡಿ (Rate Worker)</h4>
-                        <div class="star-rating">
-                            <span class="active" onclick="setRate(1)">★</span>
-                            <span class="active" onclick="setRate(2)">★</span>
-                            <span class="active" onclick="setRate(3)">★</span>
-                            <span class="active" onclick="setRate(4)">★</span>
-                            <span class="active" onclick="setRate(5)">★</span>
-                        </div>
-                        <button class="btn-action btn-call" style="width: 100%;" onclick="submitRating()">ರೇಟಿಂಗ್ ಸಲ್ಲಿಸಿ</button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Script for Customer Logic -->
-    <script>
-        function callWorker() {
-            alert("ವರ್ಕರ್ ಸುದೀಪ್ ಅವರಿಗೆ ಕರೆ ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ...");
-        }
-
-        function chatWorker() {
-            alert("ಇನ್-ಆ್ಯಪ್ ಚಾಟ್ ವಿಂಡೋ ತೆರೆಯಲಾಗಿದೆ!");
-        }
-
-        function completeJobAndPay() {
-            document.getElementById('step2').className = 'timeline-step completed';
-            document.getElementById('step3').className = 'timeline-step completed';
-            document.getElementById('step4').className = 'timeline-step completed';
-            
-            document.getElementById('orderStatus').innerHTML = '<i class="fa-solid fa-check"></i> ಕೆಲಸ ಪೂರ್ಣಗೊಂಡಿದೆ';
-            document.getElementById('orderStatus').style.background = '#10b981';
-
-            alert("₹450 ಪಾವತಿಯನ್ನು ಕೆಲಸಗಾರರ ಖಾತೆಗೆ ಯಶಸ್ವಿಯಾಗಿ ಬಿಡುಗಡೆ ಮಾಡಲಾಗಿದೆ[span_3](start_span)[span_3](end_span)!");
-            document.getElementById('ratingSection').style.display = 'block';
-        }
-
-        function setRate(stars) {
-            alert(stars + " ಸ್ಟಾರ್ ರೇಟಿಂಗ್ ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ!");
-        }
-
-        function submitRating() {
-            alert("ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ಅಮೂಲ್ಯ ರೇಟಿಂಗ್ ದಾಖಲಾಗಿದೆ[span_4](start_span)[span_4](end_span).");
-            window.location.href = 'index.html';
-        }
-    </script>
-</body>
-            </html>
-    
-<!DOCTYPE html>
-<html lang="kn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WORKZEN - Business, Bulk Workforce & Investment Portal</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #0056b3;
-            --accent-orange: #ff7300;
-            --accent-yellow: #ffb703;
-            --dark-navy: #0d1b2a;
-            --light-bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --green: #10b981;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--light-bg); color: var(--text-main); line-height: 1.6; }
-
-        /* Top Navigation */
-        .top-nav {
-            background: #fff;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo { font-size: 1.5rem; font-weight: 900; color: var(--primary); text-decoration: none; }
-        .logo span { color: var(--accent-orange); }
-
-        .btn-cta {
-            background: linear-gradient(135deg, var(--accent-orange), #e65c00);
-            color: white !important;
-            padding: 0.6rem 1.4rem;
-            border-radius: 50px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        /* Hero */
-        .b2b-hero {
-            background: linear-gradient(135deg, var(--dark-navy) 0%, #1e3a5f 100%);
-            color: white;
-            padding: 4.5rem 1.5rem;
-            text-align: center;
-        }
-
-        .b2b-hero h2 { font-size: 2.6rem; font-weight: 800; margin-bottom: 1rem; }
-        .b2b-hero h2 span { color: var(--accent-yellow); }
-        .b2b-hero p { font-size: 1.1rem; color: #cbd5e1; max-width: 800px; margin: auto; }
-
-        .container { max-width: 1200px; margin: auto; padding: 3.5rem 1.5rem; }
-
-        /* Two Major Sections Grid */
-        .portal-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .portal-card {
-            background: var(--card-bg);
-            border-radius: 14px;
-            padding: 2.2rem;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .portal-card h3 {
-            font-size: 1.4rem;
-            color: var(--dark-navy);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .portal-card ul {
-            list-style: none;
-            margin: 1.2rem 0 2rem;
-            font-size: 0.95rem;
-            color: #334155;
-        }
-
-        .portal-card ul li {
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-
-        .portal-card ul li i { color: var(--green); margin-top: 4px; }
-
-        /* Forms Section */
-        .form-card {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 2.5rem;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            margin-top: 2rem;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.2rem;
-            margin-top: 1.5rem;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .input-group label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--dark-navy);
-        }
-
-        .input-group input, .input-group select, .input-group textarea {
-            padding: 0.8rem 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            font-size: 0.95rem;
-            outline: none;
-        }
-
-        /* Sector Tags */
-        .sectors-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1.5rem;
-        }
-
-        .sector-tag {
-            background: #e0f2fe;
-            color: var(--primary);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* Footer */
-        footer { background: #080f1a; color: #8d99ae; padding: 2.5rem 1.5rem 1.5rem; text-align: center; }
-    </style>
-</head>
-<body>
-
-    <!-- Header Navigation -->
-    <header class="top-nav">
-        <a href="index.html" class="logo">WORK<span>ZEN</span></a>
-        <div style="display: flex; gap: 1rem; align-items: center;">
-            <a href="index.html" style="text-decoration: none; color: var(--dark-navy); font-weight: 600; font-size: 0.9rem;">ಮುಖಪುಟ</a>
-            <a href="#hiring" class="btn-cta" style="border-radius: 8px; font-size: 0.85rem;">Post Requirement</a>
-        </div>
-    </header>
-
-    <!-- Hero Banner -->
-    <section class="b2b-hero">
-        <h2>Business Workforce & <span>Investment Hub</span></h2>
-        <p>ಕಂಪನಿಗಳಿಗೆ ಪರಿಶೀಲಿತ ಬೃಹತ್ ಮಾನವಶಕ್ತಿ (Bulk Workforce) ಮತ್ತು ಸ್ಟಾರ್ಟ್‌ಅಪ್/ಸಣ್ಣ ಉದ್ಯಮಗಳಿಗೆ ಹೂಡಿಕೆ ಬೆಂಬಲ ಒದಗಿಸುವ AI ಪ್ಲಾಟ್‌ಫಾರ್ಮ್.</p>
-    </section>
-
-    <div class="container">
-
-        <!-- 2 Major Tracks -->
-        <div class="portal-grid">
-            
-            <!-- Track 1: Company Workforce -->
-            <div class="portal-card" style="border-top: 4px solid var(--primary);">
-                <div>
-                    <h3><i class="fa-solid fa-users-gear" style="color: var(--primary);"></i> 10. Business Workforce (Bulk Hiring)</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">ಕಾರ್ಖಾನೆಗಳು, ಕನ್‌ಸ್ಟ್ರಕ್ಷನ್ ಸೈಟ್‌ಗಳು ಅಥವಾ ಆಫೀಸ್‌ಗಳಿಗೆ ಏಕಕಾಲದಲ್ಲಿ 20 ರಿಂದ 100+ ಪರಿಶೀಲಿತ ಕೆಲಸಗಾರರನ್ನು ನೇಮಿಸಿಕೊಳ್ಳಿ.</p>
-                    <ul>
-                        <li><i class="fa-solid fa-check"></i> <strong>Verified Workforce:</strong> ಡಿಜಿಟಲ್ ಐಡಿ & ಸ್ಕಿಲ್ ಪರಿಶೀಲನೆ</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>AI Matching:</strong> ಅಗತ್ಯಕ್ಕೆ ತಕ್ಕಂತೆ ತ್ವರಿತ ಅಸೈನ್ಮೆಂಟ್</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>Recurring & Shift Management:</strong> ದಿನಗೂಲಿ ಅಥವಾ ಕಾಂಟ್ರಾಕ್ಟ್</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>Dedicated Account Manager:</strong> B2B ವಿಶೇಷ ಬೆಂಬಲ</li>
-                    </ul>
-                </div>
-                <a href="#hiring" class="btn-cta" style="text-align: center; border-radius: 8px;">ಕಾರ್ಮಿಕರ ಬೇಡಿಕೆ ಸಲ್ಲಿಸಿ (Hire Bulk)</a>
-            </div>
-
-            <!-- Track 2: Business & Investment -->
-            <div class="portal-card" style="border-top: 4px solid var(--accent-orange);">
-                <div>
-                    <h3><i class="fa-solid fa-chart-pie" style="color: var(--accent-orange);"></i> 9. Business & Investment</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">ಹೊಸ ಐಡಿಯಾ, ಉದ್ಯಮ ವಿಸ್ತರಣೆ (Expansion) ಅಥವಾ ಫ್ರಾಂಚೈಸಿಗಾಗಿ ಹೂಡಿಕೆದಾರರನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ.</p>
-                    <ul>
-                        <li><i class="fa-solid fa-check"></i> <strong>Startup & Small Business:</strong> ಫಂಡಿಂಗ್ ಅವಶ್ಯಕತೆ ಪೋಸ್ಟ್ ಮಾಡಿ</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>Investor Matching:</strong> ಕ್ಷೇತ್ರ & ಬಜೆಟ್ ಆಧರಿಸಿ ಹೂಡಿಕೆದಾರರ ಕನೆಕ್ಟ್</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>Compliant Process:</strong> ನಿಯಮಬದ್ಧ ಹಣಕಾಸು ಪಾಲುದಾರರ ನೆರವು</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>Business Verification:</strong> ದೃಢೀಕೃತ ಬಿಸಿನೆಸ್ ಲಿಸ್ಟಿಂಗ್</li>
-                    </ul>
-                </div>
-                <a href="#investment" class="btn-cta" style="text-align: center; border-radius: 8px; background: linear-gradient(135deg, var(--dark-navy), #1e3a5f);">ಹೂಡಿಕೆಗೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ (Apply Funding)</a>
-            </div>
-
-        </div>
-
-        <!-- Investment Sectors Covered -->
-        <div style="text-align: center; margin-bottom: 3.5rem;">
-            <h4 style="font-size: 1.1rem; color: var(--dark-navy);">ಪ್ರಮುಖ ಹೂಡಿಕೆ ಮತ್ತು ಉದ್ಯಮ ವಿಭಾಗಗಳು (Sectors Covered)</h4>
-            <div class="sectors-cloud" style="justify-content: center;">
-                <span class="sector-tag">AI & Software</span>
-                <span class="sector-tag">Agriculture & AgriTech</span>
-                <span class="sector-tag">Manufacturing & Garments</span>
-                <span class="sector-tag">Retail & Restaurants</span>
-                <span class="sector-tag">Solar & EV (Green Business)</span>
-                <span class="sector-tag">Healthcare & Clinics</span>
-                <span class="sector-tag">Logistics & Transport</span>
-                <span class="sector-tag">Franchise Opportunities</span>
-            </div>
-        </div>
-
-        <!-- Form 1: Company Bulk Hiring Form -->
-        <div class="form-card" id="hiring">
-            <h3 style="color: var(--primary);"><i class="fa-solid fa-building"></i> ಕಂಪನಿ ಬಲ್ಕ್ ಹೈರಿಂಗ್ ವಿನಂತಿ (Bulk Workforce Request)</h3>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">ನಿಮ್ಮ ಸಂಸ್ಥೆಗೆ ಅಗತ್ಯವಿರುವ ಮಾನವಶಕ್ತಿಯ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ.</p>
-
-            <form onsubmit="handleBulkHiring(event)">
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label>ಕಂಪನಿ ಹೆಸರು (Company Name)</label>
-                        <input type="text" id="companyName" placeholder="Ex: ABC Enterprises" required>
-                    </div>
-                    <div class="input-group">
-                        <label>ಸಂಪರ್ಕ ವ್ಯಕ್ತಿ / HR Name</label>
-                        <input type="text" id="hrName" placeholder="ನಿಮ್ಮ ಹೆಸರು" required>
-                    </div>
-                    <div class="input-group">
-                        <label>ಫೋನ್ / ಇಮೇಲ್</label>
-                        <input type="text" id="bContact" placeholder="+91 98765 43210" required>
-                    </div>
-                    <div class="input-group">
-                        <label>ಕೆಲಸಗಾರರ ಸಂಖ್ಯೆ (Count)</label>
-                        <select id="workerCount" required>
-                            <option value="10-20">10 ರಿಂದ 20 ಕೆಲಸಗಾರರು</option>
-                            <option value="20-50">20 ರಿಂದ 50 ಕೆಲಸಗಾರರು</option>
-                            <option value="50+">50+ ಕೆಲಸಗಾರರು</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>ಕೆಲಸದ ಪ್ರಕಾರ (Category)</label>
-                        <select id="workType" required>
-                            <option value="Construction Labour">Construction & Labour</option>
-                            <option value="Factory / Packaging">Factory & Packaging</option>
-                            <option value="Delivery Drivers">Delivery & Logistics</option>
-                            <option value="Office & Data Entry">Office Staff / Housekeeping</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>ಸ್ಥಳ (Work Location)</label>
-                        <input type="text" id="workLocation" placeholder="Ex: Hassan Industrial Area" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn-cta" style="margin-top: 1.5rem; border-radius: 8px; width: 100%;">ಬಲ್ಕ್ ಹೈರಿಂಗ್ ವಿನಂತಿ ಸಲ್ಲಿಸಿ</button>
-            </form>
-        </div>
-
-        <!-- Form 2: Startup Funding / Investment Pitch -->
-        <div class="form-card" id="investment" style="border-top: 4px solid var(--accent-orange);">
-            <h3 style="color: var(--accent-orange);"><i class="fa-solid fa-hand-holding-dollar"></i> ಬಿಸಿನೆಸ್ ಫಂಡಿಂಗ್ & ಇನ್ವೆಸ್ಟ್‌ಮೆಂಟ್ ನೋಂದಣಿ</h3>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">ನಿಮ್ಮ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಅಥವಾ ಉದ್ಯಮಕ್ಕೆ ಹೂಡಿಕೆ ಪಡೆಯಲು ವಿವರಗಳನ್ನು ನಮೂದಿಸಿ.</p>
-
-            <form onsubmit="handleInvestmentPitch(event)">
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label>ಉದ್ಯಮ / ಪ್ರಾಜೆಕ್ಟ್ ಹೆಸರು</label>
-                        <input type="text" id="bizName" placeholder="Ex: Smart Agri Tech" required>
-                    </div>
-                    <div class="input-group">
-                        <label>ಉದ್ಯಮದ ಹಂತ (Stage)</label>
-                        <select id="bizStage" required>
-                            <option value="Idea / Prototype">ಐಡಿಯಾ / ಪ್ರೋಟೋಟೈಪ್</option>
-                            <option value="Early Revenue">ಆರಂಭಿಕ ಆದಾಯ (Early Revenue)</option>
-                            <option value="Expansion / Scaling">ವಿಸ್ತರಣೆ (Expansion)</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>ಅಗತ್ಯವಿರುವ ಹೂಡಿಕೆ ಮೊತ್ತ (Funding Needed)</label>
-                        <input type="text" id="fundAmount" placeholder="Ex: ₹5 Lakhs - ₹25 Lakhs" required>
-                    </div>
-                    <div class="input-group">
-                        <label>ಕ್ಷೇತ್ರ (Industry Sector)</label>
-                        <select id="bizSector" required>
-                            <option value="Technology & AI">Technology & AI</option>
-                            <option value="Agriculture / Food">Agriculture / Food Processing</option>
-                            <option value="Retail & Manufacturing">Retail & Manufacturing</option>
-                            <option value="Green Energy / EV">Green Energy & EV</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="input-group" style="margin-top: 1.2rem;">
-                    <label>ಉದ್ಯಮದ ಸಂಕ್ಷಿಪ್ತ ವಿವರಣೆ (Brief Pitch)</label>
-                    <textarea id="bizDesc" rows="3" placeholder="ನಿಮ್ಮ ಬಿಸಿನೆಸ್ ಮಾಡೆಲ್ ಮತ್ತು ಹೂಡಿಕೆಯ ಉದ್ದೇಶವನ್ನು ವಿವರಿಸಿ..." required></textarea>
-                </div>
-                <button type="submit" class="btn-cta" style="margin-top: 1.5rem; border-radius: 8px; width: 100%; background: linear-gradient(135deg, var(--dark-navy), #1e3a5f);">ಇನ್ವೆಸ್ಟ್‌ಮೆಂಟ್ ಪ್ರಪೋಸಲ್ ಸಲ್ಲಿಸಿ</button>
-            </form>
-        </div>
-
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 WORKZEN Business Solutions. All rights reserved. “Work. Earn. Save. Grow.”</p>
-    </footer>
-
-    <!-- Interactive Scripts -->
-    <script>
-        function handleBulkHiring(e) {
-            e.preventDefault();
-            const company = document.getElementById('companyName').value;
-            const count = document.getElementById('workerCount').value;
-            const type = document.getElementById('workType').value;
-
-            alert(`ಧನ್ಯವಾದಗಳು ${company}!\nನಿಮ್ಮ ${count} (${type}) ಕೆಲಸಗಾರರ ಹೈರಿಂಗ್ ವಿನಂತಿಯನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ. ನಮ್ಮ B2B ಅಕೌಂಟ್ ಮ್ಯಾನೇಜರ್ ಶೀಘ್ರದಲ್ಲೇ ಸಂಪರ್ಕಿಸಲಿದ್ದಾರೆ.`);
-            e.target.reset();
-        }
-
-        function handleInvestmentPitch(e) {
-            e.preventDefault();
-            const biz = document.getElementById('bizName').value;
-            const amount = document.getElementById('fundAmount').value;
-
-            alert(`ಅಭಿನಂದನೆಗಳು! ${biz} ಪ್ರಾಜೆಕ್ಟ್‌ಗಾಗಿ ${amount} ಹೂಡಿಕೆ ಪ್ರಪೋಸಲ್ ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಕೆಯಾಗಿದೆ. ಪರಿಶೀಲನೆಯ ನಂತರ ಹೂಡಿಕೆದಾರರ ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ಲಿಸ್ಟ್ ಮಾಡಲಾಗುತ್ತದೆ.`);
-            e.target.reset();
-        }
-    </script>
-</body>
-                    </html>
-                    

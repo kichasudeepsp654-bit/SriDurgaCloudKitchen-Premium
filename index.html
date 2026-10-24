@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Let's Go - 10 Mins Bike Parcel, Auto & Cab</title>
+    <title>Let's Go - 10-Min Parcel, Auto & Cab Platform</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -65,7 +65,7 @@
 
         .nav-links {
             display: flex;
-            gap: 28px;
+            gap: 25px;
             list-style: none;
         }
 
@@ -74,11 +74,6 @@
             color: var(--dark);
             font-weight: 700;
             font-size: 14px;
-            transition: 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: #d4a500;
         }
 
         .nav-btn {
@@ -92,22 +87,22 @@
             cursor: pointer;
         }
 
-        /* ================= HERO (WEBSITE + APP SIMULATOR) ================= */
+        /* ================= HERO SECTION ================= */
         .hero-section {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            padding: 40px 6%;
+            padding: 35px 6%;
             background: linear-gradient(135deg, #FFFDF5 55%, var(--yellow) 45%);
-            min-height: 90vh;
-            gap: 40px;
+            min-height: 92vh;
+            gap: 35px;
         }
 
         .hero-left {
             flex: 1;
             min-width: 300px;
-            max-width: 540px;
+            max-width: 520px;
         }
 
         .eta-pill {
@@ -120,53 +115,58 @@
             border-radius: 30px;
             font-size: 13px;
             font-weight: 800;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .hero-left h1 {
-            font-size: 46px;
+            font-size: 44px;
             font-weight: 800;
             line-height: 1.15;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .hero-left p {
-            font-size: 16px;
+            font-size: 15px;
             color: #444;
             line-height: 1.6;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
-        .hero-badges {
+        /* Mode Switcher Pills above Phone */
+        .mode-switcher {
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+            background: var(--dark);
+            padding: 5px;
+            border-radius: 30px;
+            margin-bottom: 12px;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .h-badge {
-            background: #fff;
-            padding: 14px 20px;
-            border-radius: 16px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            border-left: 5px solid var(--yellow);
-        }
-
-        .h-badge h3 {
-            font-size: 22px;
+        .mode-tab {
+            flex: 1;
+            text-align: center;
+            padding: 8px 5px;
+            font-size: 11.5px;
             font-weight: 800;
+            color: #fff;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-        .h-badge span {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-weight: 600;
+        .mode-tab.active {
+            background: var(--yellow);
+            color: var(--dark);
         }
 
-        /* ================= STEP-BY-STEP MOBILE APP PHONE ================= */
+        /* ================= PHONE SIMULATOR ================= */
         .phone-wrapper {
             width: 100%;
             max-width: 400px;
-            height: 700px;
+            height: 710px;
             background: #fff;
             border-radius: 36px;
             border: 10px solid var(--dark);
@@ -178,7 +178,6 @@
             margin: 0 auto;
         }
 
-        /* App Screens */
         .app-screen {
             display: none;
             width: 100%;
@@ -191,45 +190,18 @@
             display: flex;
         }
 
-        /* --- SCREEN 1: LOGIN / OTP --- */
+        /* --- LOGIN SCREEN --- */
         .login-screen {
             padding: 35px 24px;
             justify-content: space-between;
             background: linear-gradient(180deg, var(--yellow) 38%, #fff 38%);
         }
 
-        .login-top {
-            margin-top: 20px;
-        }
-
-        .login-top .app-tag {
-            background: var(--dark);
-            color: var(--yellow);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        .login-top h2 {
-            font-size: 28px;
-            font-weight: 800;
-            margin-top: 10px;
-        }
-
         .login-card {
             background: #fff;
-            padding: 24px;
+            padding: 22px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-
-        .login-card label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--text-muted);
-            display: block;
-            margin-bottom: 8px;
         }
 
         .phone-input {
@@ -237,8 +209,8 @@
             align-items: center;
             border: 2px solid #E5E7EB;
             border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 11px;
+            margin: 10px 0 15px;
         }
 
         .phone-input span {
@@ -256,7 +228,7 @@
             font-weight: 700;
         }
 
-        /* --- SCREEN 2 & 3: MAP + BOTTOM SHEET --- */
+        /* --- CUSTOMER MAP & BOOKING SCREEN --- */
         .map-header {
             position: absolute;
             top: 12px;
@@ -269,8 +241,8 @@
         }
 
         .round-btn {
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             background: #fff;
             border-radius: 50%;
             display: flex;
@@ -278,7 +250,7 @@
             justify-content: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             cursor: pointer;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         .eta-header-badge {
@@ -288,18 +260,17 @@
             border-radius: 20px;
             font-size: 12px;
             font-weight: 800;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         #appMap {
             width: 100%;
-            height: 45%;
+            height: 40%;
             z-index: 1;
         }
 
         .map-center-pin {
             position: absolute;
-            top: 20%;
+            top: 18%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 500;
@@ -312,23 +283,20 @@
             color: #fff;
             font-size: 10px;
             font-weight: 700;
-            padding: 4px 9px;
+            padding: 3px 8px;
             border-radius: 10px;
-            margin-bottom: 3px;
-            white-space: nowrap;
+            margin-bottom: 2px;
         }
 
-        .pin-tag span {
-            color: var(--yellow);
-        }
+        .pin-tag span { color: var(--yellow); }
 
         .sheet-container {
-            height: 58%;
+            height: 63%;
             background: #fff;
             border-radius: 24px 24px 0 0;
             margin-top: -18px;
             z-index: 1000;
-            padding: 14px 16px;
+            padding: 12px 15px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -338,8 +306,8 @@
 
         .loc-card {
             background: var(--gray);
-            border-radius: 14px;
-            padding: 10px 12px;
+            border-radius: 12px;
+            padding: 9px 12px;
             border: 1px solid #E5E7EB;
         }
 
@@ -350,14 +318,14 @@
         }
 
         .loc-line.border-b {
-            padding-bottom: 8px;
-            margin-bottom: 8px;
+            padding-bottom: 7px;
+            margin-bottom: 7px;
             border-bottom: 1px dashed #D1D5DB;
         }
 
         .dot-pin {
-            width: 10px;
-            height: 10px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
             flex-shrink: 0;
         }
@@ -369,18 +337,17 @@
             border: none;
             background: transparent;
             width: 100%;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
             outline: none;
         }
 
-        /* Parcel Details Bar */
         .parcel-box {
             background: #FFFBEB;
             border: 1px solid #FDE68A;
-            border-radius: 12px;
-            padding: 8px 10px;
-            margin-top: 8px;
+            border-radius: 10px;
+            padding: 7px 9px;
+            margin-top: 7px;
         }
 
         .parcel-chips {
@@ -396,9 +363,9 @@
         .p-chip {
             background: #fff;
             border: 1px solid #fcd34d;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 11px;
+            padding: 3px 9px;
+            border-radius: 14px;
+            font-size: 10.5px;
             font-weight: 700;
             white-space: nowrap;
             cursor: pointer;
@@ -414,30 +381,28 @@
             width: 100%;
             border: 1px solid #E5E7EB;
             background: #fff;
-            padding: 6px 10px;
-            border-radius: 8px;
-            font-size: 12px;
+            padding: 5px 9px;
+            border-radius: 7px;
+            font-size: 11.5px;
             font-weight: 600;
             outline: none;
         }
 
-        /* Vehicle List */
         .v-list {
             display: flex;
             flex-direction: column;
-            gap: 7px;
-            margin: 8px 0;
+            gap: 6px;
+            margin: 7px 0;
         }
 
         .v-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 12px;
-            border-radius: 12px;
+            padding: 7px 10px;
+            border-radius: 11px;
             border: 2px solid #F3F4F6;
             cursor: pointer;
-            transition: 0.2s;
         }
 
         .v-item.active {
@@ -452,38 +417,30 @@
         }
 
         .v-icon {
-            width: 40px;
-            height: 36px;
+            width: 36px;
+            height: 32px;
             background: var(--gray);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 16px;
         }
 
-        .v-item.active .v-icon {
-            background: var(--yellow);
-        }
+        .v-item.active .v-icon { background: var(--yellow); }
 
-        .v-title h4 {
-            font-size: 13px;
-            font-weight: 800;
-        }
+        .v-title h4 { font-size: 12.5px; font-weight: 800; }
+        .v-title p { font-size: 10.5px; color: var(--text-muted); font-weight: 600; }
+        .v-price h4 { font-size: 14.5px; font-weight: 800; }
 
-        .v-title p {
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        .v-price {
-            text-align: right;
-        }
-
-        .v-price h4 {
-            font-size: 15px;
-            font-weight: 800;
+        .pay-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11.5px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            padding: 0 4px;
         }
 
         .btn-main {
@@ -491,9 +448,9 @@
             background: var(--yellow);
             color: var(--dark);
             border: none;
-            padding: 13px;
+            padding: 12px;
             border-radius: 12px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 800;
             cursor: pointer;
             display: flex;
@@ -502,7 +459,7 @@
             gap: 8px;
         }
 
-        /* --- SCREEN 4: BOOKING CONFIRMED MODAL --- */
+        /* --- BOOKING OVERLAY WITH UPI QR --- */
         .booking-overlay {
             position: absolute;
             bottom: -100%;
@@ -510,216 +467,210 @@
             width: 100%;
             background: #fff;
             border-radius: 24px 24px 0 0;
-            padding: 20px;
+            padding: 18px;
             z-index: 1500;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
             transition: 0.35s ease;
             text-align: center;
         }
 
-        .booking-overlay.show {
-            bottom: 0;
-        }
+        .booking-overlay.show { bottom: 0; }
 
         .captain-card {
             background: var(--gray);
-            padding: 12px;
-            border-radius: 14px;
-            margin: 12px 0;
+            padding: 10px 12px;
+            border-radius: 12px;
+            margin: 10px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             text-align: left;
         }
 
-        /* ================= WEBSITE SECTIONS BELOW ================= */
-        .services-sec {
-            padding: 70px 6%;
-            text-align: center;
-            background: #fff;
+        .qr-box {
+            background: #FFFBEB;
+            border: 1px dashed #F59E0B;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
         }
 
-        .services-sec h2 {
-            font-size: 34px;
-            font-weight: 800;
-            margin-bottom: 10px;
+        /* --- SCREEN: CAPTAIN PANEL --- */
+        .panel-screen {
+            padding: 20px 16px;
+            background: #F9FAFB;
+            overflow-y: auto;
+        }
+
+        .panel-header {
+            background: var(--dark);
+            color: #fff;
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stat-box {
+            background: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .stat-box h3 { font-size: 20px; font-weight: 800; color: var(--dark); }
+        .stat-box span { font-size: 11px; color: var(--text-muted); font-weight: 700; }
+
+        .order-alert {
+            background: #fff;
+            border: 2px solid var(--yellow);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+
+        /* ================= WEBSITE SECTIONS ================= */
+        .services-sec {
+            padding: 60px 6%;
+            text-align: center;
+            background: #fff;
         }
 
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
-            margin-top: 40px;
+            margin-top: 35px;
         }
 
         .s-card {
             background: var(--gray);
-            padding: 30px 22px;
+            padding: 28px 20px;
             border-radius: 20px;
-            transition: 0.3s;
-        }
-
-        .s-card:hover {
-            transform: translateY(-6px);
-            background: #FFFBEB;
-            border: 1px solid var(--yellow);
         }
 
         .s-icon {
-            width: 65px;
-            height: 65px;
+            width: 60px;
+            height: 60px;
             background: var(--yellow);
-            border-radius: 18px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            margin: 0 auto 18px;
-        }
-
-        /* Captain Registration Section */
-        .captain-sec {
-            padding: 70px 6%;
-            background: var(--dark);
-            color: #fff;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-        }
-
-        .cap-left {
-            flex: 1;
-            min-width: 280px;
-        }
-
-        .cap-left h2 {
-            font-size: 36px;
-            color: var(--yellow);
-            margin-bottom: 15px;
-        }
-
-        .cap-form {
-            background: #1F2937;
-            padding: 30px;
-            border-radius: 20px;
-            width: 100%;
-            max-width: 420px;
-        }
-
-        .cap-form input, .cap-form select {
-            width: 100%;
-            padding: 13px;
-            margin-bottom: 14px;
-            border-radius: 10px;
-            border: 1px solid #374151;
-            background: #111827;
-            color: #fff;
-            outline: none;
+            font-size: 26px;
+            margin: 0 auto 15px;
         }
 
         footer {
             background: #0B0F19;
             color: #9CA3AF;
             text-align: center;
-            padding: 30px 6%;
-            font-size: 14px;
+            padding: 25px 6%;
+            font-size: 13px;
         }
 
         @media (max-width: 850px) {
             .nav-links { display: none; }
-            .hero-left h1 { font-size: 34px; }
+            .hero-left h1 { font-size: 32px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ================= TOP WEBSITE NAVBAR ================= -->
+    <!-- NAVBAR -->
     <nav>
         <a href="#" class="logo">
             <i class="fa-solid fa-bolt"></i> Let's <span>Go</span>
         </a>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#services">10-Min Bike Parcel</a></li>
+            <li><a href="#home">10-Min Booking</a></li>
+            <li><a href="#services">Bike Parcel</a></li>
             <li><a href="#services">Auto & Cab</a></li>
-            <li><a href="#captain">Become a Captain</a></li>
         </ul>
-        <button class="nav-btn" onclick="document.getElementById('captain').scrollIntoView({behavior:'smooth'})">
-            Join as Captain
-        </button>
+        <button class="nav-btn" onclick="switchMode('captain')">Captain App View</button>
     </nav>
 
-    <!-- ================= HERO: WEBSITE + INTERACTIVE APP ================= -->
+    <!-- HERO SECTION -->
     <section class="hero-section" id="home">
         
-        <!-- Left Website Content -->
         <div class="hero-left">
             <div class="eta-pill">
                 <i class="fa-solid fa-stopwatch"></i> Guaranteed 10 Mins Doorstep Pickup
             </div>
-            <h1>Send Bike Parcels & Book Auto or Cabs in 10 Mins!</h1>
-            <p>Whether it's sending hot lunch boxes, urgent documents, keys, or booking a quick Auto & Cab ride across town — <strong>Let's Go</strong> reaches your doorstep within 10 minutes.</p>
+            <h1>Send Bike Parcels & Book Rides in 10 Mins!</h1>
+            <p>Everything runs seamlessly inside the website! Use the 3-in-1 app simulator on the right to test Customer Booking, Captain Order Acceptance, and the Owner's Automatic 20% Commission Wallet.</p>
 
-            <div class="hero-badges">
-                <div class="h-badge">
-                    <h3>10 Mins</h3>
-                    <span>Quick Pickup Time</span>
-                </div>
-                <div class="h-badge">
-                    <h3>₹30</h3>
-                    <span>Bike Parcel Starts At</span>
-                </div>
-                <div class="h-badge">
-                    <h3>100%</h3>
-                    <span>OTP Secured Delivery</span>
-                </div>
+            <div style="background: #fff; padding: 16px; border-radius: 16px; border-left: 5px solid var(--green); box-shadow: 0 6px 20px rgba(0,0,0,0.05);">
+                <h4 style="font-size: 15px; margin-bottom: 4px;"><i class="fa-solid fa-shield-check" style="color:var(--green);"></i> 100% In-Website Integration</h4>
+                <p style="font-size: 13px; color: #555; margin: 0;">No external apps needed. Customers pay via native UPI QR simulator and track live order status directly on screen.</p>
             </div>
         </div>
 
-        <!-- Right Interactive Step-by-Step Mobile App -->
-        <div class="phone-wrapper">
+        <!-- PHONE + MODE SWITCHER -->
+        <div style="width: 100%; max-width: 400px; margin: 0 auto;">
             
-            <!-- STEP 1: LOGIN SCREEN -->
-            <div class="app-screen login-screen active" id="screenLogin">
-                <div class="login-top">
-                    <span class="app-tag"><i class="fa-solid fa-bolt"></i> LET'S GO APP</span>
-                    <h2>Doorstep Pickup in 10 Minutes!</h2>
-                    <p style="font-size: 13px; margin-top: 5px; font-weight: 600;">Bike Parcel • Auto Ride • Cab</p>
-                </div>
-
-                <div class="login-card">
-                    <label>ENTER MOBILE NUMBER</label>
-                    <div class="phone-input">
-                        <span>+91</span>
-                        <input type="tel" id="loginPhone" maxlength="10" placeholder="98765 43210" value="9876543210">
-                    </div>
-                    <button class="btn-main" onclick="goToAppMap()">
-                        Continue with OTP <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                    <p style="text-align: center; font-size: 11px; color: #888; margin-top: 12px; cursor: pointer;" onclick="goToAppMap()">
-                        Skip Login & Try Live Booking ➔
-                    </p>
-                </div>
-
-                <div style="text-align: center; font-size: 11px; color: #777;">
-                    <i class="fa-solid fa-shield-halved"></i> 100% Safe & Verified KA-13 Captains
-                </div>
+            <!-- 3-IN-1 SWITCHER -->
+            <div class="mode-switcher">
+                <div class="mode-tab active" id="tabCustomer" onclick="switchMode('customer')">👤 Customer</div>
+                <div class="mode-tab" id="tabCaptain" onclick="switchMode('captain')">🛵 Captain</div>
+                <div class="mode-tab" id="tabAdmin" onclick="switchMode('admin')">📊 Owner Wallet</div>
             </div>
 
-            <!-- STEP 2 & 3: LIVE MAP + BOOKING SCREEN -->
-            <div class="app-screen" id="screenBooking">
+            <div class="phone-wrapper">
                 
-                <!-- Floating Map Header -->
-                <div class="map-header">
-                    <div class="round-btn" onclick="backToLogin()" title="Back to Login">
-                        <i class="fa-solid fa-arrow-left"></i>
+                <!-- 1. LOGIN SCREEN -->
+                <div class="app-screen login-screen active" id="screenLogin">
+                    <div style="margin-top: 15px;">
+                        <span style="background:var(--dark); color:var(--yellow); padding:4px 10px; border-radius:6px; font-size:11px; font-weight:800;">LET'S GO HASSAN</span>
+                        <h2 style="font-size: 26px; font-weight: 800; margin-top: 10px;">Doorstep Pickup in 10 Minutes!</h2>
+                        <p style="font-size: 13px; font-weight: 600; margin-top: 4px;">Bike Parcel • Auto • Cab</p>
                     </div>
-                    <div class="eta-header-badge">
-                        <i class="fa-regular fa-clock"></i> Pickup in 10 Mins
+
+                    <div class="login-card">
+                        <label style="font-size: 11px; font-weight: 800; color: #666;">ENTER MOBILE NUMBER</label>
+                        <div class="phone-input">
+                            <span>+91</span>
+                            <input type="tel" id="userMobile" maxlength="10" value="9876543210">
+                        </div>
+                        <button class="btn-main" onclick="openBookingScreen()">
+                            Login & Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </button>
                     </div>
-                    <div class="round-btn" onclick="resetMapCenter()">
-                        <i class="fa-solid fa-location-crosshairs"></i>
+
+                    <div style="text-align: center; font-size: 11px; color: #777;">
+                        <i class="fa-solid fa-shield-halved"></i> Verified KA-13 Captains • 10 Mins ETA
                     </div>
-       
+                </div>
+
+                <!-- 2. CUSTOMER BOOKING SCREEN -->
+                <div class="app-screen" id="screenCustomer">
+                    <div class="map-header">
+                        <div class="round-btn" onclick="backToLogin()"><i class="fa-solid fa-arrow-left"></i></div>
+                        <div class="eta-header-badge"><i class="fa-regular fa-clock"></i> Pickup in 10 Mins</div>
+                        <div class="round-btn" onclick="centerMap()"><i class="fa-solid fa-location-crosshairs"></i></div>
+                    </div>
+
+                    <div id="appMap"></div>
+
+                    <div class="map-center-pin">
+                        <div class="pin-tag">Captain in <span>10 mins</span></div>
+                        <i class="fa-solid fa-location-dot" style="font-size: 26px; color: #121212;"></i>
+                    </div>
+
+                    <div class="sheet-container">
+                        <div>
+                            <div class="loc-card">
+                                <div class="l
